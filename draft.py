@@ -21,10 +21,9 @@ class Event(object):
     
 
 class Queue(object):
-    queue = []
-
+    
     def __init__(self, max_capacity=None):
-
+        self.queue = []
         self.max_capacity = max_capacity
 
     def insert(self, event):
@@ -49,16 +48,18 @@ class Queue(object):
 
 
 class Splitter(object):
-    outputs = []
+    outputs = {}
 
     def __init__(self,number_of_outputs):
         self.number_of_outputs = number_of_outputs
+
+        for i in range(number_of_outputs):
+            self.outputs[i] = {'element':None}
     
-    def link_output(queue, output_number):
-        self.output[output_number]['queue'] = queue
+    def link_output(self, output_number, queue):
+        self.outputs[output_number]['element'] = queue
     
     def insert(self, event):
-
         if not isinstance(event, Event):
             raise SplitterError("Inserting non event object on splitter")
         
@@ -68,9 +69,42 @@ class Splitter(object):
             """As __get_splitter_output__ was not implemented, uses default function"""
             output_number = random.randint(0, len(self.outputs)-1) #TODO: must exist another way
         
-        q = outputs[output_number]['queue']
-        q.insert(event)
+        element = self.outputs[output_number]['element']
+        element.insert(event)
+    
+    def __get_splitter_output__(self):
+        """Not yet implemented"""
 
 
 class Source(object):
+    timestamp = 0
+    output = None
+
+    def __init__(self, output):
+        self.output = output
+
+    def generate(self):
+
+        if random.random() > 0.5:
+            delta_t = random.randint(1,10)
+            self.output.insert(Event(timestamp=self.timestamp+delta_t))
+
+
+if __name__=='__main__':
+
+    q1 = Queue()
+    q2 = Queue()
+    s = Splitter(2)
+
+    s.link_output(0, q1)
+    s.link_output(1, q2)
+
+    source = Source(s)
+
+    source.generate()
+    source.generate()
+    source.generate()
+    source.generate()
     
+    print q1.queue
+    print q2.queue
