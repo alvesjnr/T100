@@ -1,4 +1,5 @@
 import random
+import time
 
 class SimulationError(Exception):
     def __init__(self, message=None):
@@ -11,14 +12,22 @@ class QueueError(Exception):
 
 
 class Event(object):
-    timestamp = 0
-
+    
     def __init__(self, timestamp=0):
         self.timestamp = timestamp
+        self.__execution_behavior__()
     
     def __repr__(self):
-        return '%s with timestamp %i' % (self.__class__, self.timestamp)
+        return '%s with timestamp %i>' % (str(self.__class__)[:-1], self.timestamp)
     
+    def __execution_behavior__(self):
+        #just a placeholder, a placebo, must be overwrited
+        self.execution_time = random.randint(1,5)
+    
+    def __run__(self):
+        #just a placeholder, a placebo, must be overwrited
+        time.sleep(self.execution_time)
+
 
 class Queue(object):
     
@@ -44,13 +53,16 @@ class Queue(object):
             return self.queue.pop(0)
     
     def youngest_event(self):
-        return self.queue[0]
+        if len(self.queue) > 0:
+            return self.queue[0].timestamp
+        else:
+            return None
 
 
 class Splitter(object):
-    outputs = {}
-
+    
     def __init__(self,number_of_outputs):
+        self.outputs = {}
         self.number_of_outputs = number_of_outputs
 
         for i in range(number_of_outputs):
@@ -77,10 +89,9 @@ class Splitter(object):
 
 
 class Source(object):
-    timestamp = 0
-    output = None
 
-    def __init__(self, output):
+    def __init__(self, output, timestamp=0):
+        self.timestamp = timestamp
         self.output = output
 
     def generate(self):
@@ -89,12 +100,27 @@ class Source(object):
             delta_t = random.randint(1,10)
             self.output.insert(Event(timestamp=self.timestamp+delta_t))
 
+class Process(object):
+    def __init__(self, input=None, timestamp=0):
+        self.input = input
+        self.timestamp = timestamp
+    
+    def next(self):
+        if self.input and self.input.youngest_event() <= self.timestamp:
+            event = self.input.remove()            
+            self.execute_event(event)
+
+    def execute_event(self, event):
+        #just a placeholder, a placebo, must be overwrited
+        event.__run__()
+
 
 if __name__=='__main__':
 
     q1 = Queue()
     q2 = Queue()
     s = Splitter(2)
+    ppp = Process(input=q1)
 
     s.link_output(0, q1)
     s.link_output(1, q2)
@@ -108,3 +134,6 @@ if __name__=='__main__':
     
     print q1.queue
     print q2.queue
+    if q1.queue:
+        import pdb; pdb.set_trace()
+
