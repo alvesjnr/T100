@@ -16,6 +16,7 @@ class Event(object):
     def __init__(self, timestamp=0):
         self.timestamp = timestamp
         self.__execution_behavior__()
+        self.locked=False
     
     def __repr__(self):
         return '%s with timestamp %i>' % (str(self.__class__)[:-1], self.timestamp)
@@ -24,9 +25,9 @@ class Event(object):
         #just a placeholder, a placebo, must be overwrited
         self.execution_time = random.randint(1,5)
     
-    def __run__(self):
+    def __run__(self, parent):
         #just a placeholder, a placebo, must be overwrited
-        time.sleep(self.execution_time)
+        parent.timestamp += self.execution_time
 
 
 class Queue(object):
@@ -36,7 +37,6 @@ class Queue(object):
         self.max_capacity = max_capacity
 
     def insert(self, event):
-        
         if self.max_capacity and len(self.queue) == self.max_capacity:
             raise SimulationError("Queue %s reached maximum capacity" % (event))
         if not isinstance(event,Event):
@@ -46,7 +46,6 @@ class Queue(object):
         self.queue.sort(key=lambda event: event.timestamp)
     
     def remove(self):
-        
         if len(self.queue) == 0:
             return None
         else:
@@ -100,6 +99,7 @@ class Source(object):
             delta_t = random.randint(1,10)
             self.output.insert(Event(timestamp=self.timestamp+delta_t))
 
+
 class Process(object):
     def __init__(self, input=None, timestamp=0):
         self.input = input
@@ -111,29 +111,5 @@ class Process(object):
             self.execute_event(event)
 
     def execute_event(self, event):
-        #just a placeholder, a placebo, must be overwrited
         event.__run__()
-
-
-if __name__=='__main__':
-
-    q1 = Queue()
-    q2 = Queue()
-    s = Splitter(2)
-    ppp = Process(input=q1)
-
-    s.link_output(0, q1)
-    s.link_output(1, q2)
-
-    source = Source(s)
-
-    source.generate()
-    source.generate()
-    source.generate()
-    source.generate()
-    
-    print q1.queue
-    print q2.queue
-    if q1.queue:
-        import pdb; pdb.set_trace()
 
