@@ -2,7 +2,7 @@ from t100.simulator import Simulator
 from t100.components import *
 
 """
-Example basic_03
+Example basic_04
 
 Simulate for 1 hour
 timestep = 1 second
@@ -27,6 +27,8 @@ source 2        queue        process
 """
 
 if __name__=='__main__':
+
+    steps_number = 60*60
     execution_time_expression = lambda : 60+random.randint(-30,+30)
 
     acc1 = acc2 = 0
@@ -36,8 +38,6 @@ if __name__=='__main__':
         s1 = Source(output=q1, creation_tax=1.0/(60*5), execution_time_expression=execution_time_expression)
         s2 = Source(output=q2, creation_tax=5.0/(60*5), execution_time_expression=execution_time_expression)
         p = Process(inputs=[q1,q2])
-
-        steps_number = 60*60
 
         simul = Simulator(components=[q1,q2,s1,s2,p])
         simul.run(untill=steps_number)
