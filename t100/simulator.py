@@ -2,7 +2,7 @@ from components import *
 from algorithms import step_algorithms
 
 class Simulator(object):
-    def __init__(self, components=[]):
+    def __init__(self, components=[], verbose=False, output_file=None):
         self.timestamp = 0
         self.components = {'source':[],
                            'splitter':[],
@@ -10,6 +10,11 @@ class Simulator(object):
                            'queue':[]}
 
         for component in components:
+
+            if verbose: #Apply verbosity to every component
+                component.verbose = True
+                component.output_file = output_file
+
             if isinstance(component, Splitter):
                 self.components['splitter'].append(component)
             elif isinstance(component, Queue):

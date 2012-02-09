@@ -144,7 +144,7 @@ class Source(__Component__):
 
             self.output.insert(Event(timestamp=timestamp, execution_time=execution_time))
 
-            if self.verbose:                
+            if self.verbose:              
                 self.__log__('new event with timestamp %s and execution time %s\n' % (timestamp, execution_time))
 
 
