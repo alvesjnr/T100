@@ -29,25 +29,24 @@ source queue  process
 
 if __name__=='__main__':
 
-    steps_number = 60*60*5
+    steps_number = 60*60
     
     execution_time_expression = lambda : 60+random.randint(-30,+30)
     delta_t_expression = lambda : 30+random.randint(1,10)
 
 
-    for i in range(20):
-        q = Queue()
-        s = Source(output=q, 
-                   creation_tax=2.0/(60*5), 
-                   execution_time_expression=execution_time_expression,
-                   )
-        ps = ProcessSource(output=q, #process source 
-                    execution_time_expression=execution_time_expression,
-                    delta_t_expression=delta_t_expression,)
-        p = Process(inputs=[q], source=ps, output_ratio=0.1, verbose=True, output_file=sys.stdout)
-        p.output = p
+    q = Queue()
+    s = Source(output=q, 
+               creation_tax=2.0/(60*5), 
+               execution_time_expression=execution_time_expression,
+               verbose=True, output_file=sys.stdout)
+    ps = ProcessSource(output=q, #process source 
+                execution_time_expression=execution_time_expression,
+                delta_t_expression=delta_t_expression,)
+    p = Process(inputs=[q], source=ps, output_ratio=0.1, verbose=True, output_file=sys.stdout)
+    p.output = p
 
-        simul = Simulator(components=[q,s,p])
-        simul.run(untill=steps_number, run_untill_queue_not_empty=True)
+    simul = Simulator(components=[q,s,p])
+    simul.run(untill=steps_number, run_untill_queue_not_empty=True)
 
      

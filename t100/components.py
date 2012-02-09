@@ -17,11 +17,9 @@ class __Component__(object):
         self.verbose = verbose
         self.output_file = output_file
     
-    def __log__(self):
-         f = self.output_file
-        f.write('---BEGIN---\n')
-        f.write('timestamp: %s\n' % self._timestamp)
-        f.write('---END---\n')
+    def __log__(self, message):
+        f = self.output_file
+        f.write(message)
 
 
 
@@ -125,7 +123,7 @@ class Source(__Component__):
             if key in self.extra_params:
                 setattr(self,key,kwargs[key])
 
-    def generate(self, ):
+    def generate(self):
 
         if hasattr(self, 'creation_tax'):
             creation_tax = self.creation_tax
@@ -145,6 +143,9 @@ class Source(__Component__):
                 timestamp = self.timestamp
 
             self.output.insert(Event(timestamp=timestamp, execution_time=execution_time))
+
+            if self.verbose:                
+                self.__log__('new event with timestamp %s and execution time %s\n' % (timestamp, execution_time))
 
 
 class Process(__Component__):
