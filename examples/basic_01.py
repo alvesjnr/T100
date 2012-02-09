@@ -7,7 +7,7 @@ if __name__=='__main__':
     for i in range(100):
         q = Queue()
         s = Source(output=q)
-        p = Process(input=q)
+        p = Process(inputs=[q])
 
         simul = Simulator(components=[q,s,p])
         simul.run(untill=1000)

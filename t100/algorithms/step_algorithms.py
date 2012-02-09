@@ -11,6 +11,6 @@ def trivial(simulator):
         source.generate()
 
     for process in simulator.components['process']:
-        if process.timestamp < timestamp:
+        if process.timestamp <= timestamp:
             process.timestamp = timestamp
-        process.next()
+            process.next()

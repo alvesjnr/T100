@@ -115,21 +115,22 @@ class Source(object):
             else:
                 execution_time = random.randint(1,5)
             self.output.insert(Event(timestamp=self.timestamp, execution_time=execution_time))
-            print 't=%s, creating event with execution_time=%s' % (self.timestamp, execution_time)
+
 
 
 class Process(object):
-    def __init__(self, input=None, timestamp=0):
-        self.input = input
+    def __init__(self, inputs=[], timestamp=0):
+        self.inputs = inputs
         self.timestamp = timestamp
     
     def next(self):
-
-        if self.input and self.input.youngest_event() <= self.timestamp:
-            event = self.input.remove()
-            if event:           
-                self.execute_event(event)
+        for i in self.inputs:
+            if i.youngest_event() <= self.timestamp:
+                event = i.remove()
+                if event:           
+                    self.execute_event(event)
+                    break
 
     def execute_event(self, event):
         event.__run__(self)
-
+        
