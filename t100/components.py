@@ -13,21 +13,23 @@ class QueueError(Exception):
 
 class Event(object):
     
-    def __init__(self, timestamp=0):
+    def __init__(self, timestamp=0, execution_time=None,):
         self.timestamp = timestamp
-        self.__execution_behavior__()
         self.locked=False
+        if execution_time:
+            self.execution_time = execution_time
+        else:
+            self.__execution_behavior__()
     
     def __repr__(self):
         return '%s with timestamp %i>' % (str(self.__class__)[:-1], self.timestamp)
-    
-    def __execution_behavior__(self):
-        #just a placeholder, a placebo, must be overwrited
-        self.execution_time = random.randint(1,5)
-    
+     
     def __run__(self, parent):
         #just a placeholder, a placebo, must be overwrited
-        parent.timestamp += self.execution_time
+        parent.timestamp += int(self.execution_time)
+    
+    def __execution_behavior__(self):
+        self.execution_time = random.randint(1,10)
 
 
 class Queue(object):
@@ -56,6 +58,9 @@ class Queue(object):
             return self.queue[0].timestamp
         else:
             return None
+    
+    def __len__(self):
+        return len(self.queue)
 
 
 class Splitter(object):
@@ -88,16 +93,29 @@ class Splitter(object):
 
 
 class Source(object):
-
-    def __init__(self, output, timestamp=0):
+    extra_params = ['execution_time_expression', 'creation_tax']
+    def __init__(self, output, timestamp=0, **kwargs):
         self.timestamp = timestamp
         self.output = output
 
+        for key in kwargs:
+            if key in self.extra_params:
+                setattr(self,key,kwargs[key])
+
     def generate(self):
 
-        if random.random() > 0.5:
-            delta_t = random.randint(1,10)
-            self.output.insert(Event(timestamp=self.timestamp+delta_t))
+        if hasattr(self, 'creation_tax'):
+            creation_tax = self.creation_tax
+        else:
+            creation_tax = 0.5
+
+        if random.random() < creation_tax:
+            if hasattr(self, 'execution_time_expression'):
+                execution_time = self.execution_time_expression()
+            else:
+                execution_time = random.randint(1,5)
+            self.output.insert(Event(timestamp=self.timestamp, execution_time=execution_time))
+            print 't=%s, creating event with execution_time=%s' % (self.timestamp, execution_time)
 
 
 class Process(object):
@@ -106,10 +124,12 @@ class Process(object):
         self.timestamp = timestamp
     
     def next(self):
+
         if self.input and self.input.youngest_event() <= self.timestamp:
-            event = self.input.remove()            
-            self.execute_event(event)
+            event = self.input.remove()
+            if event:           
+                self.execute_event(event)
 
     def execute_event(self, event):
-        event.__run__()
+        event.__run__(self)
 
