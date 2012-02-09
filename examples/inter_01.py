@@ -38,15 +38,14 @@ if __name__=='__main__':
     q = Queue()
     s = Source(output=q, 
                creation_tax=2.0/(60*5), 
-               execution_time_expression=execution_time_expression,
-               verbose=True, output_file=sys.stdout)
+               execution_time_expression=execution_time_expression,)
     ps = ProcessSource(output=q, #process source 
                 execution_time_expression=execution_time_expression,
                 delta_t_expression=delta_t_expression,)
-    p = Process(inputs=[q], source=ps, output_ratio=0.1, verbose=True, output_file=sys.stdout)
+    p = Process(inputs=[q], source=ps, output_ratio=0.1)
     p.output = p
 
-    simul = Simulator(components=[q,s,p])
+    simul = Simulator(components=[q,s,p], verbose=True, output_file=sys.stdout)
     simul.run(untill=steps_number, run_untill_queue_not_empty=True)
 
      
