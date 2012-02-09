@@ -11,9 +11,25 @@ class QueueError(Exception):
         self.message=message
 
 
-class Event(object):
+class __Component__(object):
+    """ Base class which takes care about logging"""    
+    def __init__(self,verbose=False, output_file=None ):
+        self.verbose = verbose
+        self.output_file = output_file
     
-    def __init__(self, timestamp=0, execution_time=None):
+    def __log__(self):
+         f = self.output_file
+        f.write('---BEGIN---\n')
+        f.write('timestamp: %s\n' % self._timestamp)
+        f.write('---END---\n')
+
+
+
+class Event(__Component__):
+    
+    def __init__(self, timestamp=0, execution_time=None, verbose=False, output_file=None):
+        super(Event, self).__init__(verbose, output_file)
+
         self.timestamp = timestamp
         self.locked=False
         if execution_time:
@@ -33,9 +49,11 @@ class Event(object):
         self.execution_time = random.randint(1,10)
 
 
-class Queue(object):
+class Queue(__Component__):
     
-    def __init__(self, max_capacity=None):
+    def __init__(self, max_capacity=None, verbose=False, output_file=None):
+        super(Queue, self).__init__(verbose, output_file)
+        
         self.queue = []
         self.max_capacity = max_capacity
 
@@ -64,16 +82,18 @@ class Queue(object):
         return len(self.queue)
 
 
-class Splitter(object):
+class Splitter(__Component__):
     
-    def __init__(self,number_of_outputs):
+    def __init__(self,number_of_outputs, verbose=False, output_file=None):
+        super(Splitter, self).__init__(verbose, output_file)
+        
         self.outputs = {}
         self.number_of_outputs = number_of_outputs
 
         for i in range(number_of_outputs):
             self.outputs[i] = {'element':None}
     
-    def link_output(self, output_number, queue):
+    def link_output(self, output_number, queue, verbose=False, output_file=None):
         self.outputs[output_number]['element'] = queue
     
     def insert(self, event):
@@ -93,9 +113,11 @@ class Splitter(object):
         """Not yet implemented"""
 
 
-class Source(object):
+class Source(__Component__):
     extra_params = ['execution_time_expression', 'creation_tax', 'delta_t_expression']
-    def __init__(self, output, timestamp=0, **kwargs):
+    def __init__(self, output, timestamp=0, verbose=False, output_file=None, **kwargs):
+        super(Source, self).__init__(verbose, output_file)
+        
         self.timestamp = timestamp
         self.output = output
 
@@ -125,8 +147,10 @@ class Source(object):
             self.output.insert(Event(timestamp=timestamp, execution_time=execution_time))
 
 
-class Process(object):
-    def __init__(self, inputs=[], timestamp=0, source=None, output_ratio=0.0):
+class Process(__Component__):
+    def __init__(self, inputs=[], timestamp=0, source=None, output_ratio=0.0, verbose=False, output_file=None):
+        super(Process, self).__init__(verbose, output_file)
+
         self.inputs = inputs
         self.timestamp = timestamp
         self.source = source
