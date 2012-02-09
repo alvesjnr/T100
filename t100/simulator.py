@@ -1,4 +1,5 @@
 from components import *
+from algorithms import step_algorithms
 
 class Simulator(object):
     def __init__(self, components=[]):
@@ -25,8 +26,7 @@ class Simulator(object):
         acc = 0
         while untill > acc:
             self.step()
-            print acc
-            acc += 1
+            untill -= 1
     
     def step(self):
-        pass
+        step_algorithms.trivial(self)
