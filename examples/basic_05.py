@@ -36,6 +36,8 @@ source 2        queue   |    process 1
 """
 
 if __name__=='__main__':
+
+    steps_number = 60*60*5
     execution_time_expression = lambda : 60+random.randint(-30,+30)
 
     acc1 = acc2 = 0
@@ -45,8 +47,6 @@ if __name__=='__main__':
         s1 = Source(output=q1, creation_tax=1.0/(60*5), execution_time_expression=execution_time_expression)
         s2 = Source(output=q2, creation_tax=5.0/(60*5), execution_time_expression=execution_time_expression)
         p = Process(inputs=[q1,q2])
-
-        steps_number = 60*60
 
         simul = Simulator(components=[q1,q2,s1,s2,p])
         simul.run(untill=steps_number)
@@ -68,8 +68,6 @@ if __name__=='__main__':
         p1 = Process(inputs=[q1,q2])
         p2 = Process(inputs=[q1,q2])
 
-        steps_number = 60*60
-
         simul = Simulator(components=[q1,q2,s1,s2,p1,p2])
         simul.run(untill=steps_number)
         q1_size = len(simul.components['queue'][0])
@@ -81,4 +79,3 @@ if __name__=='__main__':
     print acc1/100.
     print acc2/100.
 
-    
