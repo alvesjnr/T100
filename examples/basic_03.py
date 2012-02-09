@@ -2,19 +2,24 @@ from t100.simulator import Simulator
 from t100.components import *
 
 """
-Example basic_02
+Example basic_03
 
 Simulate for 1 hour
 timestep = 1 second
 
-Source frequency: 2 events each 5 minuts
+Two sources
+Source 1 frequency: 2 events each 5 minuts
+Source 2 frequency: 3 events each 5 minuts
+
 Unlimited queue size
 Event take 1 minut +- 30 seconds (linear) to be processed
 
 take the average time for 100 simulations
-
-  ()   ->  |||||  ->   |P|
-source     queue      process
+ 
+  ()   ----+
+source 1   |
+  ()   ----+->  |||||  ->   |P| 
+source 2        queue      process  
     
 """
 
@@ -24,12 +29,13 @@ if __name__=='__main__':
     acc = 0
     for i in range(100):
         q = Queue()
-        s = Source(output=q, creation_tax=2.0/(60*5), execution_time_expression=execution_time_expression)
+        s1 = Source(output=q, creation_tax=2.0/(60*5), execution_time_expression=execution_time_expression)
+        s2 = Source(output=q, creation_tax=3.0/(60*5), execution_time_expression=execution_time_expression)
         p = Process(inputs=[q])
 
         steps_number = 60*60
 
-        simul = Simulator(components=[q,s,p])
+        simul = Simulator(components=[q,s1,s2,p])
         simul.run(untill=steps_number)
         q_size = len(simul.components['queue'][0])
         acc += q_size
