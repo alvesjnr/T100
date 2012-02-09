@@ -10,21 +10,23 @@ class Simulator(object):
 
         for component in components:
             if isinstance(component, Splitter):
-                self.elements['splitter'].append(component)
+                self.components['splitter'].append(component)
             elif isinstance(component, Queue):
-                self.elements['queue'].append(component)
+                self.components['queue'].append(component)
             elif isinstance(component, Process):
-                self.elements['process'].append(component)
+                self.components['process'].append(component)
             elif isinstance(component, Source):
-                self.elements['source'].append(component)
+                self.components['source'].append(component)
         
     def add_component(self, component):
         self.components[str(type(component)).lower()].append(component)
 
     def run(self, untill=0):
-        while untill:
+        acc = 0
+        while untill > acc:
             self.step()
-            untill -= 1
+            print acc
+            acc += 1
     
     def step(self):
         pass
