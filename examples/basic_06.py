@@ -71,7 +71,7 @@ if __name__=='__main__':
             acc1 += q1_size
             acc2 += q2_size
         
-        print '#process: ', len(p)
+        print 'process: ', len(p)
         print 'high priority on line: ', acc1/20.
         print 'low priority on line :', acc2/20.
         print
