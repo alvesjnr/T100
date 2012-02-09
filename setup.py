@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(name='SimulationFramework',
       version='0.1',
@@ -6,5 +6,5 @@ setup(name='SimulationFramework',
       author='Antonio Ribeiro',
       author_email='alvesjunior.antonio@gmail.com',
       url='alvesjnr.github.com',
-      packages=['src.framework'],
+      packages=['t100'],
      )
