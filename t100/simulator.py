@@ -22,11 +22,14 @@ class Simulator(object):
     def add_component(self, component):
         self.components[str(type(component)).lower()].append(component)
 
-    def run(self, untill=0):
+    def run(self, untill=0, run_untill_queue_not_empty=False):
         acc = 0
         while untill > acc:
             self.step()
             untill -= 1
+        
+        if run_untill_queue_not_empty:
+            step_algorithms.run_process(self)
     
     def step(self):
         step_algorithms.trivial(self)

@@ -48,7 +48,7 @@ if __name__=='__main__':
         s2 = Source(output=q2, creation_tax=5.0/(60*5), execution_time_expression=execution_time_expression)
         p = Process(inputs=[q1,q2])
 
-        simul = Simulator(components=[q1,q2,s1,s2,p])
+        simul = Simulator(components=[q1,q2,s1,s2,p], )
         simul.run(untill=steps_number)
         q1_size = len(simul.components['queue'][0])
         q2_size = len(simul.components['queue'][1])

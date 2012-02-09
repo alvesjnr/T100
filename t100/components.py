@@ -13,14 +13,14 @@ class QueueError(Exception):
 
 class Event(object):
     
-    def __init__(self, timestamp=0, execution_time=None,):
+    def __init__(self, timestamp=0, execution_time=None):
         self.timestamp = timestamp
         self.locked=False
         if execution_time:
             self.execution_time = execution_time
         else:
             self.__execution_behavior__()
-    
+
     def __repr__(self):
         return '%s with timestamp %i>' % (str(self.__class__)[:-1], self.timestamp)
      
@@ -29,6 +29,7 @@ class Event(object):
         parent.timestamp += int(self.execution_time)
     
     def __execution_behavior__(self):
+        #just a placeholder, a placebo, must be overwrited
         self.execution_time = random.randint(1,10)
 
 
@@ -93,7 +94,7 @@ class Splitter(object):
 
 
 class Source(object):
-    extra_params = ['execution_time_expression', 'creation_tax']
+    extra_params = ['execution_time_expression', 'creation_tax', 'delta_t_expression']
     def __init__(self, output, timestamp=0, **kwargs):
         self.timestamp = timestamp
         self.output = output
@@ -102,7 +103,7 @@ class Source(object):
             if key in self.extra_params:
                 setattr(self,key,kwargs[key])
 
-    def generate(self):
+    def generate(self, ):
 
         if hasattr(self, 'creation_tax'):
             creation_tax = self.creation_tax
@@ -110,18 +111,26 @@ class Source(object):
             creation_tax = 0.5
 
         if random.random() < creation_tax:
+            
             if hasattr(self, 'execution_time_expression'):
                 execution_time = self.execution_time_expression()
             else:
                 execution_time = random.randint(1,5)
-            self.output.insert(Event(timestamp=self.timestamp, execution_time=execution_time))
+            
+            if hasattr(self, 'delta_t_expression'):
+                timestamp = self.timestamp + self.delta_t_expression()
+            else:
+                timestamp = self.timestamp
 
+            self.output.insert(Event(timestamp=timestamp, execution_time=execution_time))
 
 
 class Process(object):
-    def __init__(self, inputs=[], timestamp=0):
+    def __init__(self, inputs=[], timestamp=0, source=None, output_ratio=0.0):
         self.inputs = inputs
         self.timestamp = timestamp
+        self.source = source
+        self.output_ratio = output_ratio
     
     def next(self):
         for i in self.inputs:
@@ -133,4 +142,23 @@ class Process(object):
 
     def execute_event(self, event):
         event.__run__(self)
+
+        if self.source and random.random() < self.output_ratio:
+            self.source.generate()
         
+
+class ProcessSource(Source):
+
+    def generate(self, ):
+
+        if hasattr(self, 'execution_time_expression'):
+            execution_time = self.execution_time_expression()
+        else:
+            execution_time = random.randint(1,5)
+        
+        if hasattr(self, 'delta_t_expression'):
+            timestamp = self.timestamp + self.delta_t_expression()
+        else:
+            timestamp = self.timestamp
+
+        self.output.insert(Event(timestamp=timestamp, execution_time=execution_time))
