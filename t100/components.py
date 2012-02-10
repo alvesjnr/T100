@@ -19,7 +19,7 @@ class __Component__(object):
     
     def __log__(self, message):
         f = self.output_file
-        f.write(message)
+        f.write(message + '\n')
 
 
 
@@ -141,11 +141,13 @@ class Source(__Component__):
                 timestamp = self.timestamp + self.delta_t_expression()
             else:
                 timestamp = self.timestamp
+            
+            event = Event(timestamp=timestamp, execution_time=execution_time)
 
-            self.output.insert(Event(timestamp=timestamp, execution_time=execution_time))
+            self.output.insert(event)
 
             if self.verbose:              
-                self.__log__('new event with timestamp %s and execution time %s\n' % (timestamp, execution_time))
+                self.__log__('A %s %s %s' % (timestamp, event, self))
 
 
 class Process(__Component__):
