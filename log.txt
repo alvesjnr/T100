@@ -1,5 +1,7 @@
 A timestamp event_id source_id
 B timestamp event_id queue_id
 C timestamp event_id queue_id process_id
-D timestamp event_id process_id
+D timestamp event_id process_id 
+E timestamp event_id 
+F timestamp event_id #event was just postponed
 

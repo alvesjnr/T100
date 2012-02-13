@@ -7,8 +7,8 @@ def trivial(simulator):
     simulator.timestamp = timestamp
     
     for source in simulator.components['source']:
-        source.timestamp = timestamp
         source.generate()
+        source.timestamp = timestamp
 
     for process in simulator.components['process']:
         if process.timestamp <= timestamp:

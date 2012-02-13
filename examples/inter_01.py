@@ -1,8 +1,6 @@
 from t100.simulator import Simulator
 from t100.components import *
 
-import sys
-
 """
 Example inter_01
 This example introduces refeed (send a event to itself)
@@ -41,11 +39,11 @@ if __name__=='__main__':
                execution_time_expression=execution_time_expression,)
     ps = ProcessSource(output=q, #process source 
                 execution_time_expression=execution_time_expression,
-                delta_t_expression=delta_t_expression,)
+                delta_t_expression=delta_t_expression, verbose=True)
     p = Process(inputs=[q], source=ps, output_ratio=0.1)
     p.output = p
 
-    simul = Simulator(components=[q,s,p], verbose=True, output_file=sys.stdout)
+    simul = Simulator(components=[q,s,p], verbose=True)
     simul.run(untill=steps_number, run_untill_queue_not_empty=True)
 
      

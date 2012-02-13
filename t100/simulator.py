@@ -1,8 +1,9 @@
+import sys
 from components import *
 from algorithms import step_algorithms
 
 class Simulator(object):
-    def __init__(self, components=[], verbose=False, output_file=None):
+    def __init__(self, components=[], verbose=False, output_file=sys.stdout):
         self.timestamp = 0
         self.components = {'source':[],
                            'splitter':[],
