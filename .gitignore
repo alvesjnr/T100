@@ -1,3 +1,4 @@
 *egg*
 t100-env
+t100-pypy-env
 *.pyc
