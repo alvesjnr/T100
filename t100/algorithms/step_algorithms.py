@@ -14,9 +14,13 @@ def trivial(simulator):
         if process.timestamp <= timestamp:
             process.timestamp = timestamp
             process.next()
+    
+    for queue in simulator.components['queue']:
+        queue.timestamp = timestamp
+
 
 def run_process(simulator):
-    """This is the most simple algorithms for stepping a simulation"""
+    """Run all process till all queues get empty"""
         
     while True:
     

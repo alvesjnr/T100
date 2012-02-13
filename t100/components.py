@@ -49,9 +49,9 @@ class Event(__Component__):
 
 class Queue(__Component__):
     
-    def __init__(self, max_capacity=None, verbose=False, output_file=None):
+    def __init__(self, max_capacity=None, verbose=False, output_file=None, timestamp=0):
         super(Queue, self).__init__(verbose, output_file)
-        
+        self.timestamp = timestamp
         self.queue = []
         self.max_capacity = max_capacity
 
@@ -63,6 +63,9 @@ class Queue(__Component__):
         
         self.queue.append(event)
         self.queue.sort(key=lambda event: event.timestamp)
+        if self.verbose:
+            #Log type B: an event enter on a queue
+            self.__log__('B %s %s %s' % (self.timestamp, event, self))
     
     def remove(self):
         if len(self.queue) == 0:
@@ -146,7 +149,8 @@ class Source(__Component__):
 
             self.output.insert(event)
 
-            if self.verbose:              
+            if self.verbose: 
+                #log type A: an event born             
                 self.__log__('A %s %s %s' % (timestamp, event, self))
 
 
@@ -164,7 +168,12 @@ class Process(__Component__):
             if i.youngest_event() <= self.timestamp:
                 event = i.remove()
                 if event:           
-                    self.execute_event(event)
+                    if self.verbose:
+                        self.__log__('C %s %s %s %s' % (self.timestamp, event, i, self))
+                        self.execute_event(event)
+                        self.__log__('D %s %s %s' % (self.timestamp, event, self))
+                    else:
+                        self.execute_event(event)
                     break
 
     def execute_event(self, event):
