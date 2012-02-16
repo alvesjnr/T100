@@ -1,8 +1,8 @@
 print 
 
 try:
-    from t100.simulator import Simulator
-    from t100.components import *
+    from t100.core.simulator import Simulator
+    from t100.core.components import *
 except ImportError:
     print 'Alert!'
     print 't100 is not correctly installed on your computer'

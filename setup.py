@@ -6,5 +6,5 @@ setup(name='SimulationFramework',
       author='Antonio Ribeiro',
       author_email='alvesjunior.antonio@gmail.com',
       url='alvesjnr.github.com',
-      packages=['t100'],
+      packages=['t100.core'],
      )
