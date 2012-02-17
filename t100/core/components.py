@@ -146,7 +146,6 @@ class Source(__Component__):
             if key in self.extra_params:
                 setattr(self,key,kwargs[key])
     
-
     def generate(self):
 
         if hasattr(self, 'creation_tax'):
