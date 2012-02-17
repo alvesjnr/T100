@@ -3,19 +3,14 @@ import socket
 import thread
 import time
 
-class Event(object):
-    def do(self, text=''):
-        print 'Doing!'+text
-
-def print_oi(blah):
-	while True:
-		print 'oi'
-		time.sleep(1)
+STATUS = ['active', 'away', 'transit', 'inactive']
 		
 class Proxy(object):
 
     def __init__(self, ip, port, name=None):
         self.components = []
+        self.ip = ip
+        self.port = port
         thread.start_new_thread(self.__receiver__, (ip,port))
 
 
@@ -35,8 +30,16 @@ class Proxy(object):
                 conn.close()
 
     def register(self, component):
-        self.components.append({'component':component,
-                                'status':'inactive'})
+        self.components.append({component.id:{'component':component,
+                                              'status':'inactive',
+                                              'addres':(self.ip,self.port)}
+                               })
+    
+    def modify_component_status(self, component, status):
+        self.components[component.id]['status'] = status
+    
+    def modify_component_address(self, component, addres):
+        self.components[component.id]['addres'] = addres
 
     def receive(self, msg):
         """receive a message from the external world"""
@@ -51,10 +54,3 @@ class Proxy(object):
 
     def resolve(self, destin):
         pass
-    
-
-
-d = {'d1':Event(), 'd2':Event()}
-
-if __name__=='__main__':
-    Proxy(d)

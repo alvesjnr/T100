@@ -1,27 +1,9 @@
-from t100.simulator import Simulator
-from t100.components import *
+from t100.core.simulator import Simulator
+from t100.core.components import *
 
 """
-Example inter_01
-This example introduces refeed (send a event to itself)
-
-Simulate for 1 hour
-timestep = 1 second
-
-One source
-Source frequency: 3 events each 5 minuts
-
-Unlimited queue size
-Event take 1 minut +- 30 seconds (linear) to be processed
-
-take the average time for 20 simulations
-
-            10%
-         v---------+
-() ->  |||| ->|P|--+
-source queue  process
-
-10 per cent of the processed events generate a new event for a time t = timestamp + 30 += 10 seconds
+Example inter_03
+for informations about this examples, see docs/examples/inter_03
 
 """
 
@@ -32,8 +14,6 @@ if __name__=='__main__':
     execution_time_expression = lambda : 60+random.randint(-30,+30)
     delta_t_expression = lambda : 30+random.randint(1,10)
 
-
-    q = Queue()
     s = Source(output=q, 
                creation_tax=2.0/(60*5), 
                execution_time_expression=execution_time_expression,)
@@ -46,4 +26,5 @@ if __name__=='__main__':
     simul = Simulator(components=[q,s,p], verbose=True)
     simul.run(untill=steps_number, run_untill_queue_not_empty=True)
 
-     
+ 
+    
