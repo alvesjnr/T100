@@ -62,6 +62,7 @@ if __name__=='__main__':
                 count += 1
 
             simul = Simulator(components=[q1,q2,s1,s2]+p)
+            
             simul.run(untill=steps_number)
             q1_size = len(simul.components['queue'][0])
             q2_size = len(simul.components['queue'][1])
