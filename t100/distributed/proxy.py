@@ -11,9 +11,9 @@ class Proxy(object):
         self.components = []
         self.ip = ip
         self.port = port
-        thread.start_new_thread(self.__receiver__, (ip,port))
+        thread.start_new_thread(self.__receiver__, (self,ip,port))
 
-
+    @staticmethod
     def __receiver__(self, ip, port):
         HOST = ip                 # Symbolic name meaning all available interfaces
         PORT = port              # Arbitrary non-privileged port
@@ -53,4 +53,17 @@ class Proxy(object):
         s.close()    
 
     def resolve(self, destin):
-        pass
+        #TODO!!!
+        return destin
+
+
+if __name__=='__main__':
+    import time
+    class TestProxy(Proxy):
+        def receive(self, msg):
+            print 'I received: '+msg
+
+    p = TestProxy('localhost', 5557)
+    while 1:
+        print 'heartbit'
+        time.sleep(2)
