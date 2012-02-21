@@ -14,7 +14,7 @@ class Proxy(object):
         thread.start_new_thread(self.__receiver__, (ip,port))
 
     def __receiver__(self, ip, port):
-        HOST = ip                 # Symbolic name meaning all available interfaces
+        HOST = ip                # Symbolic name meaning all available interfaces
         PORT = port              # Arbitrary non-privileged port
 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
