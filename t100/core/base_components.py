@@ -60,7 +60,6 @@ class Event(__Component__):
 
 
 class Queue(__Component__):
-
     component='Q'
     
     def __init__(self, max_capacity=None, verbose=False, output_file=sys.stdout, timestamp=0):
@@ -163,9 +162,13 @@ class Source(__Component__):
 
 
 
+def output_ratio_dummy(*args,**kwargs):
+    return 0
+
 class Process(__Component__):
 
     component = 'P'
+
 
     def __init__(self, inputs=[], timestamp=0, source=None, output_ratio_expression=None, verbose=False, output_file=sys.stdout):
         super(Process, self).__init__(verbose, output_file)
@@ -173,7 +176,7 @@ class Process(__Component__):
         self.inputs = inputs
         self.timestamp = timestamp
         self.source = source
-        self.output_ratio_expression = output_ratio_expression if output_ratio_expression else lambda _ : 0
+        self.output_ratio_expression = output_ratio_expression if output_ratio_expression else output_ratio_dummy
     
     def next(self):
         for i in self.inputs:

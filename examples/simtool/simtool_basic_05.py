@@ -1,8 +1,11 @@
-from t100.core.simulator import Simulator
-from t100.core.base_components import *
+from t100.simtool.sequential_env import Environment
+from t100.components.components import *
+
+import random
 
 """
-Example basic_05
+Example simtool_basic_05
+Does exatly the same as basic_05, but using sequential environment
 Calculating the impact of adding one more process
 
 Simulate for 1 hour
@@ -34,6 +37,7 @@ source 2        queue   |    process 1
                         +-->   |P|
                              process 2
 """
+
 def execution_time_expression(timestamp): #on this example, timestamp IS NOT used
     return 60 + random.randint(-30,+30)
 
@@ -45,8 +49,8 @@ def ct_2(timestamp): #on this example, timestamp IS NOT used
 
 if __name__=='__main__':
 
-    steps_number = 60*60*5
-    
+    number_of_steps = 60*60*5
+
     acc1 = acc2 = 0
     for i in range(100):
         q1 = Queue()
@@ -55,10 +59,11 @@ if __name__=='__main__':
         s2 = Source(output=q2, creation_tax_expression=ct_2, execution_time_expression=execution_time_expression)
         p = Process(inputs=[q1,q2])
 
-        simul = Simulator(components=[q1,q2,s1,s2,p], )
-        simul.run(untill=steps_number)
-        q1_size = len(simul.components['queue'][0])
-        q2_size = len(simul.components['queue'][1])
+        env = Environment()
+        env.populate(components=[q1,q2,s1,s2,p])
+        env.simulate(untill=number_of_steps)
+        q1_size = len(env.components['queue'][0])
+        q2_size = len(env.components['queue'][1])
 
         acc1 += q1_size
         acc2 += q2_size
@@ -75,10 +80,11 @@ if __name__=='__main__':
         p1 = Process(inputs=[q1,q2])
         p2 = Process(inputs=[q1,q2])
 
-        simul = Simulator(components=[q1,q2,s1,s2,p1,p2])
-        simul.run(untill=steps_number)
-        q1_size = len(simul.components['queue'][0])
-        q2_size = len(simul.components['queue'][1])
+        env = Environment()
+        env.populate(components=[q1,q2,s1,s2,p1,p2])
+        env.simulate(untill=number_of_steps)
+        q1_size = len(env.components['queue'][0])
+        q2_size = len(env.components['queue'][1])
 
         acc1 += q1_size
         acc2 += q2_size
