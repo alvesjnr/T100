@@ -1,5 +1,5 @@
 from t100.core.simulator import Simulator
-from t100.core.components import *
+from t100.core.base_components import *
 
 """
 Example basic_02

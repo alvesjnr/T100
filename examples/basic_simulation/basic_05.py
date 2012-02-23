@@ -1,5 +1,5 @@
 from t100.core.simulator import Simulator
-from t100.core.components import *
+from t100.core.base_components import *
 
 """
 Example basic_05
@@ -39,13 +39,15 @@ if __name__=='__main__':
 
     steps_number = 60*60*5
     execution_time_expression = lambda : 60+random.randint(-30,+30)
+    ct_1 = lambda *args : 1.0/(60*5)
+    ct_2 = lambda *args : 5.0/(60*5)
 
     acc1 = acc2 = 0
     for i in range(100):
         q1 = Queue()
         q2 = Queue()
-        s1 = Source(output=q1, creation_tax=1.0/(60*5), execution_time_expression=execution_time_expression)
-        s2 = Source(output=q2, creation_tax=5.0/(60*5), execution_time_expression=execution_time_expression)
+        s1 = Source(output=q1, creation_tax_expression=ct_1, execution_time_expression=execution_time_expression)
+        s2 = Source(output=q2, creation_tax_expression=ct_2, execution_time_expression=execution_time_expression)
         p = Process(inputs=[q1,q2])
 
         simul = Simulator(components=[q1,q2,s1,s2,p], )
@@ -63,8 +65,8 @@ if __name__=='__main__':
     for i in range(100):
         q1 = Queue()
         q2 = Queue()
-        s1 = Source(output=q1, creation_tax=1.0/(60*5), execution_time_expression=execution_time_expression)
-        s2 = Source(output=q2, creation_tax=5.0/(60*5), execution_time_expression=execution_time_expression)
+        s1 = Source(output=q1, creation_tax_expression=ct_1, execution_time_expression=execution_time_expression)
+        s2 = Source(output=q2, creation_tax_expression=ct_2, execution_time_expression=execution_time_expression)
         p1 = Process(inputs=[q1,q2])
         p2 = Process(inputs=[q1,q2])
 

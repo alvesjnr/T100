@@ -1,4 +1,4 @@
-from t100.core.components import *
+from t100.core.base_components import *
 
 def trivial(simulator):
     """This is the most simple algorithms for stepping a simulation"""

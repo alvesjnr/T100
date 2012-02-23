@@ -37,19 +37,20 @@ class EnvProxy(Proxy):
 class Environment(object):
 
     def __init__(self, ip, port, name):
+        self.address = (ip,port)
         self.proxy = EnvProxy(env=self, ip=ip, port=port, name=name)
     
     def migrate(self,obj,destin):
         dumped_object = StringIO.StringIO()
-        msg = Message('object',obj,None,destin)
+        msg = Message('object',obj,self.address,destin)
         pickle.dump(msg, dumped_object)
         dumped_object.seek(0)
         self.send(dumped_object.read(), destin)
     
     def receive_migration(self,obj):
-        obj.next()
+        obj.next()  
 
-    def send(self,msg, destin):
+    def send(self,msg,destin):
         self.proxy.send(msg, destin)
     
 
