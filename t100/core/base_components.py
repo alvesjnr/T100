@@ -24,6 +24,9 @@ class __Component__(object):
 
     def __repr__(self):
         return str(self.id)
+    
+    def set_output_file(self, file):
+        self.output_file = file
 
 
 class Event(__Component__):
@@ -133,6 +136,7 @@ class Source(__Component__):
         self.id = self.component + self.__get_serial_number__()
         self.timestamp = timestamp
         self.output = output
+        self.output_id = output.id
         self.creation_tax_expression = creation_tax_expression
 
         for key in kwargs:
@@ -174,6 +178,7 @@ class Process(__Component__):
         super(Process, self).__init__(verbose, output_file)
         self.id = self.component + self.__get_serial_number__()
         self.inputs = inputs
+        self.inputs_id = [input.id for input in inputs]
         self.timestamp = timestamp
         self.source = source
         self.output_ratio_expression = output_ratio_expression if output_ratio_expression else output_ratio_dummy

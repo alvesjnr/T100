@@ -41,12 +41,18 @@ class Process(bc.Process):
 class QueuedProcess(bc.__Component__):
     component = 'QP'
 
-    def __init__(self, input_number, ):
+    def __init__(self, output=None, reschedule=False):
          self.id = self.component + self.__get_serial_number__()
          self.queue = bc.Queue()
-         self.processer = bc.Process()
-         self.output_source = bc.ProcessSource()
+         self.processer = bc.Process(inputs=[self.queue])
+         #self.output_source = bc.ProcessSource()
+    
+    def insert(self, event):
+        self.queue.insert(event)
 
+    def set_output_file(self, file):
+        self.queue.set_output_file(file)
+        self.processer.set_output_file(file)
 
 class MultiQueuedMultiProcess(bc.__Component__):
     component = 'MQMP'

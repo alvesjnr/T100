@@ -1,4 +1,5 @@
 from distributed.proxy import Proxy
+from t100.core.simulator import Simulator
 
 import StringIO
 import pickle
@@ -58,7 +59,9 @@ class Environment(object):
             pass
         
         self.reconnect_components()
-        self.simulator = Simulator(self.verbose,self.output_file)
+        self.update_components_profile()
+        components = [value for key,value in self.components]
+        self.simulator = Simulator(components, self.verbose, self.output_file)
 
 
     def update_components_profile(self):
@@ -73,7 +76,7 @@ class Environment(object):
         self.components[component.id] = component
     
     def dispatch_component(self, component, n):
-        host_index = n%(self.number_of_components-1)
+        host_index = (self.number_of_components - (self.number_of_components/self.configurations['number_of_nodes']))%n+1
         ip,port = self.configurations['nodes'][host_index].split(':')
         port = int(port)
         if hasattr(component,'output'):
@@ -83,16 +86,15 @@ class Environment(object):
         self.migrate(component, (ip,port))
     
     def migrate(self,obj,destin):
-        obj.output_file=None
+        obj.set_output_file(None)
         dumped_object = StringIO.StringIO()
         msg = Message('object',obj,self.address,destin)
         pickle.dump(msg, dumped_object)
         dumped_object.seek(0)
-        import pdb; pdb.set_trace()
         self.send(dumped_object.read(), destin)
     
     def receive_migration(self,obj):
-        print 'blah'
+        print obj
         pass
 
     def send(self,msg,destin):
@@ -100,6 +102,9 @@ class Environment(object):
     
     def simulate(self, untill=0, run_untill_queue_not_empty=False):
         self.simulator.run(untill, run_untill_queue_not_empty)
+    
+    def reset_environment(self):
+        pass
     
     def loop(self):
         while True:
