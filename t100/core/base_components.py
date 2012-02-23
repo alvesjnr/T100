@@ -101,34 +101,27 @@ class Queue(__Component__):
 
 class Splitter(__Component__):
 
-    def __init__(self,number_of_outputs, verbose=False, output_file=sys.stdout):
+    def __init__(self,number_of_outputs, select_output_expression=None, verbose=False, output_file=sys.stdout):
         super(Splitter, self).__init__(verbose, output_file)
         self.outputs = {}
         self.number_of_outputs = number_of_outputs
+        self.select_output_expression = select_output_expression if select_output_expression else self.__random_output__
 
         for i in range(number_of_outputs):
             self.outputs[i] = {'element':None}
     
+    def __random_output__(self,*args,**kwargs):        
+        return random.randint(0,self.number_of_outputs)
+
     def link_output(self, output_number, queue, verbose=False, output_file=sys.stdout):
         self.outputs[output_number]['element'] = queue
     
     def insert(self, event):
-        if not isinstance(event, Event):
-            raise SplitterError("Inserting non event object on splitter")
         
-        output_number = self.__get_splitter_output__()
+        output_number = self.select_output_expression(self.timestamp, event)
 
-        if output_number is None:
-            """As __get_splitter_output__ was not implemented, uses default function"""
-            output_number = random.randint(0, len(self.outputs)-1) #TODO: must exist another way
-        
         element = self.outputs[output_number]['element']
         element.insert(event)
-    
-    def __get_splitter_output__(self):
-        """Not yet implemented"""
-    
-
 
 
 class Source(__Component__):
@@ -153,13 +146,10 @@ class Source(__Component__):
 
         if random.random() < creation_tax:
             
-            if hasattr(self, 'execution_time_expression'):
-                execution_time = self.execution_time_expression()
-            else:
-                execution_time = random.randint(1,5)
+            execution_time = self.execution_time_expression(self.timestamp)
             
             if hasattr(self, 'delta_t_expression'):
-                timestamp = self.timestamp + self.delta_t_expression()
+                timestamp = self.timestamp + self.delta_t_expression(self.timestamp)
             else:
                 timestamp = self.timestamp
             
@@ -177,13 +167,13 @@ class Process(__Component__):
 
     component = 'P'
 
-    def __init__(self, inputs=[], timestamp=0, source=None, output_ratio=0.0, verbose=False, output_file=sys.stdout):
+    def __init__(self, inputs=[], timestamp=0, source=None, output_ratio_expression=None, verbose=False, output_file=sys.stdout):
         super(Process, self).__init__(verbose, output_file)
         self.id = self.component + self.__get_serial_number__()
         self.inputs = inputs
         self.timestamp = timestamp
         self.source = source
-        self.output_ratio = output_ratio
+        self.output_ratio_expression = output_ratio_expression if output_ratio_expression else lambda _ : 0
     
     def next(self):
         for i in self.inputs:
@@ -201,7 +191,7 @@ class Process(__Component__):
     def execute_event(self, event):
         event.__run__(self)
 
-        if self.source and random.random() < self.output_ratio:
+        if self.source and random.random() < self.output_ratio_expression(self.timestamp):
             self.source.generate(event)
         
 
@@ -213,13 +203,10 @@ class ProcessSource(Source):
 
     def generate(self, old_event):
 
-        if hasattr(self, 'execution_time_expression'):
-            execution_time = self.execution_time_expression()
-        else:
-            execution_time = random.randint(1,5)
+        execution_time = self.execution_time_expression()
         
         if hasattr(self, 'delta_t_expression'):
-            timestamp = self.timestamp + self.delta_t_expression()
+            timestamp = self.timestamp + self.delta_t_expression(self.timestamp)
         else:
             timestamp = self.timestamp
         

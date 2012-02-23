@@ -19,12 +19,13 @@ source     queue      process
 """
 
 if __name__=='__main__':
-    execution_time_expression = lambda : 60+random.randint(-30,+30)
+    execution_time_expression = lambda _ : 60+random.randint(-30,+30)
+    creation_tax_expression = lambda _ : 2.0/(60*5)
 
     acc = 0
     for i in range(100):
         q = Queue()
-        s = Source(output=q, creation_tax=2.0/(60*5), execution_time_expression=execution_time_expression)
+        s = Source(output=q, creation_tax_expression=creation_tax_expression, execution_time_expression=execution_time_expression)
         p = Process(inputs=[q])
 
         steps_number = 60*60
