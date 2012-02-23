@@ -35,7 +35,6 @@ class EnvProxy(Proxy):
 
 
 class Environment(object):
-
     def __init__(self, ip, port, name):
         self.address = (ip,port)
         self.proxy = EnvProxy(env=self, ip=ip, port=port, name=name)
@@ -52,9 +51,7 @@ class Environment(object):
 
     def send(self,msg,destin):
         self.proxy.send(msg, destin)
-    
-
-
+        
 
 if __name__=='__main__':
     e = Environment('127.0.0.1', 6545, 'cow')
