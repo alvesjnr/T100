@@ -15,12 +15,12 @@ ip,port = 'localhost',9909
 
 if  __name__=='__main__':
     
-    queue = Queue()
-    process = Process()
-    source = Source(output=None,
+    process = QueuedProcess()
+    source = Source(output=process,
                     creation_tax_expression=creation_expression,
                     execution_time_expression=execution_expression,)
 
     cfg = open('distributed_01.json').read()
     env = Environment(ip, port, cfg)
-    env.populate([source,queue,process])
+    env.populate([source,process])
+    env.simulate()
