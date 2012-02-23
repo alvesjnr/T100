@@ -22,7 +22,7 @@ class Proxy(object):
         while 1:
             s.listen(1)
             conn, addr = s.accept()
-            data = conn.recv(1024)
+            data = conn.recv(2048)
             if data:
                 self.receive(data)
             else:
