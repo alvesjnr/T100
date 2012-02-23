@@ -17,7 +17,7 @@ class Source(bc.Source):
                 of the created event
     """
 
-class Split(bc.Split):
+class Splitter(bc.Splitter):
     
     """ Split accept two parameters:
             number_of_outputs: its name explains itself
