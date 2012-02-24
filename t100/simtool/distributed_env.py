@@ -31,6 +31,7 @@ class EnvProxy(Proxy):
         super(EnvProxy,self).__init__(*args, **kwargs)
         self.env = env
         self.components_catalog = {}    #catalog with ALL components in simulation system
+        self.nodes = []
 
     def receive(self,msg):
         msg = pickle.loads(msg)
@@ -40,12 +41,16 @@ class EnvProxy(Proxy):
         elif msg.type == 'object':
             self.env.receive_migration(msg.content)
         elif msg.type == 'EOP': # end of populate
-            self.env.reconnect_components()
+            self.env.prepare_simulation()
         elif msg.type == 'START':
-            self.env.start_simulation(self.)
+            self.env.start_simulation()
         elif msg.type == 'RST': # reset
             self.env.reset_environment()
             self.components_catalog = {}
+    
+    def sendall(self,msg):
+        for node in self.nodes:
+            self.send(msg,node)
 
 
 class Environment(object):
@@ -65,6 +70,11 @@ class Environment(object):
     def __configure_simulation__(self,cfg):
         self.main_node = True
         self.configurations = json.loads(cfg)
+        for node in self.configurations['nodes']:
+            if node == self.name:
+                continue
+            ip,port = node.split(':')
+            self.proxy.nodes.append((ip,int(port)))
 
 
     def populate(self, components):
@@ -84,11 +94,13 @@ class Environment(object):
             ip,port = node.split(':')
             port = int(port)
             self.send(Message('EOP').dumped(),(ip,port)) #end of populate
-            pass
-        
+
+            self.prepare_simulation()
+
+    def prepare_simulation(self):
         self.reconnect_components()
         self.update_components_profile()
-        components = [value for key,value in self.components]
+        components = [value for key,value in self.components.items()]
         self.simulator = Simulator(components, self.verbose, self.output_file)
 
 
@@ -151,16 +163,14 @@ class Environment(object):
         insert_function = self.external_inputs[receiver_id]
         insert_function(event)
 
-
     def send(self,msg,destin):
         self.proxy.send(msg, destin)
     
     def start_simulation(self, untill=0, run_untill_queue_not_empty=False):
         self.simulating = True
         if self.main_node:
-            # send bradcast message
-            pass
-        self.simulator.run(untill, run_untill_queue_not_empty)
+            self.proxy.sendall(Message('START').dumped())
+        self.simulator.run(untill,run_untill_queue_not_empty)
     
     def reset_environment(self):
         self.components = {}

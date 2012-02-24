@@ -23,4 +23,4 @@ if  __name__=='__main__':
     cfg = open('distributed_01.json').read()
     env = Environment(ip, port, cfg)
     env.populate([source,process])
-    env.simulate()
+    env.start_simulation()
