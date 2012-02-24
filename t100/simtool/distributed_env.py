@@ -43,7 +43,8 @@ class EnvProxy(Proxy):
         elif msg.type == 'EOP': # end of populate
             self.env.prepare_simulation()
         elif msg.type == 'START':
-            self.env.start_simulation()
+            self.env.start_simulation(untill=msg.content['untill'],
+                                      run_untill_queue_not_empty=msg.content['run_untill_queue_not_empty'])
         elif msg.type == 'RST': # reset
             self.env.reset_environment()
             self.components_catalog = {}
@@ -66,6 +67,8 @@ class Environment(object):
 
         if cfg:
             self.__configure_simulation__(cfg)
+        
+        self.proxy.sendall(Message('RST').dumped())
     
     def __configure_simulation__(self,cfg):
         self.main_node = True
@@ -156,7 +159,7 @@ class Environment(object):
         dumped_object = StringIO.StringIO()
         pickl.dump(msg, dumped_object)
         dumped_object.seek(0)
-        seld.send(dumped_object.read(), destin)
+        self.send(dumped_object.read(), destin)
     
     def dummy_insert_input(self, event, sender_id, receiver_id):
         # connects in-place components to RECEIVE events from external word
@@ -169,7 +172,10 @@ class Environment(object):
     def start_simulation(self, untill=0, run_untill_queue_not_empty=False):
         self.simulating = True
         if self.main_node:
-            self.proxy.sendall(Message('START').dumped())
+            self.proxy.sendall(Message('START', {'untill':untill, 
+                                                 'run_untill_queue_not_empty':run_untill_queue_not_empty}
+                                      ).dumped())
+
         self.simulator.run(untill,run_untill_queue_not_empty)
     
     def reset_environment(self):

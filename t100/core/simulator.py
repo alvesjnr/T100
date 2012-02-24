@@ -1,5 +1,6 @@
 import sys
-from base_components import *
+#from base_components import *
+from t100.components.components import *
 from algorithms import step_algorithms
 
 class Simulator(object):
