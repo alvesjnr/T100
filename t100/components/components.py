@@ -3,11 +3,13 @@ from t100.core import base_components as bc
 class DummyConector(object):
     """ Makes a connection between an component and an evironment
     """
-    def __init__(self, output):
-        self.output = output
+    def __init__(self, insert_function, component_id):
+        self.component_id = component_id
+        self.insert_function = insert_function
 
     def insert(self, event):
-        self.output.insert(event)
+        self.insert_function(event, sender_id, receiver_id)
+
 
 class Source(bc.Source):
     """ Source accept two parameters:

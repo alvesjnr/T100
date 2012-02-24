@@ -1,5 +1,6 @@
 from distributed.proxy import Proxy
 from t100.core.simulator import Simulator
+from t100.components.components import DummyConector
 
 import StringIO
 import pickle
@@ -8,11 +9,18 @@ import time
 import sys
 
 class Message(object):
-    def __init__(self,type,content,origin,destin):
+    def __init__(self,type,content=None,origin=None,destin=None,meta=None):
         self.type = type
         self.content = content
         self.origin = origin
         self.destin = destin
+        self.meta = meta
+    
+    def dumped(self):
+        dumped_object = StringIO.StringIO()
+        pickle.dump(self, dumped_object)
+        dumped_object.seek(0)
+        return dumped_object.read()
 
 
 class EnvProxy(Proxy):
@@ -22,11 +30,22 @@ class EnvProxy(Proxy):
     def __init__(self, env, *args, **kwargs):
         super(EnvProxy,self).__init__(*args, **kwargs)
         self.env = env
+        self.components_catalog = {}    #catalog with ALL components in simulation system
 
     def receive(self,msg):
         msg = pickle.loads(msg)
-        if msg.type == 'object':
+
+        if msg.type == 'event':
+            self.env.dummy_insert_input(msg.content, msg.origin, msg.destin)
+        elif msg.type == 'object':
             self.env.receive_migration(msg.content)
+        elif msg.type == 'EOP': # end of populate
+            self.env.reconnect_components()
+        elif msg.type == 'START':
+            self.env.start_simulation(self.)
+        elif msg.type == 'RST': # reset
+            self.env.reset_environment()
+            self.components_catalog = {}
 
 
 class Environment(object):
@@ -36,12 +55,15 @@ class Environment(object):
         self.proxy = EnvProxy(env=self, ip=ip, port=port)
         self.verbose = verbose
         self.output_file = output_file
-        self.components = {}
+        self.main_node = False
+        
+        self.reset_environment()
 
         if cfg:
             self.__configure_simulation__(cfg)
     
     def __configure_simulation__(self,cfg):
+        self.main_node = True
         self.configurations = json.loads(cfg)
 
 
@@ -56,6 +78,12 @@ class Environment(object):
         
         for node in self.configurations['nodes']:
             # send messages for nodes, for component conections, update profiles, add output file etc.
+            if node == self.name:
+                continue
+
+            ip,port = node.split(':')
+            port = int(port)
+            self.send(Message('EOP').dumped(),(ip,port)) #end of populate
             pass
         
         self.reconnect_components()
@@ -69,8 +97,19 @@ class Environment(object):
         pass
             
     def reconnect_components(self):
-        # refaz todas as conexoes necesssrias quebradas pela separacao
-        pass
+        for key in self.components:
+            self.connect_component(self.components[key])
+    
+    def connect_component(self, component):
+        if hasattr(component,'output'):
+            if component.output_id in self.components:
+                component.output = self.components[component.output_id]
+            else:
+                d = DummyConector(self.dummy_insert_output, component.id)
+                component.output = d
+        if hasattr(component,'insert'):
+            self.external_inputs[component.id] = component.insert
+
     
     def add_component(self, component):
         self.components[component.id] = component
@@ -80,9 +119,8 @@ class Environment(object):
         ip,port = self.configurations['nodes'][host_index].split(':')
         port = int(port)
         if hasattr(component,'output'):
-            #ver quem e o cara da output!
-            #acho que o proprio component pode fazre isso!!!
             component.output=None
+
         self.migrate(component, (ip,port))
     
     def migrate(self,obj,destin):
@@ -95,17 +133,42 @@ class Environment(object):
     
     def receive_migration(self,obj):
         print obj
-        pass
+        self.components[obj.id] = obj
+        if self.simulating:
+            self.connect_component(obj)
+
+    
+    def dummy_insert_output(self, event, sender_id, receiver_id):
+        # connects in-place components to SEND events to external word
+        msg = Message('event', event, sender_id, receiver_id)
+        dumped_object = StringIO.StringIO()
+        pickl.dump(msg, dumped_object)
+        dumped_object.seek(0)
+        seld.send(dumped_object.read(), destin)
+    
+    def dummy_insert_input(self, event, sender_id, receiver_id):
+        # connects in-place components to RECEIVE events from external word
+        insert_function = self.external_inputs[receiver_id]
+        insert_function(event)
+
 
     def send(self,msg,destin):
         self.proxy.send(msg, destin)
     
-    def simulate(self, untill=0, run_untill_queue_not_empty=False):
+    def start_simulation(self, untill=0, run_untill_queue_not_empty=False):
+        self.simulating = True
+        if self.main_node:
+            # send bradcast message
+            pass
         self.simulator.run(untill, run_untill_queue_not_empty)
     
     def reset_environment(self):
-        pass
-    
+        self.components = {}
+        self.external_inputs = {}
+        self.simulating = False
+        self.message_buffer = []
+
+
     def loop(self):
         while True:
             time.sleep(10)
