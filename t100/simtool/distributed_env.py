@@ -159,7 +159,7 @@ class Environment(object):
         dumped_object = StringIO.StringIO()
         pickl.dump(msg, dumped_object)
         dumped_object.seek(0)
-        self.send(dumped_object.read(), destin)
+        self.send(dumped_object.read(), self.proxy.components_catalog[receiver_id])
     
     def dummy_insert_input(self, event, sender_id, receiver_id):
         # connects in-place components to RECEIVE events from external word
