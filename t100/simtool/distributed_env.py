@@ -90,15 +90,12 @@ class Environment(object):
                 self.dispatch_component(item,n)
         
         for node in self.configurations['nodes']:
-            # send messages for nodes, for component conections, update profiles, add output file etc.
-            if node == self.name:
-                continue
+            if node != self.name:
+                ip,port = node.split(':')
+                port = int(port)
+                self.send(Message('EOP').dumped(),(ip,port)) #end of populate
+                self.prepare_simulation()
 
-            ip,port = node.split(':')
-            port = int(port)
-            self.send(Message('EOP').dumped(),(ip,port)) #end of populate
-
-            self.prepare_simulation()
 
     def prepare_simulation(self):
         self.reconnect_components()
@@ -110,10 +107,12 @@ class Environment(object):
     def update_components_profile(self):
         # atualiza informacoes referente aos processos existentes no host
         pass
+
             
     def reconnect_components(self):
         for key in self.components:
             self.connect_component(self.components[key])
+
     
     def connect_component(self, component):
         if hasattr(component,'output'):
@@ -129,6 +128,7 @@ class Environment(object):
     def add_component(self, component):
         self.components[component.id] = component
     
+
     def dispatch_component(self, component, n):
         host_index = (self.number_of_components - (self.number_of_components/self.configurations['number_of_nodes']))%n+1
         ip,port = self.configurations['nodes'][host_index].split(':')
@@ -138,6 +138,7 @@ class Environment(object):
 
         self.migrate(component, (ip,port))
     
+
     def migrate(self,obj,destin):
         obj.set_output_file(None)
         dumped_object = StringIO.StringIO()
@@ -145,6 +146,7 @@ class Environment(object):
         pickle.dump(msg, dumped_object)
         dumped_object.seek(0)
         self.send(dumped_object.read(), destin)
+    
     
     def receive_migration(self,obj):
         print obj
@@ -161,13 +163,16 @@ class Environment(object):
         dumped_object.seek(0)
         self.send(dumped_object.read(), self.proxy.components_catalog[receiver_id])
     
+
     def dummy_insert_input(self, event, sender_id, receiver_id):
         # connects in-place components to RECEIVE events from external word
         insert_function = self.external_inputs[receiver_id]
         insert_function(event)
 
+    
     def send(self,msg,destin):
         self.proxy.send(msg, destin)
+    
     
     def start_simulation(self, untill=0, run_untill_queue_not_empty=False):
         self.simulating = True
@@ -177,6 +182,7 @@ class Environment(object):
                                       ).dumped())
 
         self.simulator.run(untill,run_untill_queue_not_empty)
+    
     
     def reset_environment(self):
         self.components = {}
