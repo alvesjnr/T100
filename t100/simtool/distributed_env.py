@@ -106,18 +106,31 @@ class Environment(object):
 
 
     def update_components_profile(self, msg=None):
-        if self.main_node:
+        if self.main_node and msg is None:
             nodes = [address.split(':') for address in self.configurations['nodes']]
             nodes = map(lambda a : (a[0],int(a[1])), nodes)
-            msg = Message('CFG',nodes,nodes[1], self.name, 1).dumped()
+            components_catalog = dict((key,self.address) for key in self.components)
+            msg = Message('CFG',{'nodes':nodes,
+                                 'components':components_catalog}
+                                 ,nodes[1], self.name, 1).dumped()
             self.send(msg, nodes[1])
+        
+        elif self.main_node and msg:
+            self.proxy.components_catalog = msg.content['components']
+
         elif msg:
-            self.proxy.nodes = msg.content[::]
-            if msg.meta == len(self.proxy.nodes):
-                return
-            else:
-                msg = Message('CFG',nodes,nodes[msg.meta+1], self.name, msg.meta+1).dumped()
-                self.send(msg, nodes[msg.meta+1])
+            self.proxy.nodes = msg.content['nodes'][::]
+            self.proxy.components_catalog = msg.content['components']
+            self.proxy.components_catalog.update( dict((key,self.address) for key in self.components) )
+            next_node = msg.meta+1
+        
+            if next_node == len(self.proxy.nodes):
+                next_node = 0
+        
+            msg = Message('CFG',{'nodes':self.proxy.nodes,
+                                 'components': self.proxy.components_catalog},self.proxy.nodes[next_node], self.name, next_node).dumped()
+            self.send(msg, self.proxy.nodes[next_node])
+        
 
 
             
