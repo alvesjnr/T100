@@ -72,7 +72,7 @@ class Queue(__Component__):
         self.queue = []
         self.max_capacity = max_capacity
 
-    def insert(self, event):
+    def insert(self, event, output_id=None):
         if self.max_capacity and len(self.queue) == self.max_capacity:
             raise SimulationError("Queue %s reached maximum capacity" % (event))
         if not isinstance(event,Event):
@@ -118,12 +118,12 @@ class Splitter(__Component__):
     def link_output(self, output_number, queue, verbose=False, output_file=sys.stdout):
         self.outputs[output_number]['element'] = queue
     
-    def insert(self, event):
+    def insert(self, event, output_id=None):
         
         output_number = self.select_output_expression(self.timestamp, event)
 
         element = self.outputs[output_number]['element']
-        element.insert(event)
+        element.insert(event, output_id)
 
 
 class Source(__Component__):
@@ -162,7 +162,7 @@ class Source(__Component__):
                 #log type A: an event born      
                 self.__log__('A %s %s %s' % (self.timestamp, event, self))
 
-            self.output.insert(event)
+            self.output.insert(event, self.output_id)
 
 
 
@@ -230,4 +230,4 @@ class ProcessSource(Source):
             else:
                 self.__log__('E %s %s %s %s' % (timestamp, event, self, old_event))
         
-        self.output.insert(event)
+        self.output.insert(event, self.output_id)

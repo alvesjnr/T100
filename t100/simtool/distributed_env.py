@@ -1,5 +1,5 @@
 from distributed.proxy import Proxy
-from t100.core.simulator import Simulator
+from t100.core.simulator import DistributedSimulator as Simulator
 from t100.components.components import DummyConector
 
 import StringIO
@@ -35,7 +35,7 @@ class EnvProxy(Proxy):
 
     def receive(self,msg):
         msg = pickle.loads(msg)
-
+        print msg.type
         if msg.type == 'event':
             self.env.dummy_insert_input(msg.content, msg.origin, msg.destin)
         elif msg.type == 'object':
@@ -48,10 +48,13 @@ class EnvProxy(Proxy):
         elif msg.type == 'RST': # reset
             self.env.reset_environment()
             self.components_catalog = {}
+        elif msg.type == 'CFG':
+            self.env.update_components_profile(msg)
     
     def sendall(self,msg):
         for node in self.nodes:
-            self.send(msg,node)
+            if node != self.env.address:
+                self.send(msg,node)
 
 
 class Environment(object):
@@ -74,8 +77,6 @@ class Environment(object):
         self.main_node = True
         self.configurations = json.loads(cfg)
         for node in self.configurations['nodes']:
-            if node == self.name:
-                continue
             ip,port = node.split(':')
             self.proxy.nodes.append((ip,int(port)))
 
@@ -104,9 +105,20 @@ class Environment(object):
         self.simulator = Simulator(components, self.verbose, self.output_file)
 
 
-    def update_components_profile(self):
-        # atualiza informacoes referente aos processos existentes no host
-        pass
+    def update_components_profile(self, msg=None):
+        if self.main_node:
+            nodes = [address.split(':') for address in self.configurations['nodes']]
+            nodes = map(lambda a : (a[0],int(a[1])), nodes)
+            msg = Message('CFG',nodes,nodes[1], self.name, 1).dumped()
+            self.send(msg, nodes[1])
+        elif msg:
+            self.proxy.nodes = msg.content[::]
+            if msg.meta == len(self.proxy.nodes):
+                return
+            else:
+                msg = Message('CFG',nodes,nodes[msg.meta+1], self.name, msg.meta+1).dumped()
+                self.send(msg, nodes[msg.meta+1])
+
 
             
     def reconnect_components(self):
@@ -157,9 +169,10 @@ class Environment(object):
     
     def dummy_insert_output(self, event, sender_id, receiver_id):
         # connects in-place components to SEND events to external word
+        event.output_file=None
         msg = Message('event', event, sender_id, receiver_id)
         dumped_object = StringIO.StringIO()
-        pickl.dump(msg, dumped_object)
+        pickle.dump(msg, dumped_object)
         dumped_object.seek(0)
         self.send(dumped_object.read(), self.proxy.components_catalog[receiver_id])
     
@@ -180,7 +193,6 @@ class Environment(object):
             self.proxy.sendall(Message('START', {'untill':untill, 
                                                  'run_untill_queue_not_empty':run_untill_queue_not_empty}
                                       ).dumped())
-
         self.simulator.run(untill,run_untill_queue_not_empty)
     
     

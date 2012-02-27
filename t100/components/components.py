@@ -7,8 +7,8 @@ class DummyConector(object):
         self.component_id = component_id
         self.insert_function = insert_function
 
-    def insert(self, event):
-        self.insert_function(event, sender_id, receiver_id)
+    def insert(self, event, receiver_id):
+        self.insert_function(event, self.component_id, receiver_id)
 
 
 class Source(bc.Source):
@@ -44,10 +44,11 @@ class QueuedProcess(bc.__Component__):
     component = 'QP'
 
     def __init__(self, output=None, reschedule=False):
-         self.id = self.component + self.__get_serial_number__()
-         self.queue = bc.Queue()
-         self.processer = bc.Process(inputs=[self.queue])
-         #self.output_source = bc.ProcessSource()
+        self.timestamp = 0 #FIXME
+        self.id = self.component + self.__get_serial_number__()
+        self.queue = bc.Queue()
+        self.processer = bc.Process(inputs=[self.queue])
+        #self.output_source = bc.ProcessSource()
     
     def insert(self, event):
         self.queue.insert(event)

@@ -2,6 +2,7 @@ from t100.components.components import *
 from t100.simtool.distributed_env import Environment
 
 import random
+import time
 import sys
 
 
@@ -21,6 +22,7 @@ if  __name__=='__main__':
                     execution_time_expression=execution_expression,)
 
     cfg = open('distributed_01.json').read()
-    env = Environment(ip, port, cfg)
+    env = Environment(ip, port, cfg, verbose=True)
     env.populate([source,process])
-    env.start_simulation()
+    time.sleep(2)
+    env.start_simulation(untill=1000)

@@ -36,3 +36,23 @@ def run_process(simulator):
     
         if not events_on_queue:
             break
+
+
+def distributed(simulator):
+    """ runs distributed simulation """
+
+    timestamp = simulator.timestamp + 1
+    simulator.timestamp = timestamp
+    
+    for source in simulator.components['source']:
+        source.generate()
+        source.timestamp = timestamp
+
+    for qprocess in simulator.components['queuedprocess']:
+        if qprocess.timestamp <= timestamp:
+            qprocess.timestamp = timestamp
+            qprocess.processer.next()
+        qprocess.queue.timestamp = timestamp
+    
+    for queue in simulator.components['queue']:
+        queue.timestamp = timestamp
