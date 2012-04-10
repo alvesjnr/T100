@@ -4,9 +4,13 @@ Neste capítulo pretende-se apresentar a proposta de uma arquitetura que visa su
 
 \section{Um \textit{framework} para simulação distribuída}
 
-Escrever
+Escrever uma aplicação de simulação de eventos discretos distribuída é uma tarefa de grandes proporções. Todo o tratamento de sincronização, comunicação, troca de mensagens, manipulação de objetos remotos, dentre outros, acarretam na existência de diversas tarefas paralelas à simulação em si, que devem ser gerenciadas pelo desenvolvedor que pretende implementar a simulação.
 
-\subsection{}
+Some-se a isso questões de ordem prática, como cuidado com o desempenho (entram neste ítem balanceamento de carga, \textit{design} eficiente dos algorítmos utilizados, etc) e permissividade ao erro (a probabilidade de se intruduzir um erro em um código aumente proporcionalmente ao tamanho deste código, \cite{HONGYU09}). Obtemos neste ponto um cenário onde o desenvolvedor acaba tendo de se ater a diversos detalhes alheios à simulação propriamente dita, que torna impraticável um desenvolvimento sustentável de simulações distribuídas.
+
+Assim como proposto em \{LIVERSON}, um framework de simulação distribuída tem o objetivo de suportar o desenvolvimento de simulações distribuídas de uma maneira que proveja encapsulamento dos mecanismos alhios à modelagem e execução da simulação, transparência nas tomadas de decisões internas e reusabilidade de código.
+
+\subsection{Encapsulamento}
 
 \subsection{Transparência}
 
@@ -14,7 +18,24 @@ A proposta de se escrever um código que seja ao mesmo tempo fácil de se implem
 
 Segundo \cite{DIRK00}, um usuário ao utilizar um \textit{framework} reutiliza seu \textit{design} e sua implementação. Isto é feito pois cabe ao framework resolver os problemas referentes ao seu domínio (no caso proposto por esse trabalho: sincronismo, comunicação, migração e balanceamento de carga em um sistema distribuído de simulação), deixando ao usuário apenas a função de desenvolver a aplicação sem a necessidade de se preocupar com questões que estão fora de seu domínio.
 
-O conceito de transparência neste caso remete-se que a intenção do \textit{framework} é deixar invisível ao seu usuário toda e qualquer decisão que não compete à construção do seu modelo a ser simulado.
+O conceito de transparência neste caso remete-se que a intenção do \textit{framework} é deixar invisível ao seu usuário toda e qualquer decisão que não compete à construção do seu modelo a ser simulado. Isso acaba trazendo para a construção do \textit{framework} algumas responsabilidades quanto a tomadas de decisões sobre \testit{design} de software, implementação de algorítmos considerados decisivos, entre outros.
 
 \subsection{Reusabilidade}
 
+Ao se optar pelo desenvolvimento de um \textit{framework} o responsável pelo seu \textit{design} deve permitir que componentes de interesse sejam trocados ou mesmo customizados. Isso faz com que que o mesmo código escrito para um framework funcione mesmo depois da troca de algum componente deste framework.
+
+No caso da simulação distribuída, componentes como protocolo de sincronização ou sistema de balanceamento de cargas poderiam ser plugáveis, o que permitiria a reutilização do mesmo código de simulação no mesmo framework, porém com caracterúisticas diferentes. Isso leva à uma reutilização de código, economizando no desenvolvimento e dinamizando a comparação entre diferentes soluções para um mesmo modelo.
+
+\section{Soluções Existentes}
+
+Uma proposta de \textit{framework} para simulação distribuída foi proposta em \cite{LIVERSON}, baseada em troca de mensagens suportando tanto \textit{MPI} qaunto \textit{PVM} e abordando tanto os protocolos de sincronização \textit{Rollback} Solidário e \textit{Time Warp}. Em \cite{RIBEIROALVES} é proposto uma solução utilizando agentes móveis, o que contempla, além da comunicação por troca de mensagens, também a possibilidade de migrações de processos lógicos através dos nós do sistema distribuído, visando a possibilidade de balancear a carga entre os nós do sistema.
+
+Algumas propostas como a \textit{Remote Call Framework (RCF)}, \textit{ClassdescMP} e diversas implementações do \textit{MPI} e de \textit{PVM} provém diversas soluções para a a troca de mensagem entre diferentes processos. Essas soluções ao mesmo tempo que provém eficientes mecanismos para gerenciar a troca de mensagens entre os processos, não possuem soluções nativas para a migração de processos lógicos entre nós do sistema de simulação, e também não estão preparados para o redirecionamento de mensagens enviadas à processos que migraram para um nó diferente do seu nó de origem.
+
+Outras soluções como \cite{SASSY} e \cite{}, assim como \cite{RIBEIROALVES} baseia-se nos agentes móveis para se desenvolver a aplicação de simulação distribuída.
+
+Tanto nos casos que utilizam agente quanto nos casos que baseiam-se em suprir soluções para troca de mensagens não é encontrada nativamente todos os mecanismos necessários para a implementação de um sistema de simulação distribuída que suporte tanto troca de mensagem quanto migração de processos. Ao utilizar-se de agentes móveis, que possuem tanto mecanismo de mobilidade quanto mecanismos de troca de mensagens, obtemos em um primeiro momento todos esses elementos. Porém, ao se mover um objeto de um nó para outro, perde-se a referência que havia deste objeto, forçando a se implementar um mecanismo que corrija este cenário. Vale citar também que mecanismos como comunicação grupal, essencial na implementação do \textit{Rollback} Solidário não é compreendido por agentes móveis.
+
+Visando isso este trabalho se propões em apresentar uma solução para se desenvolver simulações distribuídas de eventos discretos que encapsule os macanismos de sincronização de processos, balanceamento de carga, \textit{design} de componentes para a construção do modelo a ser simulado.
+
+Para que seja sustentada tanto os mecanismos de sincronização quanto o balanceamento de carga, é vital que o \textit{framework} supra também as necessidades básicas de comunicação, troca de mensagens, serialização de processos lógicos, migração destes processos e comunicação grupal. Estas funcionalidades são providas pelo \textit{middleware} de comunicação do \textit{framework}. Uma característica fundamental do \textit{middlere} de comunicação proposto por esse trabalho é que, uma vez um objeto migrando de seu nó de origem para um novo local, o \textit{middleware} se encarrega de redirecionar as mensagens para o nó em seu ambiente de destino, deixando completamente transparente para o usuário questões como endereço físico do processo lógico, \textit{status} do processo, etc.
