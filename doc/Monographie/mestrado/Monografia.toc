@@ -4,23 +4,25 @@
 \contentsline {subsection}{\numberline {1.1.1}Encapsulamento}{4}
 \contentsline {subsection}{\numberline {1.1.2}Transpar\IeC {\^e}ncia}{4}
 \contentsline {subsection}{\numberline {1.1.3}Reusabilidade}{5}
-\contentsline {section}{\numberline {1.2}Solu\IeC {\c c}\IeC {\~o}es Existentes}{5}
-\contentsline {chapter}{\numberline {2}Arquitetura do \textit {middleware} de comunica\IeC {\c c}\IeC {\~a}o}{7}
-\contentsline {section}{\numberline {2.1}Componentes do \textit {middleware}}{7}
-\contentsline {section}{\numberline {2.2}O componente \textit {environment}}{9}
-\contentsline {subsection}{\numberline {2.2.1}Estrutura interna}{9}
-\contentsline {subsection}{\numberline {2.2.2}\textit {Proxy}}{11}
-\contentsline {subsection}{\numberline {2.2.3}Tabela de endere\IeC {\c c}os de processos}{11}
-\contentsline {section}{\numberline {2.3}O componente \textit {process} }{13}
-\contentsline {subsection}{\numberline {2.3.1}Ciclo de vida de um processo}{15}
-\contentsline {subsection}{\numberline {2.3.2}Serializa\IeC {\c c}\IeC {\~a}o de um processo}{17}
-\contentsline {section}{\numberline {2.4}Migra\IeC {\c c}\IeC {\~a}o de processos }{17}
-\contentsline {subsection}{\numberline {2.4.1}Atualiza\IeC {\c c}\IeC {\~a}o da tabela de endere\IeC {\c c}os dos processos }{19}
-\contentsline {section}{\numberline {2.5}Troca de mensagens }{19}
-\contentsline {subsection}{\numberline {2.5.1}Comunica\IeC {\c c}\IeC {\~a}o direta e indireta}{20}
-\contentsline {subsection}{\numberline {2.5.2}Comunica\IeC {\c c}\IeC {\~a}o local direta}{21}
-\contentsline {section}{\numberline {2.6}Serializa\IeC {\c c}\IeC {\~a}o em grande escala}{22}
-\contentsline {section}{\numberline {2.7}Comunica\IeC {\c c}\IeC {\~a}o grupal}{22}
-\contentsline {section}{\numberline {2.8}Migra\IeC {\c c}oes em grande escala e migra\IeC {\c c}\IeC {\~o}es de ambientes }{22}
-\contentsline {chapter}{\numberline {3}Arquitetura do \textit {framework} de simula\IeC {\c c}\IeC {\~a}o}{23}
-\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{24}
+\contentsline {section}{\numberline {1.2}Solu\IeC {\c c}\IeC {\~o}es Existentes }{6}
+\contentsline {section}{\numberline {1.3}Arquitetura proposta}{7}
+\contentsline {section}{\numberline {1.4}Organiza\IeC {\c c}\IeC {\~a}o deste documento}{9}
+\contentsline {chapter}{\numberline {2}Arquitetura do \textit {middleware} de comunica\IeC {\c c}\IeC {\~a}o}{10}
+\contentsline {section}{\numberline {2.1}Componentes do \textit {middleware}}{10}
+\contentsline {section}{\numberline {2.2}O componente \textit {environment}}{12}
+\contentsline {subsection}{\numberline {2.2.1}Estrutura interna}{12}
+\contentsline {subsection}{\numberline {2.2.2}\textit {Proxy}}{14}
+\contentsline {subsection}{\numberline {2.2.3}Tabela de endere\IeC {\c c}os de processos}{14}
+\contentsline {section}{\numberline {2.3}O componente \textit {process} }{16}
+\contentsline {subsection}{\numberline {2.3.1}Ciclo de vida de um processo}{18}
+\contentsline {subsection}{\numberline {2.3.2}Serializa\IeC {\c c}\IeC {\~a}o de um processo}{20}
+\contentsline {section}{\numberline {2.4}Migra\IeC {\c c}\IeC {\~a}o de processos }{20}
+\contentsline {subsection}{\numberline {2.4.1}Atualiza\IeC {\c c}\IeC {\~a}o da tabela de endere\IeC {\c c}os dos processos }{22}
+\contentsline {section}{\numberline {2.5}Troca de mensagens }{22}
+\contentsline {subsection}{\numberline {2.5.1}Comunica\IeC {\c c}\IeC {\~a}o direta e indireta}{23}
+\contentsline {subsection}{\numberline {2.5.2}Comunica\IeC {\c c}\IeC {\~a}o local direta}{24}
+\contentsline {section}{\numberline {2.6}Serializa\IeC {\c c}\IeC {\~a}o em grande escala}{25}
+\contentsline {section}{\numberline {2.7}Comunica\IeC {\c c}\IeC {\~a}o grupal}{25}
+\contentsline {section}{\numberline {2.8}Migra\IeC {\c c}oes em grande escala e migra\IeC {\c c}\IeC {\~o}es de ambientes }{25}
+\contentsline {chapter}{\numberline {3}Arquitetura do \textit {framework} de simula\IeC {\c c}\IeC {\~a}o}{26}
+\contentsline {chapter}{Refer\^encias}{27}
