@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.10)  10 APR 2012 14:44
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.10)  10 APR 2012 17:35
 entering extended mode
  %&-line parsing enabled.
 **Monografia.tex
@@ -540,7 +540,8 @@ Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
 )) (./Monografia.aux
-(./ArquiteturaMiddleware.aux) (./biblio.aux))
+(./PropostaProjeto.aux) (./ArquiteturaMiddleware.aux)
+(./ArquiteturaFramework.aux) (./biblio.aux))
 \openout1 = `Monografia.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
@@ -613,13 +614,9 @@ driver: pdftex
 -----------------------
 \c@lstlisting=\count119
 (./Monografia.toc
-
-LaTeX Font Warning: Font shape `T1/cmr/b/it' undefined
-(Font)              using `T1/cmr/b/n' instead on input line 2.
-
 LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 3.
 
-(/usr/share/texmf-texlive/tex/latex/psnfss/ot1ztmcm.fd
+ (/usr/share/texmf-texlive/tex/latex/psnfss/ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
 LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 3.
@@ -651,7 +648,12 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 3.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 3.
- [1
+
+
+LaTeX Font Warning: Font shape `T1/cmr/b/it' undefined
+(Font)              using `T1/cmr/b/n' instead on input line 8.
+
+[1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
@@ -659,11 +661,33 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 \openout3 = `Monografia.toc'.
 
  [2]
+\openout2 = `PropostaProjeto.aux'.
+
+
+(./PropostaProjeto.tex
+Cap\'{\i }tulo 1.
+[3
+
+
+
+]
+! Undefined control sequence.
+l.21 ...uanto a tomadas de decisÃµes sobre \testit
+                                                  {design} de software, impl...
+
+? 
+[4]
+Overfull \hbox (4.29646pt too wide) in paragraph at lines 31--32
+[]\T1/aer/m/n/12 Uma pro-posta de \T1/aer/m/it/12 fra-mework \T1/aer/m/n/12 par
+a si-mu-la-ção dis-tri-buída foi pro-posta em (CRUZ,
+ []
+
+[5]) [6]
 \openout2 = `ArquiteturaMiddleware.aux'.
 
  (./ArquiteturaMiddleware.tex
-Cap\'{\i }tulo 1.
-[3
+Cap\'{\i }tulo 2.
+[7
 
 
 
@@ -674,32 +698,41 @@ File: omsaer.fd 1999/12/27
 )
 LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 22.
- [4] [5]
-<Environment_1.png, id=27, 405.515pt x 269.005pt>
+ [8] [9]
+<Environment_1.png, id=40, 405.515pt x 269.005pt>
 File: Environment_1.png Graphic file (type png)
  <use Environment_1.png>
-[6 <./Environment_1.png>] [7] [8] [9] [10]
-<estados_processos.png, id=47, 481.8pt x 361.35pt>
+[10 <./Environment_1.png>] [11] [12] [13] [14]
+<estados_processos.png, id=60, 481.8pt x 361.35pt>
 File: estados_processos.png Graphic file (type png)
  <use estados_processos.png>
-<process_uml.png, id=48, 259.97125pt x 216.81pt>
+[15] <process_uml.png, id=64, 259.97125pt x 216.81pt>
 File: process_uml.png Graphic file (type png)
- <use process_uml.png> [11]
-[12 <./estados_processos.png>] [13 <./process_uml.png>]
+ <use process_uml.png>
+[16 <./estados_processos.png>] [17 <./process_uml.png>]
 Overfull \hbox (0.38081pt too wide) in paragraph at lines 148--149
 []\T1/aer/m/n/12 O am-bi-ente de des-tino re-cebe o pro-cesso se-ri-a-li-zado e
  o des-se-ri-a-liza, tornando-
  []
 
-[14] [15] [16] <Communication_indireta.png, id=70, 317.185pt x 139.52126pt>
+[18] [19] [20] <Communication_indireta.png, id=83, 317.185pt x 139.52126pt>
 File: Communication_indireta.png Graphic file (type png)
 
 <use Communication_indireta.png>
-<Communication_direta.png, id=71, 323.2075pt x 145.54375pt>
+<Communication_direta.png, id=84, 323.2075pt x 145.54375pt>
 File: Communication_direta.png Graphic file (type png)
 
-<use Communication_direta.png> [17] [18 <./Communication_indireta.png> <./Commu
-nication_direta.png>]) [19]
+<use Communication_direta.png> [21 <./Communication_indireta.png>]) [22 <./Comm
+unication_direta.png>]
+\openout2 = `ArquiteturaFramework.aux'.
+
+ (./ArquiteturaFramework.tex
+Cap\'{\i }tulo 3.
+) [23
+
+
+
+]
 \openout2 = `biblio.aux'.
 
 
@@ -709,24 +742,25 @@ No file biblio.tex.
 | Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
 |                  http://abntex.codigolivre.org.br                 |
 +-------------------------------------------------------------------+
-[20
+[24
 
 
 
 
-] (./Monografia.aux (./ArquiteturaMiddleware.aux) (./biblio.aux))
+] (./Monografia.aux (./PropostaProjeto.aux) (./ArquiteturaMiddleware.aux)
+(./ArquiteturaFramework.aux) (./biblio.aux))
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 4993 strings out of 495041
- 67095 string characters out of 1181897
- 124639 words of memory out of 3000000
- 7990 multiletter control sequences out of 15000+50000
+ 5029 strings out of 495041
+ 67724 string characters out of 1181897
+ 125481 words of memory out of 3000000
+ 8012 multiletter control sequences out of 15000+50000
  38205 words of font info for 77 fonts, out of 3000000 for 9000
  30 hyphenation exceptions out of 8191
- 30i,7n,41p,977b,272s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,7n,41p,977b,234s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc} </home/antonio/.texmf-
 var/fonts/pk/ljfour/jknappen/ec/ecrb1728.600pk> </home/antonio/.texmf-var/fonts
 /pk/ljfour/jknappen/ec/ecrb1200.600pk> </home/antonio/.texmf-var/fonts/pk/ljfou
@@ -738,9 +772,9 @@ xmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1
 /public/amsfonts/cm/cmti12.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/
 utmri8a.pfb>
-Output written on Monografia.pdf (20 pages, 256705 bytes).
+Output written on Monografia.pdf (24 pages, 281218 bytes).
 PDF statistics:
- 210 PDF objects out of 1000 (max. 8388607)
+ 244 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

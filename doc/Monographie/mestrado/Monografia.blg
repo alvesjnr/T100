@@ -1,11 +1,15 @@
 This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: Monografia.aux
+A level-1 auxiliary file: PropostaProjeto.aux
 A level-1 auxiliary file: ArquiteturaMiddleware.aux
+A level-1 auxiliary file: ArquiteturaFramework.aux
 A level-1 auxiliary file: biblio.aux
 The style file: abnt-alf.bst
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: abnt-options.bib
 Database file #2: biblio.bib
+Warning--entry type for "LIVERSON" isn't style-file defined
+--line 164 of file biblio.bib
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 +---------------------------------------------------------+
 | Estilo bibliografico abnt-alf.bst versao 1.53           |
@@ -13,44 +17,45 @@ Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 | Em caso de duvidas ou problemas com este estilo procure |
 | http://abntex.codigolivre.org.br                        |
 +---------------------------------------------------------+
-You've used 3 entries,
+You've used 7 entries,
             6522 wiz_defined-function locations,
-            1178 strings with 9667 characters,
-and the built_in function-call counts, 2644 in all, are:
-= -- 309
-> -- 84
+            1202 strings with 10362 characters,
+and the built_in function-call counts, 5472 in all, are:
+= -- 498
+> -- 206
 < -- 2
-+ -- 74
-- -- 25
-* -- 163
-:= -- 392
-add.period$ -- 8
-call.type$ -- 4
-change.case$ -- 28
-chr.to.int$ -- 6
-cite$ -- 2
-duplicate$ -- 71
-empty$ -- 192
-format.name$ -- 117
-if$ -- 637
++ -- 120
+- -- 62
+* -- 373
+:= -- 789
+add.period$ -- 22
+call.type$ -- 8
+change.case$ -- 69
+chr.to.int$ -- 10
+cite$ -- 6
+duplicate$ -- 190
+empty$ -- 418
+format.name$ -- 294
+if$ -- 1307
 int.to.chr$ -- 0
 int.to.str$ -- 0
-missing$ -- 46
-newline$ -- 16
-num.names$ -- 10
-pop$ -- 83
+missing$ -- 113
+newline$ -- 34
+num.names$ -- 30
+pop$ -- 169
 preamble$ -- 1
-purify$ -- 12
+purify$ -- 28
 quote$ -- 0
-skip$ -- 198
+skip$ -- 357
 stack$ -- 1
-substring$ -- 81
-swap$ -- 29
+substring$ -- 150
+swap$ -- 76
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1
+type$ -- 5
 warning$ -- 0
-while$ -- 14
+while$ -- 38
 width$ -- 0
-write$ -- 37
+write$ -- 95
+(There was 1 warning)
