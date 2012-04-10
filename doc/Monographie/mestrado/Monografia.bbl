@@ -1,0 +1,20 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{1.53 }
+
+\bibitem[Alves, Walbon e Takahashi 2009]{RIBEIROALVES}
+\abntrefinfo{Alves, Walbon e Takahashi}{ALVES; WALBON; TAKAHASHI}{2009}
+{ALVES, A.~R.; WALBON, G.; TAKAHASHI, W. \emph{Agentes móveis e Simulação
+  Distribuída}. 2009.}
+
+\bibitem[McQuillan e Walden 1975]{MCQUILLAN75}
+\abntrefinfo{McQuillan e Walden}{MCQUILLAN; WALDEN}{1975}
+{MCQUILLAN, J.~M.; WALDEN, D.~C. Some considerations for a high performance
+  message-based interprocess communication system. In:  . [S.l.]: Proceedings
+  of the 1975 ACM SIGCOMM/SIGOPS workshop on Interprocess communications, 1975.
+  v.~9.}
+
+\end{thebibliography}

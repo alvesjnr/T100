@@ -1,0 +1,19 @@
+\select@language {brazil}
+\contentsline {chapter}{\numberline {1}Arquitetura do \textit {middleware}}{3}
+\contentsline {section}{\numberline {1.1}Componentes do \textit {middleware}}{3}
+\contentsline {section}{\numberline {1.2}O componente \textit {environment}}{5}
+\contentsline {subsection}{\numberline {1.2.1}Estrutura interna}{5}
+\contentsline {subsection}{\numberline {1.2.2}\textit {Proxy}}{7}
+\contentsline {subsection}{\numberline {1.2.3}Tabela de endere\IeC {\c c}os de processos}{7}
+\contentsline {section}{\numberline {1.3}O componente \textit {process} }{9}
+\contentsline {subsection}{\numberline {1.3.1}Ciclo de vida de um processo}{11}
+\contentsline {subsection}{\numberline {1.3.2}Serializa\IeC {\c c}\IeC {\~a}o de um processo}{13}
+\contentsline {section}{\numberline {1.4}Migra\IeC {\c c}\IeC {\~a}o de processos }{14}
+\contentsline {subsection}{\numberline {1.4.1}Atualiza\IeC {\c c}\IeC {\~a}o da tabela de endere\IeC {\c c}os dos processos }{15}
+\contentsline {section}{\numberline {1.5}Troca de mensagens }{16}
+\contentsline {subsection}{\numberline {1.5.1}Comunica\IeC {\c c}\IeC {\~a}o direta e indireta}{16}
+\contentsline {subsection}{\numberline {1.5.2}Comunica\IeC {\c c}\IeC {\~a}o local direta}{17}
+\contentsline {section}{\numberline {1.6}Serializa\IeC {\c c}\IeC {\~a}o em grande escala}{19}
+\contentsline {section}{\numberline {1.7}Comunica\IeC {\c c}\IeC {\~a}o grupal}{19}
+\contentsline {section}{\numberline {1.8}Migra\IeC {\c c}oes em grande escala e migra\IeC {\c c}\IeC {\~o}es de ambientes }{19}
+\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{20}

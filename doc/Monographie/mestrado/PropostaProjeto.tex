@@ -1,0 +1,20 @@
+\chapter{Proposta deste projeto}
+
+Neste capítulo pretende-se apresentar a proposta de uma arquitetura que visa sustentar o desenvolvimento de aplicações de simulação distribuída de maneira transparente para o usuário final. Em complemento é trazido também neste capítulo algumas soluções já existentes e, por fim, pretende-se defender a posição de se optar por uma nova arquitetura de comunicação entre processos lógicos.
+
+\section{Um \textit{framework} para simulação distribuída}
+
+Escrever
+
+\subsection{}
+
+\subsection{Transparência}
+
+A proposta de se escrever um código que seja ao mesmo tempo fácil de se implementar pelo usuário e eficiente em sua execução projeta-se diretamente na utilização de diversas camadas que ao mesmo tempo esconde do usuário do \textit{framework} algumas decisões internas e provê abstrações nas quais o usuário se baseia para desenvolver seu modelo.
+
+Segundo \cite{DIRK00}, um usuário ao utilizar um \textit{framework} reutiliza seu \textit{design} e sua implementação. Isto é feito pois cabe ao framework resolver os problemas referentes ao seu domínio (no caso proposto por esse trabalho: sincronismo, comunicação, migração e balanceamento de carga em um sistema distribuído de simulação), deixando ao usuário apenas a função de desenvolver a aplicação sem a necessidade de se preocupar com questões que estão fora de seu domínio.
+
+O conceito de transparência neste caso remete-se que a intenção do \textit{framework} é deixar invisível ao seu usuário toda e qualquer decisão que não compete à construção do seu modelo a ser simulado.
+
+\subsection{Reusabilidade}
+

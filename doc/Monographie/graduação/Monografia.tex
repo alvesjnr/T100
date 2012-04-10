@@ -1,0 +1,46 @@
+%%
+\documentclass{abnt}
+% Incluir Pacotes ------------------------------------------------
+\usepackage [brazil] {babel}
+\usepackage [utf8] {inputenc}
+\usepackage{ae}                  %% Font Encoding T1 (PDF)
+\usepackage{graphicx}            %% Incluso de grficos (DVI/PS)
+\usepackage{geometry}            %% Dimenses do documento (DVI/PS)
+\usepackage{lscape}              %% Utilizar pgina em landscape
+\usepackage{url}                 %% Trata URLs, e-mails e paths
+\usepackage[alf]{abntcite}
+\usepackage{listings}
+\usepackage{color}
+%\usepackage{float}
+
+
+\renewcommand{\ABNTchapterfont}{\fontfamily{cmr}\fontseries{b}\selectfont}
+\renewcommand{\ABNTsectionfont}{\fontfamily{cmr}\fontseries{b}}
+\renewcommand{\tituloformat}{\large\bfseries}
+
+\begin{document}
+% ----------------------------------------------------------------
+% Paginas iniciais
+% ----------------------------------------------------------------
+\include{capa}                    %% Capa e Folha de rosto
+\tableofcontents                  %% Sumário
+\listoffigures                    %% Lista de figuras
+%\listoftables                    %% Lista de tabelas
+%\include{ListaAbrev}             %% Lista de abreviaturas
+%\include{Agradecimentos}          %% Agradecimentos
+%\include{Resumo}                 %% Resumo
+%-----------------------------------------------------------------
+% Corpo da Monografia
+% ----------------------------------------------------------------
+\include{Introducao}              %% INTRODUÇÃO
+\include{SimulacaoDistribuida}           %% Simulação Distribuída
+\include{EscalonamentoProcessos}           %% Como o escalonamento contribui
+\include{ArquiteturaMiddleware}		%% Proposta de arquitetura para simulação distribuída
+\include{Testes}           %% Testes e resultados de implementações
+\include{Conclusao}               %% Conclsões e trabalhos futuros
+% ----------------------------------------------------------------
+\bibliographystyle{abnt-alf}
+\bibliography{biblio}             %% REFERENCIAS (deve-se possuir o arquivo do tipo bibitex)
+% ----------------------------------------------------------------
+\end{document}
+% ----------------------------------------------------------------

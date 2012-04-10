@@ -1,0 +1,36 @@
+\select@language {brazil}
+\contentsline {chapter}{Lista de Figuras}{}
+\contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{5}
+\contentsline {section}{\numberline {1.1}Simula\IeC {\c c}\IeC {\~a}o}{5}
+\contentsline {section}{\numberline {1.2}Simula\IeC {\c c}\IeC {\~a}o Distribu\IeC {\'\i }da}{6}
+\contentsline {section}{\numberline {1.3}Objetivos}{8}
+\contentsline {section}{\numberline {1.4}Organiza\IeC {\c c}\IeC {\~a}o da Monografia}{8}
+\contentsline {chapter}{\numberline {2}Protocolos de Sincroniza\IeC {\c c}\IeC {\~a}o de Simula\IeC {\c c}\IeC {\~a}o Distribu\IeC {\'\i }da}{9}
+\contentsline {section}{\numberline {2.1}Protocolos Existentes}{9}
+\contentsline {section}{\numberline {2.2}Protocolos Conservativos}{9}
+\contentsline {section}{\numberline {2.3}Protocolos Otimistas}{10}
+\contentsline {section}{\numberline {2.4}Time Warp}{11}
+\contentsline {subsection}{\numberline {2.4.1}\textit {Rollback} prim\IeC {\'a}rio e \textit {Rollback} secund\IeC {\'a}rio}{12}
+\contentsline {subsection}{\numberline {2.4.2}Anti-Mensagem}{13}
+\contentsline {section}{\numberline {2.5}\textit {RollBack} Solid\IeC {\'a}rio}{13}
+\contentsline {section}{\numberline {2.6}O comportamento geral do protocolo \textit {Rollback} Solid\IeC {\'a}rio}{14}
+\contentsline {section}{\numberline {2.7}Recupera\IeC {\c c}\IeC {\~a}o dos Estados Durante um \textit {Rollback}}{15}
+\contentsline {section}{\numberline {2.8}Uma abordagem utilizando \textit {checkpoints} s\IeC {\'\i }ncronos}{16}
+\contentsline {section}{\numberline {2.9}Rollback Solid\IeC {\'a}rio utilizando mecanismos de \textit {checkpoints} Semi-S\IeC {\'\i }ncronos}{16}
+\contentsline {chapter}{\numberline {3}Agente M\IeC {\'o}veis}{18}
+\contentsline {section}{\numberline {3.1}Mobilidade Forte e Mobilidade Fraca}{20}
+\contentsline {section}{\numberline {3.2}Agentes M\IeC {\'o}veis em Java e a Biblioteca \textit {Aglets}}{21}
+\contentsline {section}{\numberline {3.3}Ciclo de Vida \textit {Aglets}}{23}
+\contentsline {section}{\numberline {3.4}Comunica\IeC {\c c}\IeC {\~a}o Entre \textit {Aglets}}{24}
+\contentsline {section}{\numberline {3.5}Considera\IeC {\c c}\IeC {\~o}es Finais}{25}
+\contentsline {chapter}{\numberline {4}Estrutura e Implementa\IeC {\c c}\IeC {\~a}o}{27}
+\contentsline {section}{\numberline {4.1}Implementa\IeC {\c c}\IeC {\~a}o}{28}
+\contentsline {subsection}{\numberline {4.1.1}A Classe Servidor}{30}
+\contentsline {subsection}{\numberline {4.1.2}A classe Processo}{31}
+\contentsline {subsection}{\numberline {4.1.3}A classe Observador}{35}
+\contentsline {subsection}{\numberline {4.1.4}Tratamento de mensagens}{36}
+\contentsline {section}{\numberline {4.2}Considera\IeC {\c c}\IeC {\~o}es finais}{37}
+\contentsline {chapter}{\numberline {5}Conclus\IeC {\~o}es}{38}
+\contentsline {section}{\numberline {5.1}Sobre a Implementa\IeC {\c c}\IeC {\~a}o}{39}
+\contentsline {section}{\numberline {5.2}Contribui\IeC {\c c}\IeC {\~o}es Desse Trabalho}{40}
+\contentsline {section}{\numberline {5.3}Trabalhos Futuros}{41}

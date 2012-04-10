@@ -1,0 +1,60 @@
+\chapter{Agentes Móveis}
+
+Os agentes móveis surgiram como técnicas de computação móvel e em sistemas distribuídos, com o objetivo de resolver problemas de integração e mobilidade da informação. Um agente pode migrar entre computadores de uma rede durante a sua execução, carregando consigo o seu estado e código de execução.
+
+\section{Definição de Agente Móvel}
+Um agente móvel é um agente que não está ligado permanentemente ao sistema que o iniciou enquanto processo, ele possui a habilidade única de se transportar de um sistema a outro em uma rede, mantendo seu contexto original antes do transporte. Esta habilidade de viajar, permite ao agente móvel se mover para o sistema que contém o recurso com o qual o agente deseja interagir podendo portanto tirar vantagem disso para estar na mesma máquina ou rede onde busca informações, e com isso ser muito mais eficiente em sua tarefa.
+
+A utilização dessa técnica traz diversas vantagens como:
+\begin{itemize}
+	\item \textbf{Redução no tráfego na rede}: Sistemas distribuídos demandam protocolos de comunicação que envolvem múltiplas interações para concluir uma tarefa, junto com medidas de seguranças, resultando em intenso tráfego na rede. Agentes móveis permitem o deslocamento da interação entre a aplicação cliente e o servidor para a máquina onde está o servidor, onde estas interações podem então ocorrer localmente. Quando grandes volumes de dados estão armazenados remotamente e necessitam ser processados, ao invés de trazer os dados para serem processados localmente, enviamos o agente para processá-los remotamente, diminuindo assim o tráfego na rede.
+
+	\item \textbf{Podem resolver problemas de latência na rede}: Sistemas críticos de tempo-real precisam responder imediatamente a mudanças em seu ambiente. O sistema de comunicação em um sistema distribuído pode gerar latências, e essas latências podem não ser aceitáveis. Agentes móveis podem solucionar o problema, pois estes podem ser despachados de um controlador central para agir localmente e executar diretamente as diretivas de controle.
+
+	\item \textbf{Encapsulamento de protocolos}: Quando trocamos dados em um sistema distribuído, cada host implementa localmente os protocolos de comunicação com o qual pode receber e enviar dados, entretanto, como estes protocolos estão sendo sempre aperfeiçoados e/ou modificados por razões de segurança e eficiência, os softwares que implementam estes protocolos necessitam estar em constante manutenção. Em uma rede com um número grande máquinas, a manutenção destes softwares pode ser custosa e até mesmo impossível. Protocolos normalmente tornam-se um problema em sistemas mais antigos. Agentes móveis podem carregar consigo estes protocolos, e portanto podem implementar esta manutenção de uma maneira muito eficaz.
+
+	\item \textbf{Execução assíncrona e autônoma}: Frequentemente, dispositivos móveis necessitam dispor de conexões de rede caras e frágeis, tarefas que demandam de conexões continuamente abertas entre um dispositivo móvel e uma rede fixa podem não ser economicamente viáveis. Estas tarefas podem ser implementadas por meio de agentes móveis, que podem então ser despachados para dentro da rede. Após serem despachados, os agentes móveis tornam-se independentes do processo que os criou e podem atuar de maneira assíncrona e autônoma. O dispositivo móvel pode se reconectar posteriormente então para coletar o agente de volta.
+
+	\item \textbf{Adaptação dinâmica}: Agentes móveis têm a habilidade de sensorear seu ambiente de execução e reagir autonomamente a mudanças. Estas mudanças podem envolver questões como: taxa de ocupação de memória e CPU de máquinas específicas, tráfego na rede, ociosidade de máquinas, trechos e/ou segmentos de rede congestionados, horários prioritários em máquinas específicas. Múltiplos agentes móveis possuem a habilidade única de se distribuírem mutuamente entre os hosts disponíveis em uma rede, de maneira a manter uma configuração ótima para a resolução de um dado problema.
+
+	\item \textbf{Independência de plataforma}: Redes são sistemas fundamentalmente heterogêneos, tanto sob perspectivas de hardware como de software. Múltiplos tipos de máquinas e sistemas operacionais podem estar presentes em redes de vasto alcance. Promover a integração entre esses diferentes sistemas pode constituir uma tarefa razoavelmente complicada. Esta integração normalmente demanda soluções específicas para cada máquina/sistema. Agentes móveis não dependem do computador ou da camada de transporte que os conecta, mas somente de seu ambiente de execução, provendo assim condições ótimas para a integração de sistemas.
+
+	\item \textbf{Robustez e tolerância a falhas}: Os agentes móveis podem reagir dinamicamente diante de situações desfavoráveis e eventos imprevistos, esta habilidade facilita a construção de sistemas distribuídos mais robustos e tolerantes a falhas. Se um determinado host passa a apresentar problemas e necessita ser desligado, todos os agentes executando nesta máquina são avisados e têm um dado tempo para transferirem-se para outro host. No novo host, podem então continuar sua operação normal, sem prejuízo para o cumprimento de suas tarefas, caso seja impossível essa transferência, grupos de agentes que comunicam-se constantemente podem notar a ausência de comunicações do agente subitamente desaparecido e tomar providências para compensar sua ausência.
+\end{itemize}
+
+\section{Aglets}
+Aglets são objetos Java com a capacidade de se mover de uma máquina para outra em uma rede, levando consigo o código de programa e o estado dos objetos que compõe o aglet. A migração inicia com a interrupção da execução do aglet na máquina origem, seu despacho para uma máquina remota e o reinicio da execução após sua chegada ao destino. Mecanismos de segurança impedem que aglets não autorizados tenham acesso a determinados recursos do sistema, tornando o sistema implementado com aglets seguro. 
+
+A biblioteca de classes de aglets foi criada por pesquisadores da IBM, tendo este projeto os seguintes objetivos: 
+\begin{itemize}
+	\item Fornecer um modelo compreensivo e simples de programação utilizando agentes móveis, sem no entanto implicar em modificações na máquina vitual Java ou em código nativo;
+	\item Disponibilizar mecanismos de comunicação poderosos e dinâmicos que permitissem agentes se comunicarem outros agentes, fossem eles conhecidos ou não;
+	\item Projetar uma arquitetura de agentes móveis que permitisse extensibilidade e reusabilidade;
+	\item Obter uma arquitetura altamente coerente com o modelo tecnológico Web\/ Java.  
+\end{itemize}
+
+\subsection{Agentes em Java}
+O código Java é simples, seguro, compacto e por ser orientado a objetos permite reuso e formas coerentes de explorar recursos como interfaces, encapsulamento e polimorfismo. A Java é uma linguagem dinâmica e sua natureza distribuída a torna uma candidata natural ao desenvolvimento de aplicações em rede. As características de Java em perspectiva da concepção de um ambiente baseado em agentes móveis são:
+\begin{itemize}
+	\item \textbf{Independência de plataforma} - O código Java é compilado em um formato independente de arquitetura chamado byte code, permitindo a execução de aplicações Java em redes heterogêneas, sendo portanto, independente de plataforma. Isto permite criar agentes móveis sem conhecimento prévio de qual tipo de computadores na qual eles irão executar.
+	\item \textbf{Execução segura} - Java possui diversos mecanismos de segurança principalmente pelo fato da linguagem ser voltada para Internet e Intranet. Programas Java não são permitidos acessar dados privados de objetos e muito menos violar a semântica básica da linguagem. Este fato torna possível construir um ambiente segura a ataques de agentes móveis mal intencionados.
+	\item \textbf{Carga dinâmica de classes} - A máquina virtual Java carrega e define classes em tempo de execução, fornecendo um espaço de endereçamento privado para cada agente, que pode executar independentemente e com segurança em relações a outros agentes. Este mecanismo é extensível e permite que classes possam ser carregadas via rede.
+	\item \textbf{Programação \textit{multithread}} - O modelo de programação \textit{multithread} permite a implementação de agentes como entidades autônomas. As primitivas de sincronização nativas da linguagem Java habilitam a interação entre agentes.
+	\item \textbf{Serialização de objetos} - A linguagem Java permite a serialização e deserialização de objetos. Este mecanismo permite que objetos sejam empacotados com informação suficiente que permitam posterior reconstrução. Esta é uma característica chave para implementação de agentes móveis.
+
+	\item \textbf{Reflexão} - Java possui mecanismos para obter informações sobre classes carregadas, permitindo construir agentes com maior conhecimento de si próprio e de outros agentes.
+
+\end{itemize}
+
+Embora Java apresente diversos aspectos positivos para implementação de agentes móveis, a linguagem sofre das deficiências discutidas abaixo: 
+
+\begin{itemize}
+	\item \textbf{Suporte inadequado para controle de recursos} - A linguagem não disponibiliza mecanismos para controle de recursos alocados por um objeto. Portanto recursos podem ser alocados inadvertidamente para agentes, e possivelmente permanecerem alocados após o mesmo ser despachado para uma outra máquina.
+
+	\item \textbf{Referências sem proteção} - Java não possui mecanismo de proteção à referências possibilitando que métodos públicos de um objeto sejam acessados por outros. Proteção é um fator crítico para implementação de agentes, sendo este problema contornado através do uso de um objeto proxy entre os agentes que irão interagir.
+
+	\item \textbf{Nenhum objeto é proprietário de referências} - Java permite que qualquer objeto referencie um outro. O mecanismo de garbage collector não desaloca um objeto até não haja mais referências a ele, tornando possível que um agente permaneça no sistema caso um outro agente o referencie. A utilização de um objeto proxy pode contornar este problema.
+
+	\item \textbf{Nenhum suporte para preservação e recuperação do estado de execução} - Java não possui mecanismo para salvar o estado completo de execução de um objeto. Portanto para que um agente móvel consiga restaurar seu estado de execução, são necessários a utilização de atributos internos e eventos externos para realizar esta tarefa. 
+\end{itemize}
+\cite{Aulas}
