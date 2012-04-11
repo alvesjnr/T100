@@ -26,10 +26,10 @@
 \contentsline {section}{\numberline {4.3}O componente \textit {process} }{20}
 \contentsline {subsection}{\numberline {4.3.1}Ciclo de vida de um processo}{22}
 \contentsline {subsection}{\numberline {4.3.2}Serializa\IeC {\c c}\IeC {\~a}o de um processo}{24}
-\contentsline {section}{\numberline {4.4}Migra\IeC {\c c}\IeC {\~a}o de processos }{24}
+\contentsline {section}{\numberline {4.4}Migra\IeC {\c c}\IeC {\~a}o de processos }{25}
 \contentsline {subsection}{\numberline {4.4.1}Atualiza\IeC {\c c}\IeC {\~a}o da tabela de endere\IeC {\c c}os dos processos }{26}
 \contentsline {section}{\numberline {4.5}Troca de mensagens }{27}
-\contentsline {subsection}{\numberline {4.5.1}Comunica\IeC {\c c}\IeC {\~a}o direta e indireta}{27}
+\contentsline {subsection}{\numberline {4.5.1}Comunica\IeC {\c c}\IeC {\~a}o direta e indireta}{28}
 \contentsline {subsection}{\numberline {4.5.2}Comunica\IeC {\c c}\IeC {\~a}o local direta}{29}
 \contentsline {section}{\numberline {4.6}Serializa\IeC {\c c}\IeC {\~a}o em grande escala}{30}
 \contentsline {section}{\numberline {4.7}Comunica\IeC {\c c}\IeC {\~a}o grupal}{30}

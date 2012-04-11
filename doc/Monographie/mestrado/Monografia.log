@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.10)  11 APR 2012 15:27
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.10)  11 APR 2012 17:01
 entering extended mode
  %&-line parsing enabled.
 **Monografia.tex
@@ -725,7 +725,7 @@ File: estados_processos.png Graphic file (type png)
 <process_uml.png, id=88, 259.97125pt x 216.81pt>
 File: process_uml.png Graphic file (type png)
  <use process_uml.png> [23 <./estados_processos.png>] [24 <./process_uml.png>]
-Overfull \hbox (0.38081pt too wide) in paragraph at lines 151--152
+Overfull \hbox (0.38081pt too wide) in paragraph at lines 157--158
 []\T1/aer/m/n/12 O am-bi-ente de des-tino re-cebe o pro-cesso se-ri-a-li-zado e
  o des-se-ri-a-liza, tornando-
  []
@@ -733,15 +733,20 @@ Overfull \hbox (0.38081pt too wide) in paragraph at lines 151--152
 [25] [26] [27] <Communication_indireta.png, id=107, 317.185pt x 139.52126pt>
 File: Communication_indireta.png Graphic file (type png)
 
-<use Communication_indireta.png>
-<Communication_direta.png, id=108, 323.2075pt x 145.54375pt>
+<use Communication_indireta.png> [28]
+<Communication_direta.png, id=111, 323.2075pt x 145.54375pt>
 File: Communication_direta.png Graphic file (type png)
 
-<use Communication_direta.png> [28 <./Communication_indireta.png>]) [29 <./Comm
-unication_direta.png>] [30]
+<use Communication_direta.png> [29 <./Communication_indireta.png> <./Communicat
+ion_direta.png>]
+<communication_superdirect.png, id=117, 236.885pt x 214.8025pt>
+File: communication_superdirect.png Graphic file (type png)
+
+<use communication_superdirect.png>) [30 <./communication_superdirect.png>]
 \openout2 = `ArquiteturaFramework.aux'.
 
- (./ArquiteturaFramework.tex
+
+(./ArquiteturaFramework.tex
 Cap\'{\i }tulo 5.
 ) [31
 
@@ -787,15 +792,12 @@ No file biblio.tex.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 5071 strings out of 495041
- 68386 string characters out of 1181897
+ 5076 strings out of 495041
+ 68550 string characters out of 1181897
  126748 words of memory out of 3000000
- 8022 multiletter control sequences out of 15000+50000
+ 8026 multiletter control sequences out of 15000+50000
  38205 words of font info for 77 fonts, out of 3000000 for 9000
  30 hyphenation exceptions out of 8191
  30i,7n,41p,1040b,272s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -810,9 +812,9 @@ xmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1
 /public/amsfonts/cm/cmti12.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/
 utmri8a.pfb>
-Output written on Monografia.pdf (34 pages, 315719 bytes).
+Output written on Monografia.pdf (34 pages, 321083 bytes).
 PDF statistics:
- 311 PDF objects out of 1000 (max. 8388607)
+ 313 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

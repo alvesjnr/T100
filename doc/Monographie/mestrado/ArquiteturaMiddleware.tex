@@ -171,15 +171,15 @@ Vale ressaltar que uma vez que esteja em processamento (executando o método run
 
 \subsection{Atualização da tabela de endereços dos processos \label{atualizacao}}
 
-Uma vez que um processe migra de um \textit{environment} para outro, instantes após a migração apenas os dois ambientes envolvidos possuem os dados atualizados. Todo ambiente difente dos envolvidos no processo de migração possuem em suas tabelas de endereços de processos dados incorretos quanto a sua localização, portanto, enviariam mensagens para o ambiente antigo, ao qual o processo destinatário não mais pertence.
+Uma vez que um processe migra de um \textit{environment} para outro, instantes após a migração apenas os dois ambientes envolvidos possuem os dados atualizados. Todo ambiente difente dos envolvidos no processo de migração possuem em suas tabelas de endereços de processos dados incorretos quanto à sua localização, portanto, enviariam mensagens para o ambiente antigo, ao qual o processo destinatário não mais pertence.
 
-Ao receber uma mensagem de um antigo hospedeiro, um \textit{environment} (que possui o seu novo endereço), redireciona a mensagem ao proxy do ambiente que possui atualmente o processo em questão. Porém, isso inclui mais um intermediário no processo de transmissão de mensagens. Sendo assim, duas ações, em momentos distintos, são efetuadas para garantir a atualização das tabelas de endereços de processos. Primeiro, o antigo \textit{host} do processo, ao receber a mensagem, al;em de repassa-la ao atual \textit{host} também devolve uma mensagem para o remetente da mensagem, notificando-o que o endereço do ambiente que contém o processo mudou, e atualiza este endereço.
+Ao receber uma mensagem de um antigo hospedeiro, um \textit{environment} (que possui o seu novo endereço), redireciona a mensagem ao proxy do ambiente que possui atualmente o processo em questão. Porém, isso inclui mais um intermediário no processo de transmissão de mensagens. Sendo assim, duas ações, em momentos distintos, são efetuadas para garantir a atualização das tabelas de endereços de processos. Primeiro, o antigo \textit{host} do processo, ao receber a mensagem, além de repassa-la ao atual \textit{host} também devolve uma mensagem para o remetente da mensagem, notificando-o que o endereço do ambiente que contém o processo mudou, e atualiza este endereço.
 
 Em um momento distinto, uma segunda ação de sincronismo de tabelas é disparada. Esta ação é iniciada de forma idependente por cada \textit{environment}, enviando uma mensagem para os demais ambientes, notificando-os de quais processos lógicos encontram-se em seu poder. Isto garante uma atualização constante das diversas tabelas de endereços de processos existente na simulação.
 
 \section{Troca de mensagens \label{troca_mensagens}}
 
-No modelo de comunicação baseado em proxy, quando um processo deseja enviar uma mensagem a um segundo processo, a mensagem é primeiramente enviada ao proxy do \textit{environment} ao qual o processo remetente reside, e o proxy é responsável por resolver a correlação entre endereço lógico e o endereço físico, e enfim enviar a mensagem ao processo destinatário. O principal motivo de se deixar o proxy responsável pelo envio da mensage é se possibilitar que existam uma pequena quantidade de tabelas de correlação de endereços, e assim, que existam menos atualizações de tabelas em uma migração.
+No modelo de comunicação baseado em \textit{proxy}, quando um processo deseja enviar uma mensagem a um segundo processo, a mensagem é primeiramente enviada ao \textit{proxy} do \textit{environment} ao qual o processo remetente reside, e o proxy é responsável por resolver a correlação entre endereço lógico e o endereço físico, e enfim enviar a mensagem ao processo destinatário. O principal motivo de se deixar o proxy responsável pelo envio da mensage é se possibilitar que existam uma pequena quantidade de tabelas de correlação de endereços, e assim, que existam menos atualizações de tabelas em uma migração.
 
 Em um modelo onde cada processo resolveria o envio de mensagem diretamente, a quantidade de tabelas de endereços seria proporcional à quantidade de processos (e não proporcional à quantidade de ambientes, como é na arquitetura proposta). Ao haver uma migração, existirão menos tabelas a serem atualizadas na arquitetura baseada em comunicação inter-proxies, ao passo que na comunicação direta entre processos, a quantidade de tabelas a serem atualizadas seria bem maior.
 
@@ -216,7 +216,7 @@ Assim como na comunicação direta, neste caso há um ganho na transmissão da m
 A comunicação local direta, assim como a comunicação direta, são opções que devem ser exploradas em casos onde a migração de processos é reduzida ou nula.
 
 \begin{figure}
-  %\centerline{\includegraphics{Communication_superdirect.png}}
+  \centerline{\includegraphics{communication_superdirect.png}}
   \caption{Comunicação direta \textit{process-process}.}
 \label{fig:direta_mesmo}
 \end{figure}
