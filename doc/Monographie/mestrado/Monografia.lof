@@ -1,9 +1,12 @@
 \select@language {brazil}
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Camadas da arquitetura do \textit {framework}.}}{13}
-\contentsline {figure}{\numberline {4.1}{\ignorespaces A arquitetura interna de um \textit {environment}.}}{18}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Ciclo de vida de um processo l\IeC {\'o}gico.}}{24}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Representa\IeC {\c c}\IeC {\~a}o em diagrama de classe do componente \textit {process}.}}{25}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Comunica\IeC {\c c}\IeC {\~a}o indireta \textit {proxy-process}.}}{30}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Comunica\IeC {\c c}\IeC {\~a}o direta \textit {proxy-process}.}}{30}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Comunica\IeC {\c c}\IeC {\~a}o direta \textit {process-process}.}}{31}
-\contentsline {figure}{\numberline {5.1}{\ignorespaces A camada aqui denominada \textit {framework}.}}{34}
+\contentsline {figure}{\numberline {1}{\ignorespaces Camadas da arquitetura do \textit {framework}.}}{13}
+\contentsline {figure}{\numberline {2}{\ignorespaces A arquitetura interna de um \textit {environment}.}}{18}
+\contentsline {figure}{\numberline {3}{\ignorespaces Ciclo de vida de um processo l\IeC {\'o}gico.}}{24}
+\contentsline {figure}{\numberline {4}{\ignorespaces Representa\IeC {\c c}\IeC {\~a}o em diagrama de classe do componente \textit {process}.}}{25}
+\contentsline {figure}{\numberline {5}{\ignorespaces Comunica\IeC {\c c}\IeC {\~a}o indireta \textit {proxy-process}.}}{30}
+\contentsline {figure}{\numberline {6}{\ignorespaces Comunica\IeC {\c c}\IeC {\~a}o direta \textit {proxy-process}.}}{30}
+\contentsline {figure}{\numberline {7}{\ignorespaces Comunica\IeC {\c c}\IeC {\~a}o direta \textit {process-process}.}}{31}
+\contentsline {figure}{\numberline {8}{\ignorespaces A camada aqui denominada \textit {framework}.}}{34}
+\contentsline {figure}{\numberline {9}{\ignorespaces rquitetura b\IeC {\'a}sica de um componente primitivo.}}{36}
+\contentsline {figure}{\numberline {10}{\ignorespaces Hierarquia dos componentes b\IeC {\'a}sicos.}}{37}
+\contentsline {figure}{\numberline {11}{\ignorespaces Modelagem de uma via urbana.}}{38}
