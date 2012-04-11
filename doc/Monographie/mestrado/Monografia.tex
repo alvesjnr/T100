@@ -26,7 +26,7 @@
 \include{capa}                    %% Capa e Folha de rosto
 \tableofcontents                  %% Sumário
 \listoffigures                    %% Lista de figuras
-\include{Agradecimentos}          %% Agradecimentos
+%\include{Agradecimentos}          %% Agradecimentos
 %-----------------------------------------------------------------
 % Corpo da Monografia
 % ----------------------------------------------------------------
@@ -38,7 +38,9 @@
 \include{Implementacao}
 \include{Conclusao}               %% Conclsões e trabalhos futuros
 \include{biblio}
-% \include{A_Python}
+\begin{appendix}
+\include{A_Python}
+\end{appendix}
 % ----------------------------------------------------------------
 \bibliographystyle{abnt-alf}
 \bibliography{biblio}             %% REFERENCIAS (deve-se possuir o arquivo do tipo bibitex)
