@@ -63,7 +63,7 @@ A estrutura interna de dados do ambiente é a representação de todos as variá
 
 Um \textit{environment} possui um endereço lógico único em toda o ciclo de vida da simulação, denominado \textit{Unique Environment Identifier} - \textit{UEI}. Este endereço é um número natural que o representa no sistema de simulação.
 
-A comunicação entre dois \textit{environmets} se dá através seu endereço físico na rede. Tal inflexibilidade é justificada quando assumimos que um \textit{environment} tem todo o seu ciclo de vida atrelado a uma mesma máquina física (salvo excessões descritas na Seção~\ref{migra_ambiente})
+A comunicação entre dois \textit{environmets} se dá através seu endereço físico na rede. Tal inflexibilidade é justificada quando assumimos que um \textit{environment} tem todo o seu ciclo de vida atrelado a uma mesma máquina física.
 
 \subsection{\textit{Proxy}}
 
@@ -221,6 +221,10 @@ A comunicação local direta, assim como a comunicação direta, são opções q
 \label{fig:direta_mesmo}
 \end{figure}
 
-\section{Serialização em grande escala} %trata da serialização de um environment ou até mesmo da simulação como um todo
-\section{Comunicação grupal} % mensagens em multicast
-\section{Migraçoes em grande escala e migrações de ambientes \label{migra_ambiente}} %casos de excessão
+\section{Comunicação grupal}
+
+Por definição agentes móveis não suportam comunicação grupal \cite{}. Uma das lacunas de se utilizar agentes móveis para a implementação de um framework de simulação distribuída é justamente a ausência de um mecanismo nativo de comunicação grupal, necessário para a implementação do protocolo \textit{Rollback} Solidário.
+
+Uma alternativa para este problema seria o envio de múltiplas mensagens para cada \textit{environment} presente no sistema, o que seria uma solução parcial, pois a medida que aumenta-se a quantidade de nós existentes no sistema, aumenta-se a quantidade de mensagens a serem enviadas.
+
+A arquitetura do \textit{middleware} proposto resolve este problema em dois níveis: primeiramente existe o envio de mensagens em broadcasta que atingem simultaneamente todos os \textit{environments} do sistema. Em seguida cada environment envia uma mensage física local para cada processo. Como a comunicação entre \textit{environment} e processo é local, não há sobrecarga na rede.
