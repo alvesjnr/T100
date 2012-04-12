@@ -35,14 +35,14 @@
 \contentsline {chapter}{\numberline {5}Arquitetura do \textit {framework} de simula\IeC {\c c}\IeC {\~a}o}{33}
 \contentsline {section}{\numberline {5.1}O bloco Componente}{33}
 \contentsline {section}{\numberline {5.2}Componentes b\IeC {\'a}sicos}{35}
-\contentsline {subsection}{\numberline {5.2.1}O componente Fila}{36}
-\contentsline {subsection}{\numberline {5.2.2}O componente Gerador}{39}
+\contentsline {subsection}{\numberline {5.2.1}O componente Fila}{37}
+\contentsline {subsection}{\numberline {5.2.2}O componente Gerador}{38}
 \contentsline {subsection}{\numberline {5.2.3}O componente Consumidor}{39}
-\contentsline {subsection}{\numberline {5.2.4}O componente Divisor}{39}
-\contentsline {section}{\numberline {5.3}O \textit {kernel} do \textit {framework}}{39}
-\contentsline {section}{\numberline {5.4}Protocolos de sincroniza\IeC {\c c}\IeC {\~a}o}{39}
-\contentsline {section}{\numberline {5.5}Algoritmos de balanceamento de carga}{39}
-\contentsline {chapter}{\numberline {6}Implementa\IeC {\c c}\IeC {\~a}o}{40}
-\contentsline {chapter}{\numberline {7}Discuss\IeC {\~o}es finais e Conclus\IeC {\~o}es}{41}
-\contentsline {chapter}{Ap\^endice{} A{} -$\mskip -\thinmuskip $-{} A linguagem \textit {Python}}{42}
-\contentsline {chapter}{Refer\^encias}{43}
+\contentsline {subsection}{\numberline {5.2.4}O componente Divisor }{40}
+\contentsline {section}{\numberline {5.3}O \textit {kernel} do \textit {framework}}{40}
+\contentsline {section}{\numberline {5.4}Protocolos de sincroniza\IeC {\c c}\IeC {\~a}o}{40}
+\contentsline {section}{\numberline {5.5}Algoritmos de balanceamento de carga}{40}
+\contentsline {chapter}{\numberline {6}Implementa\IeC {\c c}\IeC {\~a}o}{41}
+\contentsline {chapter}{\numberline {7}Discuss\IeC {\~o}es finais e Conclus\IeC {\~o}es}{42}
+\contentsline {chapter}{Ap\^endice{} A{} -$\mskip -\thinmuskip $-{} A linguagem \textit {Python}}{43}
+\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{44}

@@ -26,7 +26,7 @@ O tipo primitivo de um componente no \textit{framework} proposto é desenvolvido
 
 \begin{figure}
   \centerline{\includegraphics{basic_component.png}}
-  \caption{rquitetura básica de um componente primitivo.}
+  \caption{Arquitetura básica de um componente primitivo.}
 \label{fig:basic_component}
 \end{figure}
 
@@ -36,7 +36,7 @@ O tipo primitivo de um componente no \textit{framework} proposto é desenvolvido
 \label{fig:uml_components}
 \end{figure}
 
-Sobre este componente primitivo são construídos quatro componentes básicos, suficientes para demonstrar a implementação de alguns modelos para simulação. Estes componentes são: fila, gerador, consumidor e divisor.
+Sobre este componente primitivo são construídos quatro componentes básicos(Figura~\ref{uml_components}), suficientes para demonstrar a implementação de alguns modelos para simulação. Estes componentes são: fila, gerador, consumidor e divisor.
 
 Cada um desses componentes é construído sobre a arquitetura do componente primitivo descrito na seção~\ref{primitivo}. Por motivos naturais, nem todos os componentes implementos esse modelo em sua totalidade. Componentes como os geradores de eventos, por exemplo, não possuem canais de entrada de eventos, uma vez que a sua função é a de apenas gerar novos eventos com base em uma parametrização de suas características para que se comporte conforme o modelo que descreve suas ações. 
 
@@ -62,10 +62,34 @@ Um exemplo típico que ilustra esse caso é a simulação de uma sequência de c
 
 Assim como ilustrado na Figura~\ref{fig:cruzamento}, um exemplo de gerador de eventos é uma extremidade de uma via de trânsito, que gera eventos (no exemplo citado, carros) em uma determinada taxa de tempo, com uma determinada frequência.
 
-Um dos comportamentos parametrizáveis do componente gerador é a função que modela a taxa de criação de novos eventos ao longo do tempo. Um sistema que se deseja
+Um dos comportamentos parametrizáveis do componente gerador é a função que modela a taxa de criação de novos eventos ao longo do tempo. Um sistema que se deseja maior fidelidade quanto aos dados simulados deve permitir uma detalhada parametrização do comportamento de seus componentes. Neste \textit{framework} isto é feito através das funções geradoras, que são funções que recebem como parâmetros dados da simulação e resultam em decisões sobre a criação ou não de novos eventos, e o comportamento desses eventos.
+
+Mais detalhes sobre o funcionamento das funções geradoras são abordados na seção~\ref{funcoes_geradoras}.
 
 \subsection{O componente Consumidor}
-\subsection{O componente Divisor}
+
+Assim como o componente gerador, o componente consumidor é parametrizável através de funções externas que descrevem o seu comportamento ao longo do tempo de simulação. Outros dados levados em conta durante a execução de um evento por um consumidor são as características internas dos eventos.
+
+O componente gerador possui múltiplas entradas de dados, porém apenas um canal de saída. Uma saída do gerador pode ser dividida em várias utilizando um componente divisor(\ref{divisor}). A razão de se adotar este \textit{design} de um único canal de saída e múltiplas entradas se justifica pela simplicidade da arquitetura do modelo, uma vez que o componente gerador não precisaria se encarregar do comportamento que os eventos por ele processados tomariam após o processamento.
+
+Uma vez que o evento é processado por um consumidor, este pode tomar três caminhos distintos: o evento pode simplesmente morrer, o evento pode ser redirecionado para um novo processador (ou mesmo para o mesmo processador, dependendo da necessidade da simulação), porém com suas características originais mantidas. Uma terceira possibilidade é que o evento sofra uma modificação nas suas características antes de ser encaminhado a diante.
+
+\begin{figure}
+  \centerline{\includegraphics{multiple_sons.png}}
+  \caption{Um processo consumidor que gera eventos.}
+\label{fig:multiple_sons}
+\end{figure}
+
+Em condições especiais, um componente processador pode ser conectado à um gerador, e a ação de executar um evento poderia gerar um ou mais eventos distintos por esse gerador, que seriam então inseridos no sistema. Um exemplo prático desta aplicação é a simulação do fluxo de trabalho de uma companhia, onde a chegada de um documento pode disparar duas tarefas diferentes a serem feitas em paralelo (Figura~\ref{multiple_sons}).
+
+
+\subsection{O componente Divisor \label{divisor}}
+
+Um componente divisor possui multiplas entradas e múltiplos canais de saída. A sua função é, dado um evento e que entra pelo divisor, aplicar uma função de decisão que mapeie este evnto para uma de suas saídas.
+
+Assim como os componentes consumidor e gerador, o comportamento de um divisor é parametrizável através de funções que descrevem o seu comportamento com base nas características do modelo simulado.
+
+A aplicação mais comum de um divisor é atrelado à saída de um processador, ou de um gerador, a fim de o evento que é entregue a ele seja redirecionado a um caminho aleatório, porém descrito por sua função de comportamento.
 
 \section{O \textit{kernel} do \textit{framework}}
 
