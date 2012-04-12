@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.10)  12 APR 2012 12:10
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.10)  12 APR 2012 12:28
 entering extended mode
  %&-line parsing enabled.
 **Monografia.tex
@@ -793,12 +793,12 @@ File: gerador_mais_consumidor.png Graphic file (type png)
 LaTeX Warning: Reference `camada_central' on page 41 undefined on input line 96
 .
 
-[41]) [42]
+[41] [42]) [43]
 \openout2 = `Implementacao.aux'.
 
  (./Implementacao.tex
 Cap\'{\i }tulo 6.
-) [43
+) [44
 
 
 
@@ -807,7 +807,7 @@ Cap\'{\i }tulo 6.
 
  (./Conclusao.tex
 Cap\'{\i }tulo 7.
-) [44
+) [45
 
 
 
@@ -825,7 +825,7 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
 
 Apendice A.
-) [45
+) [46
 
 
 
@@ -836,7 +836,7 @@ Apendice A.
 | Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
 |                  http://abntex.codigolivre.org.br                 |
 +-------------------------------------------------------------------+
-[46
+[47
 
 
 ] (./Monografia.aux (./capa.aux) (./Introducao.aux) (./Simulacao.aux)
@@ -870,9 +870,9 @@ live/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/t
 ype1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/
 amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
 /cmti12.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Monografia.pdf (47 pages, 439462 bytes).
+Output written on Monografia.pdf (48 pages, 442281 bytes).
 PDF statistics:
- 398 PDF objects out of 1000 (max. 8388607)
+ 401 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  61 words of extra memory for PDF output out of 10000 (max. 10000000)
 

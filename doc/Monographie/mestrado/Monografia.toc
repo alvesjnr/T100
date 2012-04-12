@@ -41,8 +41,8 @@
 \contentsline {subsection}{\numberline {5.2.4}O componente Divisor }{41}
 \contentsline {section}{\numberline {5.3}O \textit {kernel} do \textit {framework}}{41}
 \contentsline {section}{\numberline {5.4}Protocolos de sincroniza\IeC {\c c}\IeC {\~a}o}{42}
-\contentsline {section}{\numberline {5.5}Algoritmos de balanceamento de carga}{42}
-\contentsline {chapter}{\numberline {6}Implementa\IeC {\c c}\IeC {\~a}o}{43}
-\contentsline {chapter}{\numberline {7}Discuss\IeC {\~o}es finais e Conclus\IeC {\~o}es}{44}
-\contentsline {chapter}{Ap\^endice{} A{} -$\mskip -\thinmuskip $-{} A linguagem \textit {Python}}{45}
-\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{46}
+\contentsline {section}{\numberline {5.5}Algoritmos de balanceamento de carga}{43}
+\contentsline {chapter}{\numberline {6}Implementa\IeC {\c c}\IeC {\~a}o}{44}
+\contentsline {chapter}{\numberline {7}Discuss\IeC {\~o}es finais e Conclus\IeC {\~o}es}{45}
+\contentsline {chapter}{Ap\^endice{} A{} -$\mskip -\thinmuskip $-{} A linguagem \textit {Python}}{46}
+\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{47}

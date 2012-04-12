@@ -111,5 +111,16 @@ O \textit{kernel} do sistema executa estes processos em \textit{loop} até que o
 
 \section{Protocolos de sincronização}
 
+Uma das premissas do projeto é a possibilidade de se substituir certos módulos do framework conforme a necessidade do seu usuário. Este encapsulamento de certas funcionalidades do \textit{framework} possibilita uma facilidade quando se deseja trocar algum componente do sistema.
+
+Para que isto seja possível, o \textit{kernel} do sistema deve garantir uma \textit{interface} de acessos a diveras funções e variáveis do ambiente, permitindo assim que o módulo adquira dados referentes à simulação e interfira no seu funcionamento.
+
+No caso da sincronização dos processos, o módulo em questão deve ser capaz de adquirir valores como o \textit{LVT} e o \textit{GVT}, idendtificar mensagens \textit{straggler}, além de ter acesso ao \textit{middleware} de comunicação para trocar mensagens com os demais nós do sistemas, e requerer o \textit{rollback} para um determinado \textit{timestamp}.
 
 \section{Algoritmos de balanceamento de carga}
+
+Assim como no caso dos protocolos de sincronização de eventos, os algorítmos de balanceamento de cargas do sistema também são modularidos e podem ser trocados pelo usuário (ou até mesmo customizados).
+
+Cabe ao \textit{framework} prover uma interface que possibilite ao módulo de balanceamento requerere ao \textit{kernel} informações sobre a carga de cada nó do sistema, tal qual o perfil de comunicação de cada \textit{process}. Com base nesses dados, o algorítmo decide qual processo deve ser migrado, e para qual máquina.
+
+Para que a migração seja possível, o \textit{kernel} deve prover mecanismos para que o módulo de balanceamento de cargas requira a migração de um determinado processo.
