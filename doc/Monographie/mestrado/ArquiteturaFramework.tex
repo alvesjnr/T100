@@ -2,7 +2,7 @@
 
 Uma vez definida a arquitetura de \textit{middleware} de comunicação a ser utilizado durante este projeto, o próximo passo é a definição do funcionamento e da arquitetura da camada de simulação, aqui genericamente denominado \textit{framework}.
 
-Esta camada, conforme ilustrada na figura~\ref{fig:camada_central}, compreende diversos sub-componentes do framework (aqui esses sub-componentes serão denominados genericamentes de blocos, para que se distingua dos componentes, objetos utilizados para descrever um modelo a ser simulado). Cada bloco que compreende o kernel se liga ao bloco central, denominado \textit{kernel}. Este é o responsável por coordenar a simulação, aplicando sincronização e balanceamento de carga, além de gerenciar o ciclo de vida da simulação (quando começar, quando terminar, etc).
+Esta camada, conforme ilustrada na figura~\ref{fig:camada_central}, compreende diversos sub-componentes do framework (aqui esses sub-componentes serão denominados genericamentes de módulos, para que se distingua dos componentes, objetos utilizados para descrever um modelo a ser simulado). Cada módulo que compreende o kernel se liga ao módulo central, denominado \textit{kernel}. Este é o responsável por coordenar a simulação, aplicando sincronização e balanceamento de carga, além de gerenciar o ciclo de vida da simulação (quando começar, quando terminar, etc).
 
 \begin{figure}
   \centerline{\includegraphics{camada_framework.png}}
@@ -10,7 +10,7 @@ Esta camada, conforme ilustrada na figura~\ref{fig:camada_central}, compreende d
 \label{fig:camada_central}
 \end{figure}
 
-\section{O bloco Componente}
+\section{O módulo Componente}
 
 Um componente é uma abstração de um comportamento que desejamos reproduzir na nossa simulação. Na abstração de um sistema de caixa de supermercados, por exemplos, pode-se extrair três componentes (que são comuns em muitas situações na simulação de eventos discretos): o produtor, a fila de espera e o consumidor.
 
@@ -72,15 +72,15 @@ Assim como o componente gerador, o componente consumidor é parametrizável atra
 
 O componente gerador possui múltiplas entradas de dados, porém apenas um canal de saída. Uma saída do gerador pode ser dividida em várias utilizando um componente divisor(\ref{divisor}). A razão de se adotar este \textit{design} de um único canal de saída e múltiplas entradas se justifica pela simplicidade da arquitetura do modelo, uma vez que o componente gerador não precisaria se encarregar do comportamento que os eventos por ele processados tomariam após o processamento.
 
-Uma vez que o evento é processado por um consumidor, este pode tomar três caminhos distintos: o evento pode simplesmente morrer, o evento pode ser redirecionado para um novo processador (ou mesmo para o mesmo processador, dependendo da necessidade da simulação), porém com suas características originais mantidas. Uma terceira possibilidade é que o evento sofra uma modificação nas suas características antes de ser encaminhado a diante.
-
 \begin{figure}
-  \centerline{\includegraphics{multiple_sons.png}}
-  \caption{Um processo consumidor que gera eventos.}
+  \centerline{\includegraphics{gerador_mais_consumidor.png}}
+  \caption{Um processo consumidor que gera eventos. No caso ilustrado, o consumidor A gera, através de um componente Gerador, simultaneamente os eventos e\_1 e e\_2 que são então encaminhados para os consumidores B e C}
 \label{fig:multiple_sons}
 \end{figure}
 
-Em condições especiais, um componente processador pode ser conectado à um gerador, e a ação de executar um evento poderia gerar um ou mais eventos distintos por esse gerador, que seriam então inseridos no sistema. Um exemplo prático desta aplicação é a simulação do fluxo de trabalho de uma companhia, onde a chegada de um documento pode disparar duas tarefas diferentes a serem feitas em paralelo (Figura~\ref{multiple_sons}).
+Uma vez que o evento é processado por um consumidor, este pode tomar três caminhos distintos: o evento pode simplesmente morrer, o evento pode ser redirecionado para um novo processador (ou mesmo para o mesmo processador, dependendo da necessidade da simulação), porém com suas características originais mantidas. Uma terceira possibilidade é que o evento sofra uma modificação nas suas características antes de ser encaminhado a diante.
+
+Em condições especiais, um componente processador pode ser conectado à um gerador, e a ação de executar um evento poderia gerar um ou mais eventos distintos por esse gerador, que seriam então inseridos no sistema. Um exemplo prático desta aplicação é a simulação do fluxo de trabalho de uma companhia, onde a chegada de um documento pode disparar duas tarefas diferentes a serem feitas em paralelo (Figura~\ref{fig:multiple_sons}).
 
 
 \subsection{O componente Divisor \label{divisor}}
@@ -93,6 +93,21 @@ A aplicação mais comum de um divisor é atrelado à saída de um processador, 
 
 \section{O \textit{kernel} do \textit{framework}}
 
+A parte central do \textit{framework} desenvolvido neste trabalho aqui é ilustrada pelo blog \textit{kernel} (Figura~\ref{camada_central}). O \textit{kernel} é o responsável por gerenciar a simulação, incrementando o \textit{timestep} de cada componente, e tomando decisões de migração, comunicação, sincronismo e balanceamento de carga.
+
+Para realizar tais funções o kernel se apoia diretamente no \textit{middleware} de comunicação descrito no capítulo~\ref{chapter_middleware}, além de utilizar os algorítmos de balanceamento de carga e os protocolos de sincronismo da simulação.
+
+A cada incremento discreto da simulação, denominado \textit{timestep}, o kernel do \textit{framework} realiza as seguintes funções:
+
+\begin{itemize}
+\item Incrementar o \textit{timestamp} de cada componente.
+\item Verificar se existem mensagens no \textit{buffer} do middleware, e tentar redireciona-las ao destinatário.
+\item Verificar, através do módulo de balanceamento de cargas, se existem processos que devem ser migrados.
+\item Verificar, através do módulo de sincronismo, se ocorreram mensagens \textit{straggler}. Caso afirmativo, designa ao módulo de sincronismo a tarefa de re-sincronizar o sistema.
+\item Gerencia, através do módulo de sincronismo, as tarefas de salvamento de estados.
+\end{itemize}
+
+O \textit{kernel} do sistema executa estes processos em \textit{loop} até que o números de iterações previstas acabe, ou até que a simulação seja interrompida por algum evento externo.
 
 \section{Protocolos de sincronização}
 

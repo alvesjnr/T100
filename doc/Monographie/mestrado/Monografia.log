@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.10)  12 APR 2012 11:32
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.10)  12 APR 2012 12:10
 entering extended mode
  %&-line parsing enabled.
 **Monografia.tex
@@ -785,33 +785,20 @@ File: cruzamento.png Graphic file (type png)
 LaTeX Warning: Reference `funcoes_geradoras' on page 39 undefined on input line
  67.
 
+<gerador_mais_consumidor.png, id=160, 271.0125pt x 289.08pt>
+File: gerador_mais_consumidor.png Graphic file (type png)
 
-LaTeX Warning: File `multiple_sons.png' not found on input line 78.
+<use gerador_mais_consumidor.png> [39] [40 <./gerador_mais_consumidor.png>]
 
+LaTeX Warning: Reference `camada_central' on page 41 undefined on input line 96
+.
 
-! Package pdftex.def Error: File `multiple_sons.png' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.78 ...rline{\includegraphics{multiple_sons.png}}
-                                                  
-? 
-LaTeX Font Info:    Try loading font information for T1+aett on input line 78.
-(/usr/share/texmf-texlive/tex/latex/ae/t1aett.fd
-File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-)
-
-LaTeX Warning: Reference `multiple_sons' on page 39 undefined on input line 83.
-
-
-[39]) [40]
+[41]) [42]
 \openout2 = `Implementacao.aux'.
 
  (./Implementacao.tex
 Cap\'{\i }tulo 6.
-) [41
+) [43
 
 
 
@@ -820,7 +807,7 @@ Cap\'{\i }tulo 6.
 
  (./Conclusao.tex
 Cap\'{\i }tulo 7.
-) [42
+) [44
 
 
 
@@ -838,7 +825,7 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
 
 Apendice A.
-) [43
+) [45
 
 
 
@@ -849,7 +836,7 @@ Apendice A.
 | Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
 |                  http://abntex.codigolivre.org.br                 |
 +-------------------------------------------------------------------+
-[44
+[46
 
 
 ] (./Monografia.aux (./capa.aux) (./Introducao.aux) (./Simulacao.aux)
@@ -864,13 +851,13 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 5182 strings out of 495041
- 70165 string characters out of 1181897
- 127427 words of memory out of 3000000
- 8095 multiletter control sequences out of 15000+50000
- 52732 words of font info for 110 fonts, out of 3000000 for 9000
+ 5163 strings out of 495041
+ 69944 string characters out of 1181897
+ 127436 words of memory out of 3000000
+ 8081 multiletter control sequences out of 15000+50000
+ 52242 words of font info for 108 fonts, out of 3000000 for 9000
  30 hyphenation exceptions out of 8191
- 34i,7n,41p,1040b,262s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34i,7n,41p,1040b,237s stack positions out of 5000i,500n,10000p,200000b,50000s
  </home/antonio/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrb2074.600pk>{/usr/s
 hare/texmf-texlive/fonts/enc/dvips/base/8r.enc} </home/antonio/.texmf-var/fonts
 /pk/ljfour/jknappen/ec/ecrb1728.600pk> </home/antonio/.texmf-var/fonts/pk/ljfou
@@ -882,11 +869,10 @@ e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-tex
 live/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/t
 ype1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/
 amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
-/cmti12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb
-></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Monografia.pdf (45 pages, 431268 bytes).
+/cmti12.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Monografia.pdf (47 pages, 439462 bytes).
 PDF statistics:
- 393 PDF objects out of 1000 (max. 8388607)
+ 398 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -10,4 +10,4 @@
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Arquitetura b\IeC {\'a}sica de um componente primitivo.}}{35}
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Hierarquia dos componentes b\IeC {\'a}sicos.}}{36}
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Modelagem de uma via urbana.}}{38}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Um processo consumidor que gera eventos.}}{39}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Um processo consumidor que gera eventos. No caso ilustrado, o consumidor A gera, atrav\IeC {\'e}s de um componente Gerador, simultaneamente os eventos e\_1 e e\_2 que s\IeC {\~a}o ent\IeC {\~a}o encaminhados para os consumidores B e C}}{40}
