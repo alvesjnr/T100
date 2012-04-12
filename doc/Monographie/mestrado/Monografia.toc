@@ -35,7 +35,7 @@
 \contentsline {chapter}{\numberline {5}Arquitetura do \textit {framework} de simula\IeC {\c c}\IeC {\~a}o}{33}
 \contentsline {section}{\numberline {5.1}O m\IeC {\'o}dulo Componente}{33}
 \contentsline {section}{\numberline {5.2}Componentes b\IeC {\'a}sicos}{35}
-\contentsline {subsection}{\numberline {5.2.1}O componente Fila}{37}
+\contentsline {subsection}{\numberline {5.2.1}O componente Fila}{35}
 \contentsline {subsection}{\numberline {5.2.2}O componente Gerador}{38}
 \contentsline {subsection}{\numberline {5.2.3}O componente Consumidor}{39}
 \contentsline {subsection}{\numberline {5.2.4}O componente Divisor }{41}

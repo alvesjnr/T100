@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.10)  12 APR 2012 12:28
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.10)  12 APR 2012 13:50
 entering extended mode
  %&-line parsing enabled.
 **Monografia.tex
@@ -768,31 +768,19 @@ File: basic_component.png Graphic file (type png)
 <uml_componentes.png, id=142, 571.13374pt x 458.71375pt>
 File: uml_componentes.png Graphic file (type png)
 
-<use uml_componentes.png>
-
-LaTeX Warning: Reference `uml_components' on page 35 undefined on input line 39
-.
-
-
-LaTeX Warning: Reference `primitivo' on page 35 undefined on input line 41.
-
-[35 <./basic_component.png>] [36 <./uml_componentes.png>]
-<cruzamento.png, id=152, 441.65pt x 168.63pt>
+<use uml_componentes.png> [35] [36 <./basic_component.png>] [37 <./uml_componen
+tes.png>] <cruzamento.png, id=155, 441.65pt x 168.63pt>
 File: cruzamento.png Graphic file (type png)
- <use cruzamento.png> [37]
+ <use cruzamento.png>
 [38 <./cruzamento.png>]
 
 LaTeX Warning: Reference `funcoes_geradoras' on page 39 undefined on input line
- 67.
+ 70.
 
 <gerador_mais_consumidor.png, id=160, 271.0125pt x 289.08pt>
 File: gerador_mais_consumidor.png Graphic file (type png)
 
 <use gerador_mais_consumidor.png> [39] [40 <./gerador_mais_consumidor.png>]
-
-LaTeX Warning: Reference `camada_central' on page 41 undefined on input line 96
-.
-
 [41] [42]) [43]
 \openout2 = `Implementacao.aux'.
 
@@ -851,10 +839,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 5163 strings out of 495041
- 69944 string characters out of 1181897
+ 5160 strings out of 495041
+ 69901 string characters out of 1181897
  127436 words of memory out of 3000000
- 8081 multiletter control sequences out of 15000+50000
+ 8078 multiletter control sequences out of 15000+50000
  52242 words of font info for 108 fonts, out of 3000000 for 9000
  30 hyphenation exceptions out of 8191
  34i,7n,41p,1040b,237s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -870,7 +858,7 @@ live/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/t
 ype1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/
 amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
 /cmti12.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Monografia.pdf (48 pages, 442281 bytes).
+Output written on Monografia.pdf (48 pages, 442430 bytes).
 PDF statistics:
  401 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
