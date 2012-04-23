@@ -1,0 +1,40 @@
+
+|-- doc
+|-- examples
+|   |-- basic_simulation
+|   |  
+|   |-- check_installation.py
+|   |-- __init__.py
+|   +-- simtool
+|-- README
+|-- setup.py
++-- t100
+    |-- components
+    |   |-- components.py
+    |   +-- __init__.py
+    |-- core
+    |   |-- algorithms
+    |   |   |-- __init__.py
+    |   |   +-- step_algorithms.py
+    |   |-- base_components.py
+    |   |-- blah.py
+    |   |-- errors.py
+    |   |-- __init__.py
+    |   +-- simulator.py
+    |-- __init__.py
+    |-- simtool
+    |   |-- distributed
+    |   |   |-- dummy_environment.py
+    |   |   |-- example_of_use_proxy.py
+    |   |   |-- __init__.py
+    |   |   +-- proxy.py
+    |   |-- distributed_env.py
+    |   |-- __init__.py
+    |   |-- parallel
+    |   |   +-- __init__.py
+    |   |-- parallel_env.py
+    |   |-- sequential_env.py
+    +-- test
+        |-- __init__.py
+        +-- tests.py 
+
