@@ -1,1 +1,23 @@
 \chapter{Implementação}
+
+Para validar o conceito apresentado nos capítulos anteriores, a arquitetura do \textit{framework} foi efetivamente implementada e testada.
+
+Neste capítulo serão tratados detalhes de implementação do framework de simulação. Particularidades de implementação e decisões de \textit{design} de software são expostos neste capítulo, assim como alguns exemplos de aplicação e utilização do framework.
+
+Para esta implementação foi utilizada a linguagem \textit{Python}. Toda a comunicação entre máquinas distintas foi feita utilizando \textit{sockets} sobre o protocolo \textit{TCP}. As tarefas assíncronas da implementação foram contruídas sobre a implementação de nativa \textit{threads} provida pela própria linguagem.
+
+\section{A linguagem \textit{Python}}
+
+Python é uma linguagem de programação poderosa e de fácil aprendizado. Possui estruturas de dados de alto nível eficientes, bem como adota uma abordagem simples e efetiva para a programação orientada a objetos. Sua sintaxe elegante e tipagem dinâmica, além de sua natureza interpretada, tornam Python ideal para scripting e para o desenvolvimento rápido de aplicações em diversas áreas e na maioria das plataformas.
+
+O interpretador Python e sua extensa biblioteca padrão estão disponíveis na forma de código fonte ou binário para a maioria das plataformas \cite{PYTHONSITE}, e podem ser distribuídos livremente. Também estão disponíveis distribuições e referências para diversos módulos, programas, ferramentas e documentação adicional, contribuídos por terceiros.
+
+O interpretador Python é facilmente extensível incorporando novas funções e tipos de dados implementados em C ou C++ (ou qualquer outra linguagem acessível a partir de C). Python também se adequa como linguagem de extensão para customizar aplicações.
+
+A linguagem vem sendo amplamnete empregada em desenvolvimento na área de computação científica devido ao seu desempenho satisfatório e sua facilidade de uso.
+
+\section{As camadas externas}
+\section{Implementando a comunicação}
+\section{Implementando os Componentes}
+\section{Implementando o \textit{Environment}}
+\section{Exemplos de aplicação}
