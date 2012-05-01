@@ -104,7 +104,9 @@ O construtor da classe (método \textbf{\_\_init\_\_}) recebe os parâmetros bá
 
 \section{Componentes \label{implement_components}}
 
-Os compoenentes do \textit{framework} são descritos sobre o componente base \textit{Process}. 
+Os componentes do \textit{framework} são descritos sobre o componente base \textit{Process}. Isto se dá porque o \textit{environment} deve ser capaz de lidar com qualquer tipo de componente de forma indistinta. Sendo assim, o \textit{environment} fica livre para manipular objetos de um mesmo tipo, cabendo a ele checar a especialização do tipo de cada objeto apenas no momento conveniente.
+
+Novos componentes podem ser criados de duas maneiras: extendendo a classe base \textbf{\_\_Component\_\_} e criando um subtipo completamente novo, ou simplesmente encapsulando diversos componentes com determinadas características em um \textit{container} de componentes, deixando visível apenas seus parâmetros configuráveis e suas entradas e saídas.
 
 \subsection{Migração de componentes \label{migrar_componentes}}
 
