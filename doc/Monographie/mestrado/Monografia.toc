@@ -50,23 +50,21 @@
 \contentsline {subsection}{\numberline {6.3.1}O objeto \emph {Message}}{49}
 \contentsline {subsection}{\numberline {6.3.2}O m\IeC {\'e}todo \emph {send} do \emph {Proxy}}{51}
 \contentsline {subsection}{\numberline {6.3.3}O m\IeC {\'e}todo \emph {receive} do \emph {Proxy}}{51}
-\contentsline {section}{\numberline {6.4}Implementando os Componentes }{52}
-\contentsline {subsection}{\numberline {6.4.1}A classe base \emph {Process}}{52}
-\contentsline {subsection}{\numberline {6.4.2}Os componentes b\IeC {\'a}sicos}{52}
-\contentsline {subsection}{\numberline {6.4.3}Migra\IeC {\c c}\IeC {\~a}o de componentes }{52}
+\contentsline {section}{\numberline {6.4}Componentes }{52}
+\contentsline {subsection}{\numberline {6.4.1}Migra\IeC {\c c}\IeC {\~a}o de componentes }{52}
 \contentsline {section}{\numberline {6.5}Implementando o \emph {Environment}}{53}
 \contentsline {section}{\numberline {6.6}Exemplos de aplica\IeC {\c c}\IeC {\~a}o}{53}
 \contentsline {subsection}{\numberline {6.6.1}Uma aplica\IeC {\c c}\IeC {\~a}o t\IeC {\'\i }pica}{53}
-\contentsline {subsection}{\numberline {6.6.2}O sistema de registro de execu\IeC {\c c}\IeC {\~a}o da simula\IeC {\c c}\IeC {\~a}o}{55}
+\contentsline {subsection}{\numberline {6.6.2}O sistema de registro de execu\IeC {\c c}\IeC {\~a}o da simula\IeC {\c c}\IeC {\~a}o}{56}
 \contentsline {subsection}{\numberline {6.6.3}Escalabilidade do framework}{56}
-\contentsline {chapter}{\numberline {7}Discuss\IeC {\~o}es finais e Conclus\IeC {\~o}es}{58}
-\contentsline {chapter}{Ap\^endice{} A{} -$\mskip -\thinmuskip $-{} A linguagem \textit {Python} }{59}
-\contentsline {chapter}{Ap\^endice{} B{} -$\mskip -\thinmuskip $-{} Diagrama de classes }{60}
-\contentsline {chapter}{Ap\^endice{} C{} -$\mskip -\thinmuskip $-{} \IeC {\'A}rvore de diret\IeC {\'o}rios }{61}
-\contentsline {chapter}{Ap\^endice{} D{} -$\mskip -\thinmuskip $-{} Classe com m\IeC {\'e}todo ass\IeC {\'\i }ncrono }{63}
-\contentsline {chapter}{Ap\^endice{} E{} -$\mskip -\thinmuskip $-{} Distribui\IeC {\c c}ao}{65}
-\contentsline {section}{\numberline {E.1}Licensa}{65}
-\contentsline {subsection}{\numberline {E.1.1}\emph {License}}{65}
-\contentsline {subsection}{\numberline {E.1.2}Informa\IeC {\c c}\IeC {\~o}es sobre a licensa}{66}
-\contentsline {section}{\numberline {E.2}Disponibilidade}{66}
-\contentsline {chapter}{Refer\^encias}{67}
+\contentsline {chapter}{\numberline {7}Discuss\IeC {\~o}es finais e Conclus\IeC {\~o}es}{59}
+\contentsline {chapter}{Ap\^endice{} A{} -$\mskip -\thinmuskip $-{} A linguagem \textit {Python} }{60}
+\contentsline {chapter}{Ap\^endice{} B{} -$\mskip -\thinmuskip $-{} Diagrama de classes }{61}
+\contentsline {chapter}{Ap\^endice{} C{} -$\mskip -\thinmuskip $-{} \IeC {\'A}rvore de diret\IeC {\'o}rios }{62}
+\contentsline {chapter}{Ap\^endice{} D{} -$\mskip -\thinmuskip $-{} Classe com m\IeC {\'e}todo ass\IeC {\'\i }ncrono }{64}
+\contentsline {chapter}{Ap\^endice{} E{} -$\mskip -\thinmuskip $-{} Distribui\IeC {\c c}ao}{66}
+\contentsline {section}{\numberline {E.1}Licensa}{66}
+\contentsline {subsection}{\numberline {E.1.1}\emph {License}}{66}
+\contentsline {subsection}{\numberline {E.1.2}Informa\IeC {\c c}\IeC {\~o}es sobre a licensa}{67}
+\contentsline {section}{\numberline {E.2}Disponibilidade}{67}
+\contentsline {chapter}{Refer\^encias}{68}
