@@ -1,8 +1,8 @@
 \chapter{Implementação}
 
-Para validar o conceito apresentado nos capítulos anteriores, a arquitetura do \textit{framework} foi efetivamente implementada e testada.
+Para validar o conceito apresentado nos capítulos anteriores, a arquitetura do \textit{framework} foi implementada em uma forma minimalista. Alguns detalhes do \textit{framework} foram simplificadospara esta implementação, umas vez que se trata de uma prova de conceito.
 
-Neste capítulo serão tratados detalhes de implementação do framework de simulação. Particularidades de implementação e decisões de \textit{design} de software são expostos neste capítulo, assim como alguns exemplos de aplicação e utilização do framework.
+Neste capítulo serão tratados detalhes de implementação do framework de simulação, particularidades de implementação e decisões de \textit{design} de software, assim como alguns exemplos de aplicação e utilização do framework.
 
 Para esta implementação foi utilizada a linguagem \textit{Python}. Toda a comunicação entre máquinas distintas foi feita utilizando \textit{sockets} sobre o protocolo \textit{TCP}. As tarefas assíncronas da implementação foram contruídas sobre a implementação de nativa \textit{threads} provida pela própria linguagem.
 
@@ -18,19 +18,9 @@ A linguagem vem sendo amplamnete empregada em desenvolvimento na área de comput
 
 \section{As camadas externas}
 
-A arquitetura apresentadas nos capítulos anteriores deste documento é representada pelo diagrama \textit{UML} da figura~\ref{fig:arquitetura_uml_geral} (Uma versão expandida, portanto mais completa, deste diagrama pode ser encontrada no anexo~\ref{appendix_uml_completo}). Vale ressaltar que esta representação é completamente independente da linguagem escolhida para sua implementação, porém atrelada ao paradigma de programação orientado à objetos, eleito para construir o \textit{framework} de simulação.
+A arquitetura apresentadas nos capítulos anteriores deste documento é representada pelo diagrama \textit{UML} da figura~\ref{fig:arquitetura_uml_geral} (Uma versão expandida, portanto mais completa, deste diagrama encontra-se no anexo~\ref{appendix_uml_completo}). Vale ressaltar que esta representação é completamente independente da linguagem escolhida para sua implementação, porém atrelada ao paradigma de programação orientado à objetos, eleito para construir o \textit{framework} de simulação.
 
-\begin{figure}
-  \centerline{\includegraphics{arquitetura_uml_geral.png}}
-  \caption{Diagrama de classes do \textit{framework}.}
-\label{fig:arquitetura_uml_geral}
-\end{figure}
-
-A arquitetura da árvore de diretórios é ilustrada na listagem~\ref{source_tree}. A partir dela pode-se ilustrar a modularização e a divisão das módulos do framework. Os módulos são descritos a seguir:
-
-\lstinputlisting[language=Python,
-                 label=source_tree,
-                 caption="Árvore de diretórios do projeto."]{source_tree.txt}
+A arquitetura da árvore de diretórios de como foi implementado o \textit{framework} é ilustrada no apêndice~\ref{appendix_tree}. A partir dela pode-se ilustrar a modularização dos componentes do projeto e a divisão dos módulos do \textit{framework}. Os módulos são descritos a seguir:
 
 \begin{itemize}
 \item \textbf{doc:} Contém toda a documentação do projeto, inclusive esta monografia.
@@ -39,9 +29,15 @@ A arquitetura da árvore de diretórios é ilustrada na listagem~\ref{source_tre
 \item \textbf{t100:} Código fonte do \textit{framework}.
 \end{itemize}
 
-Nas seções seguintes são apresentados detalhes internos da estrutura do código implementado. 
+Nas seções seguintes são apresentados detalhes internos da estrutura do código implementado, do subdiretório \textit{t100}. 
 
 \subsection{Módulos internos do \emph{framework}}
+
+\begin{figure}
+  \centerline{\includegraphics{arquitetura_uml_geral.png}}
+  \caption{Diagrama simplificado de classes do \textit{framework}.}
+\label{fig:arquitetura_uml_geral}
+\end{figure}
 
 O código fonte do \textit{framework} pode ser dividido inicialmente em quatro grandes módulos:
 
@@ -60,28 +56,57 @@ O módulo \textit{components} possui a implementação base necessária para se 
 
 A linguagem de programação \textit{Python} oferece uma ampla e funcional biblioteca padrão, que provê, de forma nativa na linguagem, métodos para implementação de \textit{threads, sockets}, persistência de dados e estruturas de dados.
 
-Conforme ilustrado na figora~\ref{fig:uml_proxy_basico}, o proxy mínimo de comunicação deve oferecer os seguintes métodos: \textit{send, receive, listen}.
+Conforme ilustrado na figura~\ref{fig:uml_proxy_basico}, o proxy mínimo de comunicação deve oferecer os seguintes métodos: \textit{send, receive, listen}.
 
-Para a implementação do \textit{proxy} de comunicação 
+Para a implementação da camada de comunicação do \textit{framework} de simulação, foi adotada uma estratégia simplista, utilizando-se das bibliotecas de comunicação disponibilizadas pela linguagem adotada.
 
-\section{O objeto \emph{Message}}
+Toda a comunicação se faz por meio de troca de mensagens utilizando \textit{sockets} sobre o protocolo \textit{TCP/IP}.
+
+\subsection{O objeto \emph{Message}}
 
 Toda a comunicação entre instâncias de \textit{proxy} é realizada enviando e recebendo objetos do tipo \textit{Message}. Um objeto do tipo \textit{Message} é um objeto obrigatoriamente serializável (ou seja, ele pode ser convertido de objeto para um \textit{stream} de bytes a qualquer instante do seu ciclo de vida. Este \textit{stream} de \textit{bytes} deve ser usado para reconstruir o objeto \textit{Message}).
 
 O objeto possuim os campos \textit{content}, que é o conteúdo da mensagem propriamente dito, além dos campos de endereço lógico do remetente e do destinatário. Cabe ao \textit{proxy} converter este endereço lógico em seu correspondente físico antes da transmissão.
 
-\subsection{O método \emph{send}}
+O objeto \textit{Message} possui dois métodos especiais para tratar da sua serialização: o método \textit{serialize}  e o método de estático \textit{recreate}.
+
+O método \textit{serialize} converte o atual objeto \textit{Message}, com o seu devido conteúdo, em um \textit{stream} de \textit{bytes}. Estes \testxit{bytes} é que são transmitidos de um nó do sistema para outro quando há a necessidade de se transmitir uma mensagem.
+
+Uma vez que a mensagem chega ao seu destino, o \textit{proxy} local é encarregado de recriar a mensagem com base nesse \textit{stream} de \textit{bytes}. Para isso ele usa o método \textit{recreate}. Este método é um método estático que instancia um novo objeto do tipo \textit{Message}, com base no \textit{stream} serializado recebido, e devolve essa nova instância. O fluxo do processo de envio de uma mensagem de um nó do sistema para um \textit{environment} remoto pode ser visualizado na figura~\ref{fig:fluxo_troca_msg}
+
+\begin{figure}
+  \centerline{\includegraphics{fluxo_troca_msg.png}}
+  \caption{Diagrama de fluxo de envio de mensagem entre dois \textit{environments} distintos.}
+\label{fig:fluxo_troca_msg}
+\end{figure}
+
+\subsection{O método \emph{send} do \emph{Proxy}}
 
 O método \textit{send} recebe como parâmetro um objeto do tipo \textit{Message} e o envia para o destinatário designado a ele. O próprio \textit{proxy} deve ser capaz de, em cooperação com o \textit{kernel} do \textit{framework}, resolver o endereço lógico do destinatário para seu correspondendte endereço físico, e realizar a comunicação.
 
 
 \begin{figure}
-  \centerline{\includegraphics{uml_proxy.png}}
+  \centerline{\includegraphics{uml_proxy_basico.png}}
   \caption{Diagrama de classes da classe \textit{proxy}.}
 \label{fig:uml_proxy_basico}
 \end{figure}
 
+\subsection{O método \emph{receive} do \emph{Proxy}}
+
+O método \textit{receive} do \textit{Proxy} do sistema é o método que é responsável por receber todas as mensagens externas direcionadas ao \textit{environment}. Este método deve executar ininterrupdamente durante todo o processo de simulação.
+
+Para se evitar que o método \textit{receive} bloqueie a execução do sistema, este é executado de forma assíncrona aos demais componentes. Isto é feito utilizando a \textit{API} de manipulação de \textit{threads} de baixo nível da linguagem \textit{Python}.
+
+O código listado~\ref{proxy_example} ilustra uma versão bastante simplificada da implementação do método \textit{receive} de forma assíncrona usando a \textit{API} de baixo nível de \textit{threads} da linguagem \textit{Python}.
+
+\lstinputlisting[language=Python,
+                 label=proxy_example,
+                 caption="Exemplo de chamada de métodos assíncronas na classe \textit{Proxy}"]{proxy_example.py}
+
+O construtor da classe (método \textbf{\_\_init\_\_}) recebe os parâmetros básicos para inicializar o \textit{proxy} e dispara uma chamada assíncrona (\textbf{thread.start\_new\_thread(...)}) passando como argumento uma referência para o método que se deseja executar de forma assíncrona (neste caso, o método \textbf{\_\_receiver\_\_}). Com o método \textbf{\_\_receiver\_\_} passa a ser executado ininterrupdamente, em paralelo à função que executou a instanciação do objeto \textit{Proxy}.
+
 \section{Implementando os Componentes \label{implement_components}}
+\subsection{}
 \section{Implementando o \emph{Environment}}
 \section{Exemplos de aplicação}
 
