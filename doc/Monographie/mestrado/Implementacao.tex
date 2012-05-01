@@ -102,10 +102,26 @@ O código listado no apêndice~\ref{appendix_proxy_example} ilustra uma versão 
 
 O construtor da classe (método \textbf{\_\_init\_\_}) recebe os parâmetros básicos para inicializar o \textit{proxy} e dispara uma chamada assíncrona (\textbf{thread.start\_new\_thread(...)}) passando como argumento uma referência para o método que se deseja executar de forma assíncrona (neste caso, o método \textbf{\_\_receiver\_\_}). Com o método \textbf{\_\_receiver\_\_} passa a ser executado ininterrupdamente, em paralelo à função que executou a instanciação do objeto \textit{Proxy}.
 
-\section{Implementando os Componentes \label{implement_components}}
-\subsection{A classe base \emph{Process}}
-\subsection{Os componentes básicos}
+\section{Componentes \label{implement_components}}
+
+Os compoenentes do \textit{framework} são descritos sobre o componente base \textit{Process}. 
+
 \subsection{Migração de componentes \label{migrar_componentes}}
+
+Todo objeto derivado da classe \textit{Component} deve contemplar a possibilidade de serialização de seu conteúdo. Isso se faz necessário porque é baseado na serialização de um componente que a sua migração é implementada.
+
+Uma vez que o sistema identifica que um objeto deve migrar de seu \textit{environment} atual para um novo ambiente, uma série de ações são tomadas:
+
+\begin{itemize}
+	\item O componente em questão é marcado como \"em trânsito\".
+	\item O objeto é serializado.
+	\item Seus dados serializados são enviados, através do \textit{proxy} do \textit{environment} para o novo ambiente de execução.
+	\item Uma vez em seu novo ambiente, o componente é reconstruído.
+	\item As tabelas de endereço dos \textit{proxies} do sistema são atualizadas.
+	\item O estado do componente é marcado como \"ativo\".
+\end{itemize}
+
+A partir da construção do \textit{middleware} de comunicação, composto pelos \textit{proxies} dos ambientes, a implementação da migração foi bastante simplificada. Como as suas construções são totalmente independentes, caso haja a necessidade de se atulizar ou trocar o sistema de comunicação ou mesmo o sistema de serialização dos componentes, se as interfaces dos objetos forem matidas, a funcionalidade de migração permanece consistente.
 
 \section{Implementando o \emph{Environment}}
 
@@ -138,9 +154,6 @@ As linhas [22] e [24] obtêem dados referente a simulação (o tamanho da fila d
                  label=example_use_01,
                  caption="Exemplo de uma aplicação utilizando o \textit{framework} desenvolvido"]{example_use_01.py}
 
-
-\subsection{Modelos com vários componentes}
-
 \subsection{O sistema de registro de execução da simulação}
 
 Em ambos os exemplos ilustrados até então, o resultado da simulação era dado pelo tamanho da fila de eventos, que era aferida diretamente e impressa na saída padrão. Porém, o sistema desenvolvido possui uma ferramenta que possibilita traçar todas as atividades do sistema, além de acompanhar o ciclo de vida de cada componente ou evento do sistema.
@@ -170,11 +183,10 @@ Este arquivo de configuração pode ser descrito tanto no formato \textit{xml} c
 
 \lstinputlisting[language=json,
                  label=nodes_cfg,
-                 caption="Exemplo de arquivo de configuração dos nós da rede."]{distributed_example_01.json}
+                 caption="Exemplo de arquivo de configuração dos nós da rede."]{distributed_01.json}
 
 Uma vez que se deseja distribuir a simulação por entre os nós de um sistema distribuído basta, em posse do arquivo de mapeamento do sistema, passar o caminho para este arquivo como parâmetro \textit{cfg} na construção do objeto \textit{Simulator}.
 
-Vale ressaltar que, da maneira que este \textir{framework} foi desenvolvido, para adicionar um nó extra ao sistema basta mapear o novo nó no arquivo de configuração do sistema, e o \textit{framework} fará a partição entre os processos entre os nós automaticamente. 
+Vale ressaltar que, da maneira que este \textir{framework} foi desenvolvido, para adicionar um nó extra ao sistema basta mapear o novo nó no arquivo de configuração do sistema, e o \textit{framework} fará a partição dos processos entre os nós automaticamente. Porém, um novo nó só pode ser adicionado ao arquivo de configuração antes do início da simulação. A atual concepção do sistema não permite a inclusão de nós durante o processo de simulação.
 
-
-
+Todo nó do sistema que se disponibiliza a receber objetos para a simulação deve estar executando uma instância especial do \textit{framework}, responsável por receber os objetos despachados à ele e gerenciar a simulação.
