@@ -70,7 +70,7 @@ O objeto possuim os campos \textit{content}, que é o conteúdo da mensagem prop
 
 O objeto \textit{Message} possui dois métodos especiais para tratar da sua serialização: o método \textit{serialize}  e o método de estático \textit{recreate}.
 
-O método \textit{serialize} converte o atual objeto \textit{Message}, com o seu devido conteúdo, em um \textit{stream} de \textit{bytes}. Estes \testxit{bytes} é que são transmitidos de um nó do sistema para outro quando há a necessidade de se transmitir uma mensagem.
+O método \textit{serialize} converte o atual objeto \textit{Message}, com o seu devido conteúdo, em um \textit{stream} de \textit{bytes}. Estes \textit{bytes} é que são transmitidos de um nó do sistema para outro quando há a necessidade de se transmitir uma mensagem.
 
 Uma vez que a mensagem chega ao seu destino, o \textit{proxy} local é encarregado de recriar a mensagem com base nesse \textit{stream} de \textit{bytes}. Para isso ele usa o método \textit{recreate}. Este método é um método estático que instancia um novo objeto do tipo \textit{Message}, com base no \textit{stream} serializado recebido, e devolve essa nova instância. O fluxo do processo de envio de uma mensagem de um nó do sistema para um \textit{environment} remoto pode ser visualizado na figura~\ref{fig:fluxo_troca_msg}
 
@@ -84,6 +84,7 @@ Uma vez que a mensagem chega ao seu destino, o \textit{proxy} local é encarrega
 
 O método \textit{send} recebe como parâmetro um objeto do tipo \textit{Message} e o envia para o destinatário designado a ele. O próprio \textit{proxy} deve ser capaz de, em cooperação com o \textit{kernel} do \textit{framework}, resolver o endereço lógico do destinatário para seu correspondendte endereço físico, e realizar a comunicação.
 
+O mesmoo método \textit{send} é utilizado para despachar componentes em uma migração. Mais detalhes sobre a implementação da migração de objetos é tratado na subseção~\ref{migrar_componentes}
 
 \begin{figure}
   \centerline{\includegraphics{uml_proxy_basico.png}}
@@ -97,17 +98,83 @@ O método \textit{receive} do \textit{Proxy} do sistema é o método que é resp
 
 Para se evitar que o método \textit{receive} bloqueie a execução do sistema, este é executado de forma assíncrona aos demais componentes. Isto é feito utilizando a \textit{API} de manipulação de \textit{threads} de baixo nível da linguagem \textit{Python}.
 
-O código listado~\ref{proxy_example} ilustra uma versão bastante simplificada da implementação do método \textit{receive} de forma assíncrona usando a \textit{API} de baixo nível de \textit{threads} da linguagem \textit{Python}.
-
-\lstinputlisting[language=Python,
-                 label=proxy_example,
-                 caption="Exemplo de chamada de métodos assíncronas na classe \textit{Proxy}"]{proxy_example.py}
+O código listado no apêndice~\ref{appendix_proxy_example} ilustra uma versão bastante simplificada da implementação do método \textit{receive} de forma assíncrona usando a \textit{API} de baixo nível de \textit{threads} da linguagem \textit{Python}.
 
 O construtor da classe (método \textbf{\_\_init\_\_}) recebe os parâmetros básicos para inicializar o \textit{proxy} e dispara uma chamada assíncrona (\textbf{thread.start\_new\_thread(...)}) passando como argumento uma referência para o método que se deseja executar de forma assíncrona (neste caso, o método \textbf{\_\_receiver\_\_}). Com o método \textbf{\_\_receiver\_\_} passa a ser executado ininterrupdamente, em paralelo à função que executou a instanciação do objeto \textit{Proxy}.
 
 \section{Implementando os Componentes \label{implement_components}}
-\subsection{}
+\subsection{A classe base \emph{Process}}
+\subsection{Os componentes básicos}
+\subsection{Migração de componentes \label{migrar_componentes}}
+
 \section{Implementando o \emph{Environment}}
+
 \section{Exemplos de aplicação}
 
-\lstinputlisting[language=Python]{source_prime.py}
+Esta seção tem como fim demonstrar a estrutura básica de um código utilizando o \textit{framework} implementado durante este projeto. O que é apresentado são exemplos simples que visam apenas ilustrar o funcionamento do \textit{framework} desenvolvido, assim como ilustrar o uso da biblioteca de componentes do \textit{framework}.
+
+\subsection{Uma aplicação típica}
+
+O código ilustrado pela listagem~\ref{example_use_01} apresenta uma aplicação mínima de simulação utilizando o \textit{framework} desenvolvido neste trabalho.
+
+As linhas [01] e [02] importam as bibliotecas necessárias para utilizar o \textit{framework}. A biblioteca \textbf{Simulator} é a responsável por gerenciar a simulação. Ela se encarrega de orquestrar a comunicação entre os componentes.
+
+A biblioteca \textbf{base\_components} possui os componentes básicos para a construção de uma simulação. É com esses componentes que o modelo a ser simulado deve ser construído.
+
+
+As linhas [07] e [08] criam funções que são passadas para o componente que será criado. Essas funções determinam o comportamento do componente durante a simulação. 
+
+As linhas [11] e [12] criam dois componentes: uma fila de eventos e uma fonte geradora de eventos. Para a construção do gerador é passado como parâmetros as funções criadas nas linhas [07] e [08]. A expressão \textit{creation\_tax\_expression} rege sobre a frequência que cada novo evento é criado pelo gerador de eventos, enquanto a expressão \textit{execution\_time\_expression} representa o valor de cada evento criado. Este valor do evento é o que determina o custo do seu processamento pelo componente processador.
+
+Um outro parâmetro passado durante a criação do componente \textbf{Source} é o parâmetro \textit{output}. Este parâmetro determina a qual componente a saída do gerador estará ligada. No exemplo aqui discutido, a saída do gerador está ligada à fila declarada na linha [11].
+
+Na linha número [16] é declarado o componente \textbf{Process}, e é passado como parâmetro para este uma lista de todos os componentes que possuem suas saídas atreladas à entrada do processador.
+
+Por fim, entre as linhas [18] e [21] é criado o componente \textit{Simulator}, responsável por gerir a simulação. Paar isto é passado ao contrutor do simulador uma lista com todos os componentes que contemplam a simulação. Com posse de uma instância do objeto \textit{Simulator}, é requerida a sua execução chamando o método \textit{run(...)}  e passando como parâmetro o número de passos a serem simulados.
+
+As linhas [22] e [24] obtêem dados referente a simulação (o tamanho da fila de eventos, ao final da simulação) e devolvem para o usuário através da saída padrão.
+
+\lstinputlisting[language=Python,
+                 label=example_use_01,
+                 caption="Exemplo de uma aplicação utilizando o \textit{framework} desenvolvido"]{example_use_01.py}
+
+
+\subsection{Modelos com vários componentes}
+
+\subsection{O sistema de registro de execução da simulação}
+
+Em ambos os exemplos ilustrados até então, o resultado da simulação era dado pelo tamanho da fila de eventos, que era aferida diretamente e impressa na saída padrão. Porém, o sistema desenvolvido possui uma ferramenta que possibilita traçar todas as atividades do sistema, além de acompanhar o ciclo de vida de cada componente ou evento do sistema.
+
+Para habilitar a ferramenta de \textit{log} do sistema basta, ao se criar um objeto do tipo \textit{Simulator}, habiliatra o modo \textit{verbose}, passando um parâmetro extra \textbf{verbose=True}, além de passar como parâmetro um objeto do tipo \textit{file\_like\_object}, representando o arquivo onde o \textit{log} será armazenado.
+
+Um exemplo de como instaciar um objeto \textbf{Simulator} para gerar um log de saída:
+
+\begin{lstlisting}
+# Cria um arquivo chamado simulation.log em /tmp
+output_file = open('/tmp/simulation.log', 'w')
+# Instaciar um objeto do tipo Simulator
+simul = Simulator(components=[q1,q2,s1,s2], 
+	              verbose=True, 
+	              output_file=output_file)
+\end{lstlisting}
+
+Durante todo o processo de simulação, todas as atividadas (como criação de evento, entrada de um evento na fila, prcessamento de um evento, etc.) são registradas no arquivo de \textit{log} do sistema. Com isso, após a simulação, pode-se utilizar uma aplicação dedicada a ler este arquivo e estudar o comportamento do modelo durante a simulação.
+
+\subsection{Escalabilidade do framework}
+
+Em todos os exemplos ilustrados não há mençào sobre o número de nós no sistema. Quando uma execução é realizada desta maneira, o \textit{framework} assume que não existem mais nós no sistema, e a simulação se dá em apenas uma máquina.
+
+Para se incluir mais nós no sistema de simulação, um parâmetro deve ser passado ao se instanciar o \texint{Simulator}. Este parâmetro, denominado \textit{cfg} contém as configurações do sistema físico, contando com descrições de todos os nós do sistema, tal como seus endereçoes físicos na rede. 
+
+Este arquivo de configuração pode ser descrito tanto no formato \textit{xml} como no formato \textit{json}. Um exemplo de arquivo de configuração de um sistema distribuído é apresentado na listagem~\ref{nodes_cfg}.
+
+\lstinputlisting[language=json,
+                 label=nodes_cfg,
+                 caption="Exemplo de arquivo de configuração dos nós da rede."]{distributed_example_01.json}
+
+Uma vez que se deseja distribuir a simulação por entre os nós de um sistema distribuído basta, em posse do arquivo de mapeamento do sistema, passar o caminho para este arquivo como parâmetro \textit{cfg} na construção do objeto \textit{Simulator}.
+
+Vale ressaltar que, da maneira que este \textir{framework} foi desenvolvido, para adicionar um nó extra ao sistema basta mapear o novo nó no arquivo de configuração do sistema, e o \textit{framework} fará a partição entre os processos entre os nós automaticamente. 
+
+
+
