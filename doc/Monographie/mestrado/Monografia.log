@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.10)  23 APR 2012 14:26
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.10)  23 APR 2012 15:04
 entering extended mode
  %&-line parsing enabled.
 **Monografia.tex
@@ -814,12 +814,26 @@ File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 ) (./source_tree.txt
-[46] [47]) [48] (./source_prime.py)) [49]
+[46] [47]) [48] [49]
+
+LaTeX Warning: File `uml_proxy.png' not found on input line 79.
+
+
+! Package pdftex.def Error: File `uml_proxy.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.79 ...enterline{\includegraphics{uml_proxy.png}}
+                                                  
+? 
+(./source_prime.py [50])) [51]
 \openout2 = `Conclusao.aux'.
 
  (./Conclusao.tex
 Cap\'{\i }tulo 7.
-) [50
+) [52
 
 
 
@@ -890,7 +904,7 @@ l.1 ...em \textit{Python} \label{appendix_python}}
 l.1 ...em \textit{Python} \label{appendix_python}}
                                                   
 ? 
-[51
+[53
 
 
 
@@ -952,7 +966,7 @@ l.2 ...a de classes \label{appendix_uml_completo}}
 l.2 ...a de classes \label{appendix_uml_completo}}
                                                   
 ? 
-[52
+[54
 
 ]
 Apendice C.
@@ -981,7 +995,7 @@ Overfull \hbox (18.77272pt too wide) in paragraph at lines 10--11
 [][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[53
+[55
 
 ]
 Overfull \hbox (11.7239pt too wide) in paragraph at lines 11--12
@@ -998,12 +1012,12 @@ Overfull \hbox (68.11441pt too wide) in paragraph at lines 15--14
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) [54] (./Monografia.bbl)
+) [56] (./Monografia.bbl)
 +-------------------------------------------------------------------+
 | Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
 |                  http://abntex.codigolivre.org.br                 |
 +-------------------------------------------------------------------+
-[55
+[57
 
 
 ] (./Monografia.aux (./capa.aux) (./Introducao.aux) (./Simulacao.aux)
@@ -1016,9 +1030,6 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  )
 (\end occurred when \iftrue on line 2 was incomplete)
 (\end occurred when \ifnum on line 1 was incomplete)
@@ -1027,13 +1038,13 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 (\end occurred when \iftrue on line 41 was incomplete)
 (\end occurred when \ifnum on line 41 was incomplete) 
 Here is how much of TeX's memory you used:
- 5659 strings out of 495041
- 74831 string characters out of 1181897
- 160579 words of memory out of 3000000
- 8556 multiletter control sequences out of 15000+50000
+ 5662 strings out of 495041
+ 74884 string characters out of 1181897
+ 160612 words of memory out of 3000000
+ 8558 multiletter control sequences out of 15000+50000
  52732 words of font info for 110 fonts, out of 3000000 for 9000
  30 hyphenation exceptions out of 8191
- 34i,7n,45p,1040b,1664s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34i,7n,45p,1040b,1662s stack positions out of 5000i,500n,10000p,200000b,50000s
  </home/antonio/.texmf-var
 /fonts/pk/ljfour/jknappen/ec/ecrb2074.600pk>{/usr/share/texmf-texlive/fonts/enc
 /dvips/base/8r.enc} </home/antonio/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrb1
@@ -1049,9 +1060,9 @@ onts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr
 f-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-texlive/f
 onts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf-texlive/fonts/type1/
 urw/times/utmri8a.pfb>
-Output written on Monografia.pdf (56 pages, 480357 bytes).
+Output written on Monografia.pdf (58 pages, 485972 bytes).
 PDF statistics:
- 447 PDF objects out of 1000 (max. 8388607)
+ 455 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  61 words of extra memory for PDF output out of 10000 (max. 10000000)
 
