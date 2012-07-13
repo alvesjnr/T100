@@ -1,0 +1,16 @@
+\select@language {brazil}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Simula\IeC {\c c}\IeC {\~a}o Sequencial.}}{10}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Gera\IeC {\c c}\IeC {\~a}o de um novo evento.}}{11}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Camadas da arquitetura do \textit {framework}.}}{25}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces A arquitetura interna de um \textit {environment}.}}{30}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Ciclo de vida de um processo l\IeC {\'o}gico.}}{35}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Representa\IeC {\c c}\IeC {\~a}o em diagrama de classe do componente \textit {process}.}}{36}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Comunica\IeC {\c c}\IeC {\~a}o direta \textit {process-process}.}}{40}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Comunica\IeC {\c c}\IeC {\~a}o indireta \textit {proxy-process}.}}{41}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces A camada aqui denominada \textit {framework}.}}{44}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Arquitetura b\IeC {\'a}sica de um componente primitivo.}}{46}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Hierarquia dos componentes b\IeC {\'a}sicos.}}{47}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Modelagem de uma via urbana.}}{48}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Um processo consumidor que gera eventos. No caso ilustrado, o consumidor A gera, atrav\IeC {\'e}s de um componente Gerador, simultaneamente os eventos e\_1 e e\_2 que s\IeC {\~a}o ent\IeC {\~a}o encaminhados para os consumidores B e C}}{50}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Diagrama de classes do \textit {framework}.}}{56}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Diagrama de classes da classe \textit {proxy}.}}{60}

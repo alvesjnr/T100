@@ -10,10 +10,37 @@
 {ALVES, A.~R.; WALBON, G.; TAKAHASHI, W. \emph{Agentes móveis e Simulação
   Distribuída}. 2009.}
 
+\bibitem[Banks et al. 2010]{DESS-PH-2010}
+\abntrefinfo{Banks et al.}{BANKS et al.}{2010}
+{BANKS, J. et al. Discrete-event system simulation.
+In:  \underline{\ \ \ \ \ \ \ \ }. [S.l.]: Prentice Hall, 2010. p.~3.}
+
+\bibitem[Bham e Benekohal 2004]{TRAFFIC}
+\abntrefinfo{Bham e Benekohal}{BHAM; BENEKOHAL}{2004}
+{BHAM, G.~H.; BENEKOHAL, R.~F. A high fidelity traffic simulation model based
+  on cellular automata and car-following concepts.
+\emph{Transportation Research Part C: Emerging Technologies}, v.~12, n.~1, p. 1
+  -- 32, 2004.
+ISSN 0968-090X.
+Dispon{\'\i}vel em:
+  $<$http://www.sciencedirect.com/science/article/pii/S0968090X03000573$>$.}
+
 \bibitem[Cruz 2009]{LIVERSON}
 \abntrefinfo{Cruz}{CRUZ}{2009}
 {CRUZ, L.~B. da. \emph{Projeto de Um Framework para o Desenvolvimento de
   Aplicações de Simulação Distribuída}. 2009.}
+
+\bibitem[Higham 1971]{NUMERICAL}
+\abntrefinfo{Higham}{HIGHAM}{1971}
+{HIGHAM, D.~J. An algorithmic introduction to numerical simulation of
+  stochastic differential equations.
+\emph{Society for Industrial and Applied Mathematics}, v.~43, n.~3, p.
+  525--546, aug. 1971.}
+
+\bibitem[Lynch 2007]{WEATHER}
+\abntrefinfo{Lynch}{LYNCH}{2007}
+{LYNCH, P. The origins of computer weather prediction and climate modeling.
+\emph{Journal of Computational Physics}, v.~2, p. 3431--3444, 2007.}
 
 \bibitem[McQuillan e Walden 1975]{MCQUILLAN75}
 \abntrefinfo{McQuillan e Walden}{MCQUILLAN; WALDEN}{1975}
@@ -21,6 +48,20 @@
   message-based interprocess communication system. In:  . [S.l.]: Proceedings
   of the 1975 ACM SIGCOMM/SIGOPS workshop on Interprocess communications, 1975.
   v.~9.}
+
+\bibitem[Nagel e Rohrer 1971]{SPICE}
+\abntrefinfo{Nagel e Rohrer}{NAGEL; ROHRER}{1971}
+{NAGEL, L.; ROHRER, R. Computer analysis of nonlinear circuits, excluding
+  radiation (cancer).
+\emph{Solid-State Circuits, IEEE Journal of}, v.~6, n.~4, p. 166 --182, aug.
+  1971.
+ISSN 0018-9200.}
+
+\bibitem[Oskooi et al. 2010]{OskooiRo10}
+\abntrefinfo{Oskooi et al.}{OSKOOI et al.}{2010}
+{OSKOOI, A.~F. et al. {MEEP}: A flexible free-software package for
+  electromagnetic simulations by the {FDTD} method.
+\emph{Computer Physics Communications}, v.~181, p. 687--702, January 2010.}
 
 \bibitem[Perrone et al. 2006]{SASSY}
 \abntrefinfo{Perrone et al.}{PERRONE et al.}{2006}
@@ -34,6 +75,11 @@
 {RIEHLE, D.
 \emph{Framework Design: A Role Modeling Approach}.
 Tese (Doutorado) --- ETH Zürich, 2000.}
+
+\bibitem[Sokolowski e Banks 2008]{REALWORLD-2008}
+\abntrefinfo{Sokolowski e Banks}{SOKOLOWSKI; BANKS}{2008}
+{SOKOLOWSKI, J.~A.; BANKS, C.~M. Modeling and simulation: Real-world examples.
+In:  \underline{\ \ \ \ \ \ \ \ }. [S.l.]: Wiley, 2008. p.~6.}
 
 \bibitem[Zhang, Tan e Marchesi 2009]{HONGYU09}
 \abntrefinfo{Zhang, Tan e Marchesi}{ZHANG; TAN; MARCHESI}{2009}

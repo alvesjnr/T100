@@ -1,7 +1,163 @@
 \chapter{Simulação Distribuída de Eventos Discretos}
 
+Parágrafo 1: Revisar a déia inicial sobre o que é simulação, e dizer que a simulação é baseada em um modelo do problema
+
+Parágrafo 2: Dizer que a simulação é um processo caro, e que é conveniente dividir entre vários computadores (distribuir a simulação)
+
+Parágrafo 3: Apresentar problemas como sincronização, comunicação, balanceamento de cargas, etc. devido à distribuição.
+
+Parágrafo 4: Dividir o sistema em Processo lógicos e eventos discretos. Rever o conceito de timestamp de cada evento.
+
+Parágrafo 5: Dizer que cada processo lógico possui um relógio interno
+
+Parágrafo 6: Definir comunicação através de troca de mensagens
+
+Parágrafo 7: Definir o conceito de sincronização (timestamp das mensagens e LVT)
+
+
 \section{Categorias de protocolos de simulação}
 
+Parágrafo 1: breve discussão sobre as categorias de protocolos, explicando as principais diferenças
+
+\subsection{Protocolos conservaticos}
+
+Parágrafo 1: citar Srinivasan and Reynolds, explicando o conceito básico de um protocolo conservativo
+
+Parágrafo 2: citar as implementacoes de [chandy e misra] e bryant, citando a necesidade de canais estaticos
+
+Parágrafo 3: citar problema de bloqueio por esperar mensagem que contém um lvt inferior, citar também como contornar esse deadlock
+
+Parágrafo 4: explicar porque é difícil resolver o problema de deadlock
+
+Parágrafo 5: citar a desvantagem do conservativo por não aproveitar todo o paralelismo
+
+Parágrafo 6: conclusão pessoal de porque não utilizar o protocolos conservativos
+
+\subsection{Protocolos Otimistas}
+
+Parágrafo 1: explicação inicial do conceito de protocolo otimista e citar o conceito de rollback
+
+Parágrafo 2: Citar o time warp, contextualizando como foi desenvolvido, em qual época e por quem
+
+Parágrafo 4: Citar o Rollback Solidário como alternativa ao Time Warp
+
 \section{O protocolo \textit{Time Warp}}
+
+Parágrafo 1: Explica por que o Time Warp é otimista, citando o fato de nao impedir a ocorrência de erros de causa e efeito
+
+Parágrafo 2: Citar como um erro de causa e efeito pode acontecer, e o que deve ser feito quando isso acontece: o rollback
+
+Parágrafo 4: Citar implementações do protocolo
+
+Parágrafo 5: Explicar o comportamento individual de um processo lógico (tirar o eventos com menor timestamp da lista de eventos futuros, etc.)
+
+\subsection{Detecção e Tratamento de Inconsistências}
+
+Parágrafo 1: Mostrar que o sistema pode receber mensagens que causam erro de causa e efeito.
+
+Parágrafo 2: Explicar o comportamento ao receber uma mensagem straggler.
+
+Parágrafo 3: definir a diferença entre rollback primário e rollback secundário
+
+\subsection{Anti-Mensagens}
+
+Parágrafo 1: Explicar o que é uma antimensagem
+
+Parágrafo 2: mostrar que antimensagens podem se referir a um evento já processado, ou a um evento que ainda esta na fila de eventos futuros
+
+Parágrafo 3: Tratar o caso da antimensagem chegar antes da mensagem
+
+\subsection{Considerações Finais}
+
+
 \section{O protocolo \textit{Rollback} Solidário}
+
+Parágrafo 1: Apresentar a principal diferença do rollback solidário
+
+Parágrafo 2: explicar que, em caso de erro de causa e efeito, todos os processos executam rollback em conjunto
+
+Parágrafo 3: introduzir o conceito de checkpoint, checkpoint global e checkpoint local.
+
+\subsection{Comportamento Geral do Protocolo Rollback solidário}
+
+Trazer uma idéia básica do Rollback solidário em linhas gerais
+
+\subsection{Estados Locais e Estados Globais}
+
+Parágrafo 1: Definição de um estado local como sendo os valores das variáveis do processo em questão em um determinado tempo
+
+Parágrafo 2: Definição de estado global como sendo um conjunto de estdaos de cada processo.
+
+\subsection{Cortes Globais Consistentes}
+
+Parágrafo 1: Apresentar o conceito de precedência causal
+
+Parágrafo 2: Definir corte 
+
+Parágrafo 3: definir corte consistente utilizando precedência causal
+
+\subsection{Relógios Lógicos e Relógios Vetoriais}
+
+Parágrafo 1: Apresentar o conceito de relógio lógico
+
+Parágrafo 2: Mostrar que o relógio lógico não representa a precedência causal em um sistema distribuído
+
+Parágrafo 3: Apresentar o conceito de relógio vetorial
+
+\subsection{Checkpoints Globais Consistentes}
+
+Parágrafo 1: Definir o que é um checkpoint: um ponto de retorno que foi, de alguma forma, armazenado de forma persistente
+
+Parágrafo 2: a necessidade de se garantir que um checkpoint seja consistente
+
+Parágrafo 3: associação de checkpoint consistente com corte consistente
+
+\subsection{Obtenção de Checkpoint Semi-Síncrono}
+
+Parágrafo: introduzir o processo observador
+
+Parágrafo: Introduzir o vetor de dependência
+
+Parágrafo: Mostrar como a troca de mensagem deve levar o vetor de dependências, e como este deve ser atualizado no processo que recebeu a mensagem
+
+Parágrafo: mostrar como o processo observador monta uma linha de recuperação através da matriz de dependências
+
+Parágrafo: demonstrar que um checkpoint global consistente é formado por checkpoints locais que não possuem relação causal entre si
+
+
+\subsection{Tratamento dos Rollbacks na Abordagem Semi-Síncrona}
+
+Parágrafo: Explicar o comportamento de um processo ao receber uma mensagem straggler 
+
+Parágrafo: Falar sobre a atuação do processo observador (escolher a linha de retorno, avisar o rollback à todos em broadcast, etc.)
+
+Parágrafo: Falar sobre o reinício da simulação após o Rollback
+
+\subsection{Considerações Finais}
+
+
 \section{Balanceamento de cargas}
+
+Parágrafo: apresentar o balanceamento de carga como fator determinante no desempenho de uma simulação distribuída
+
+Parágrafo: Introduzir o conceito de escalonamento de processos como meio de prover o balanceamento de cargas
+
+Parágrafo: por fim mostrar que para prover o balanceamento de cargas temos que possibilitar que um processo lógico migre de um nó do sistema para outro
+
+\subsection{O Uso de Agentes Móveis Para Prover Mobilidade}
+
+Parágrafo: O que é um agente móvel
+
+Parágrafo: Falar sobre a implementação feita por Antonio, Walbon e Takahashi - 2010
+
+Parágrafo: Outras implementações feitas usando agentes móveis
+
+\subsection{Requisitos Para Mobilidade de um Processo Lógico}
+
+Parágrafo: explicar quais as funcionalidades de agentes móveis que precisamos (migração)
+
+Parágrafo: Abstrair o conceito de ambiente e processo lógico: um ambiente abriga diversos processos lógicos
+
+Parágrafo: Mostrar a idéia de migrar um processo de um ambiente para outro, a fim de prover o balanceamento
+
+\subsection{Considerações Finais}

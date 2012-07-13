@@ -1,8 +1,10 @@
 \chapter{Arquitetura do \textit{framework} de simulação}
 
-Uma vez definida a arquitetura do \textit{middleware} de comunicação a ser utilizado durante este projeto, o próximo passo é a definição do funcionamento e da arquitetura da camada de simulação, aqui genericamente denominado \textit{framework}.
+Uma vez definida a arquitetura do \textit{middleware} de comunicação a ser utilizado pelo \textit{framework} de simulação, este capítulo define a arquitetura e o funcionamento da camada de simulação, aqui genericamente entitulado \textit{framework}.
 
-Esta camada, conforme ilustrada na figura~\ref{fig:camada_central}, compreende diversos sub-componentes do framework (aqui esses sub-componentes serão denominados genericamentes de módulos, para que se distingua dos componentes, objetos utilizados para descrever um modelo a ser simulado). Cada módulo que compreende o \textit{framework} se liga ao módulo central, denominado \textit{kernel}. Este é o responsável por coordenar a simulação, aplicando sincronização e balanceamento de carga, além de gerenciar o ciclo de vida da simulação (quando começar, quando terminar, etc).
+Esta camada, conforme ilustrada na figura~\ref{fig:camada_central}, compreende diversos sub-componentes do framework (aqui esses sub-componentes serão denominados genericamentes de módulos, para que se distingua dos objetos utilizados para descrever um modelo a ser simulado). Cada módulo que compreende o \textit{framework} se liga ao módulo central, denominado \textit{kernel}. Este é o responsável por coordenar a simulação, aplicando sincronização e balanceamento de carga, além de gerenciar o ciclo de vida da simulação (quando começar, quando terminar, etc).
+
+Uma atenção maior é dado à biblioteca de componentes, que é a interface que o \textit{framework} disponibiliza para o seu usuário descrever o modelo a ser simulado.
 
 \begin{figure}
   \centerline{\includegraphics{camada_framework.png}}
@@ -12,19 +14,21 @@ Esta camada, conforme ilustrada na figura~\ref{fig:camada_central}, compreende d
 
 \section{O módulo Componente}
 
-Um componente é uma abstração de um comportamento que desejamos reproduzir na nossa simulação. Na abstração de um sistema de caixa de supermercados, por exemplos, pode-se extrair três componentes (que são comuns em muitas situações na simulação de eventos discretos): o produtor, a fila de espera e o consumidor. O produtor seria o encarregado por criar clientes e envia-los à fila de espera para que o conumidor, que representa o caixa do supermercado, execute cada evento.
+A biblioteca de componentes é a interface provida pelo \textit{framework} para que o seu usuário descreva o modelo a ser simulado. Os componentes provido pela biblioteca de componentes devem ser utilizados em conjunto para descrever o comportamento do modelo, de maneira análoga a um componente eletrônico, que juntos compôem um circuito para realizar uma determinada ação. Cada componente possui suas características próprias intrínsecas e características parametrizáveis por seu usuário. Estas características definem como este dado processo se comporta quando recebe um novo evento durante a simulação.
 
-Uma biblioteca de componentes deve proporcionar objetos parametrizáveis que permitam a descrição do comportamento de cada um deles. No caso citado anteriormente, o componete produtor deve suportar parâmetros que, por exemplo, descreva a taxa de criação de novos evento, e as características de cada evento criado.
+Um exemplo que ilustra a divisão do modelo em componentes discretos é a representação de uma fila de supermercado, por exemplo. Se enxergarmos cada cliente que vai ao caixa do supermercado como um evento discreto, podemos considerar que o caixa é um componente que consome eventos. A fila, por sua vez, é um componente que armazena eventos e um terceiro componente (que não possui representação física direta) seria o gerador de eventos discretos, que insere novos eventos (clientes) na fila.
 
-Os componentes são construidos diretamente em cima do objeto \textit{process} da camada de comunicação. Isso garante ao componente criado, por herança direta, toda funcionalidade de comunicação com outros componentes. Desta maneira, basta ao usuário do framework descrever na modelagem qual a conexão que cada componente faz, que esta é reproduzida automaticamente pelo framework, independente se esses componentes são processo cohabitantes ou não-cohabitantes.
+Cada um dos três componentes descritos possuêm características intrínsecas (a fila armazena eventos, o caixa consome eventos e o gerador gera eventos) e características parametrizáveis, como por exemplo a taxa de criação de eventos (quantos clientes entrariam na fila por minuto, obedecendo qual distribuição) ou a taxa de consumo de eventos (o quão rápido é o caixa).
 
-Em alguns casos é conveniente que componentes sejam combinados a fim de que um novo componente seja criado. Uma das justificativas seria, por exemplo, garantir que dois componentes primitivos se comportem como um único compoente, evitando assim que estes sejam por ventura separados e passem a cohabitar ambientes diferentes. 
+Uma biblioteca de componentes deve proporcionar objetos parametrizáveis que permitam a descrição do comportamento de cada um deles. No caso citado anteriormente, o componete gerador deve suportar parâmetros que, por exemplo, descreva a taxa de criação de novos evento, e as características de cada evento criado.
 
-Em um exemplo, é conveniente que o um componente do tipo fila, que tem como características armazenar eventos que serão consumidos por um componente do tipo consumidor, seja encapsulado junto ao seu consumidor, evitando assim a possibilidade de que estes se separem, e diminuindo a quantidade de mensagens que trafegariam pela rede.
+Os componentes são construidos diretamente em cima do objeto \textit{process} da camada de comunicação. Isso garante ao componente criado, por herança direta, toda funcionalidade de comunicação com outros componentes. Desta maneira, basta ao usuário do framework descrever na modelagem qual a conexão que cada componente faz, que esta é reproduzida automaticamente pelo framework, independente se esses componentes cohabitam ou não o mesmo ambiente.
+
+Em alguns casos é conveniente que componentes sejam combinados a fim de que um novo componente seja criado, aumentando a granularidade de um componente no modelo. Uma das justificativas seria, por exemplo, garantir que dois componentes se comportem como um único, evitando assim que estes sejam por ventura separados e passem a cohabitar ambientes diferentes. Um exemplo disto é o caso em que um componente do tipo fila, que tem como características armazenar eventos que serão consumidos por um componente do tipo consumidor, seja encapsulado junto ao seu consumidor, evitando assim a possibilidade de que estes se separem, e diminuindo a quantidade de mensagens que trafegariam pela rede.
 
 \section{Componentes básicos}
 
-O tipo primitivo de um componente no \textit{framework} proposto é desenvolvido em cima da classe \textit{process} (conforme ilustrado na figura~\ref{fig:basic_component}) e deve ser capaz de proporcionar alguns elementos básicos para o controle do fluxo de eventos, como por exemplo um (ou diversos) canais de entrada de eventos, ambiente de processamento e canais de saída de eventos.
+O tipo primitivo de um componente no \textit{framework} proposto é desenvolvido sobre a classe \textit{process} definida pelo \textit{middleware} de comunicação (conforme ilustrado na figura~\ref{fig:basic_component}) e deve ser capaz de proporcionar alguns elementos básicos para o controle do fluxo de eventos, como por exemplo um (ou diversos) canais de entrada de eventos, ambiente de processamento e canais de saída de eventos.
 
 Sobre este componente primitivo são construídos quatro componentes básicos(Figura~\ref{fig:uml_components}), suficientes para demonstrar a implementação de alguns modelos para simulação. Estes componentes são: fila, gerador, consumidor e divisor.
 
@@ -41,7 +45,7 @@ Sobre este componente primitivo são construídos quatro componentes básicos(Fi
 \end{figure}
 
 
-Por motivos naturais, nem todos os componentes implementos esse modelo em sua totalidade. Componentes como os geradores de eventos, por exemplo, não possuem canais de entrada de eventos, uma vez que a sua função é a de apenas gerar novos eventos com base em uma parametrização de suas características para que se comporte conforme o modelo que descreve suas ações. 
+Por motivos naturais, nem todos os componentes implementos esse modelo em sua totalidade. Componentes como os geradores de eventos, por exemplo, não possuem canais de entrada de eventos, uma vez que a sua função é a de apenas gerar novos eventos com base em uma parametrização de suas características para que se comporte conforme o modelo matemático que descreve suas ações. 
 
 \subsection{O componente Fila}
 
@@ -49,9 +53,9 @@ A fila é o componente responsável por armazenar eventos, ordenando-os com base
 
 A fila é um componente passivo, ou seja, ela não executa nenhum tipo de ação sobre os eventos nela existente. Por ser um componente passivo, é o componente gerador que deve executar a ação de inserir um novo evento na fila, e é um componente consumidor que deve executar a ação de retirar o evento de menor \textit{timestamp} da fila.
 
-Uma das características mais importantes do componente fila é o seu tamanho. Uma fila pode ou não ter um tamanho definido, porém uma vez definido um tamanho para esta fila, quando este tamanho se excede, ou seja, quando a quantidade de eventos inseridos cresce em uma velocidade tão grande que o consumidor atrelado àquela fila não consegue consumi-los em tempo hábil podem ocorrer dois eventos, dependendo de como o usuário do framework descreveu em seu modelo. No caso mais simples o usuário determina que ao se exceder a quantidade de elementos em uma fila, uma excessão do tipo QueueOverflow() seja lançada, e a simulação se encerra.
+Uma das características mais importantes do componente fila é o seu tamanho. Uma fila pode ou não ter um tamanho definido, porém uma vez definido um tamanho para esta fila, quando este tamanho se excede, ou seja, quando a quantidade de eventos inseridos cresce em uma velocidade tão grande que o consumidor atrelado à fila não consegue consumi-los em tempo hábil podem ocorrer dois eventos, dependendo de como o usuário do framework descreveu em seu modelo. No caso mais simples o usuário determina que ao se exceder a quantidade de elementos em uma fila, uma excessão do tipo QueueOverflow() seja lançada, e a simulação se encerra.
 
-Em um caso mais elaborado, ao se atingir o limite de uma fila esta pode apenas negar a inserção de novos elementos até que haja espaço suficiente. Neste caso, há uma propagação da condição de estacionamento da execução para os elementos atrelados à essa fila, causando um efeito que reflete em grande parte do sistema. 
+Em um caso mais elaborado, ao se atingir o limite de uma fila esta pode apenas negar a inserção de novos elementos até que haja espaço suficiente. Neste caso, há uma propagação da condição de estacionamento da execução para os elementos atrelados à essa fila, causando um efeito que reflete em parte do sistema. 
 
 \begin{figure}
   \centerline{\includegraphics{cruzamento.png}}
@@ -59,7 +63,7 @@ Em um caso mais elaborado, ao se atingir o limite de uma fila esta pode apenas n
 \label{fig:cruzamento}
 \end{figure}
 
-Um exemplo típico que ilustra esse caso é a simulação de uma sequência de cruzamentos em uma via urbana, ilustrada na Figura~\ref{fig:cruzamento}. A quantidade de carros que cabem em um intervalo entre os dois cruzamentos A e B é finito, e se o cruzamento A não consome carros em uma velocidade maior ou igual à que eles chegam, há um crescimento na quantidade de carros entre os dois cruzamentos, o que pode levar à paralização temporária da simulação, até que o consumidor A consuma eventos, liberando espaço na fila.
+Um exemplo típico que ilustra esse caso é a simulação de uma sequência de cruzamentos em uma via urbana, ilustrada na Figura~\ref{fig:cruzamento}. A quantidade de carros que cabem em um intervalo entre os dois cruzamentos A e B é finito, e se o cruzamento A não consome carros em uma velocidade maior ou igual à que eles chegam, há um crescimento na quantidade de carros entre os dois cruzamentos, o que pode levar à paralização temporária da simulação (eventos não podem mais ser criados), até que o consumidor A consuma eventos, liberando espaço na fila.
 
 \subsection{O componente Gerador}
 
@@ -71,9 +75,9 @@ Mais detalhes sobre o funcionamento das funções geradoras são abordados na se
 
 \subsection{O componente Consumidor}
 
-Assim como o componente gerador, o componente consumidor é parametrizável através de funções externas que descrevem o seu comportamento ao longo do tempo de simulação. Outros dados levados em conta durante a execução de um evento por um consumidor são as características internas dos eventos.
+Assim como o componente gerador, o componente consumidor é parametrizável através de funções externas que descrevem o seu comportamento ao longo do tempo de simulação. Outros dados levados em conta durante a execução de um evento por um consumidor são as características internas dos eventos. Esses parâmetros determinam, por exemplo, se o componente processará um evento de maneira mais rápida ou mais lenta, qual a taxa de geração de novos eventos para si mesmo, entre outros.
 
-O componente gerador possui múltiplas entradas de dados, porém apenas um canal de saída. Uma saída do gerador pode ser dividida em várias utilizando um componente divisor(ver subseção~\ref{divisor}). A razão de se adotar este \textit{design} de um único canal de saída e múltiplas entradas se justifica pela simplicidade da arquitetura do modelo, uma vez que o componente gerador não precisaria se encarregar do comportamento que os eventos por ele processados tomariam após o processamento.
+O componente gerador possui múltiplas entradas de dados, porém apenas um canal de saída. Uma saída do gerador pode ser dividida em várias utilizando um componente divisor(ver subseção~\ref{divisor}). A razão de se adotar este \textit{design} de um único canal de saída e múltiplas entradas visa simplificar a arquitetura do modelo, uma vez que o componente gerador não precisaria se encarregar do comportamento que os eventos por ele processados tomariam após o processamento.
 
 \begin{figure}
   \centerline{\includegraphics{gerador_mais_consumidor.png}}
@@ -83,7 +87,7 @@ O componente gerador possui múltiplas entradas de dados, porém apenas um canal
 
 Uma vez que o evento é processado por um consumidor, este pode tomar três caminhos distintos: o evento pode simplesmente morrer, o evento pode ser redirecionado para um novo processador (ou mesmo para o mesmo processador, dependendo da necessidade da simulação), porém com suas características originais mantidas. Uma terceira possibilidade é que o evento sofra uma modificação nas suas características antes de ser encaminhado a diante.
 
-Em condições especiais, um componente processador pode ser conectado à um gerador, e a ação de executar um evento poderia gerar um ou mais eventos distintos por esse gerador, que seriam então inseridos no sistema. Um exemplo prático desta aplicação é a simulação do fluxo de trabalho de uma companhia, onde a chegada de um documento pode disparar duas tarefas diferentes a serem feitas em paralelo (Figura~\ref{fig:multiple_sons}).
+Em condições especiais, um componente processador pode ser conectado à um gerador, e a ação de executar um evento poderia disparar a geração de um ou mais eventos distintos por esse gerador, que seriam então inseridos no sistema. Um exemplo prático desta aplicação é a simulação do fluxo de trabalho de um escritório onde a chegada de um documento pode disparar duas tarefas diferentes a serem feitas em paralelo (Figura~\ref{fig:multiple_sons}).
 
 
 \subsection{O componente Divisor \label{divisor}}

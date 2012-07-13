@@ -1,61 +1,68 @@
 This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: Monografia.aux
+A level-1 auxiliary file: capa.aux
+A level-1 auxiliary file: Introducao.aux
+A level-1 auxiliary file: Simulacao.aux
 A level-1 auxiliary file: PropostaProjeto.aux
 A level-1 auxiliary file: ArquiteturaMiddleware.aux
 A level-1 auxiliary file: ArquiteturaFramework.aux
+A level-1 auxiliary file: Implementacao.aux
+A level-1 auxiliary file: Conclusao.aux
 A level-1 auxiliary file: biblio.aux
+A level-1 auxiliary file: A_Python.aux
 The style file: abnt-alf.bst
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: abnt-options.bib
 Database file #2: biblio.bib
 Warning--entry type for "LIVERSON" isn't style-file defined
 --line 164 of file biblio.bib
-Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Warning--I didn't find a database entry for "PYTHONSITE"
+Reallocated wiz_functions (elt_size=4) to 9000 items from 472446408560.
 +---------------------------------------------------------+
 | Estilo bibliografico abnt-alf.bst versao 1.53           |
 | Implementa a NBR6023, NBR10520 e NBR10523               |
 | Em caso de duvidas ou problemas com este estilo procure |
 | http://abntex.codigolivre.org.br                        |
 +---------------------------------------------------------+
-You've used 7 entries,
+You've used 14 entries,
             6522 wiz_defined-function locations,
-            1202 strings with 10362 characters,
-and the built_in function-call counts, 5472 in all, are:
-= -- 498
-> -- 206
-< -- 2
-+ -- 120
-- -- 62
-* -- 373
-:= -- 789
-add.period$ -- 22
-call.type$ -- 8
-change.case$ -- 69
-chr.to.int$ -- 10
-cite$ -- 6
-duplicate$ -- 190
-empty$ -- 418
-format.name$ -- 294
-if$ -- 1307
+            1264 strings with 11765 characters,
+and the built_in function-call counts, 11604 in all, are:
+= -- 954
+> -- 419
+< -- 22
++ -- 201
+- -- 126
+* -- 826
+:= -- 1584
+add.period$ -- 50
+call.type$ -- 15
+change.case$ -- 144
+chr.to.int$ -- 32
+cite$ -- 13
+duplicate$ -- 506
+empty$ -- 875
+format.name$ -- 603
+if$ -- 2785
 int.to.chr$ -- 0
 int.to.str$ -- 0
-missing$ -- 113
-newline$ -- 34
-num.names$ -- 30
-pop$ -- 169
+missing$ -- 238
+newline$ -- 72
+num.names$ -- 65
+pop$ -- 321
 preamble$ -- 1
-purify$ -- 28
+purify$ -- 56
 quote$ -- 0
-skip$ -- 357
+skip$ -- 681
 stack$ -- 1
-substring$ -- 150
-swap$ -- 76
-text.length$ -- 1
+substring$ -- 434
+swap$ -- 251
+text.length$ -- 16
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 5
+type$ -- 7
 warning$ -- 0
-while$ -- 38
+while$ -- 93
 width$ -- 0
-write$ -- 95
-(There was 1 warning)
+write$ -- 213
+(There were 2 warnings)
