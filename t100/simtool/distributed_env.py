@@ -192,6 +192,7 @@ class Environment(object):
 
     def dummy_insert_input(self, event, sender_id, receiver_id):
         # connects in-place components to RECEIVE events from external word
+        import pdb; pdb.set_trace()
         insert_function = self.external_inputs[receiver_id]
         insert_function(event)
 

@@ -23,14 +23,26 @@ source 2        queue      process
     
 """
 
+def creation_tax_expression_1(timestamp):
+    # 2 events each five minuts
+    return 2.0/(60*5)
+
+def creation_tax_expression_2(timestamp):
+    # 3 events each five minuts
+    return 2.0/(60*5)
+
+def execution_time_expression(timestamp):
+    # execution takes 60 seconds +- 30
+    return 60+random.randint(-30,+30)
+
+
 if __name__=='__main__':
-    execution_time_expression = lambda : 60+random.randint(-30,+30)
 
     acc = 0
     for i in range(100):
         q = Queue()
-        s1 = Source(output=q, creation_tax=2.0/(60*5), execution_time_expression=execution_time_expression)
-        s2 = Source(output=q, creation_tax=3.0/(60*5), execution_time_expression=execution_time_expression)
+        s1 = Source(output=q, creation_tax_expression=creation_tax_expression_1, execution_time_expression=execution_time_expression)
+        s2 = Source(output=q, creation_tax_expression=creation_tax_expression_2, execution_time_expression=execution_time_expression)
         p = Process(inputs=[q])
 
         steps_number = 60*60

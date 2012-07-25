@@ -45,7 +45,7 @@ def ct_2(timestamp): #on this example, timestamp IS NOT used
 
 if __name__=='__main__':
 
-    steps_number = 60*60*5
+    steps_number = 60*60
     
     acc1 = acc2 = 0
     for i in range(100):

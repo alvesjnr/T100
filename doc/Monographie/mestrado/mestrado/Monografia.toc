@@ -1,0 +1,63 @@
+\select@language {brazil}
+\contentsline {chapter}{Lista de Figuras}{}
+\contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{7}
+\contentsline {section}{\numberline {1.1}Simula\IeC {\c c}\IeC {\~a}o de eventos discretos}{7}
+\contentsline {section}{\numberline {1.2}Sistemas centralizados e distribu\IeC {\'\i }dos}{7}
+\contentsline {section}{\numberline {1.3}Simula\IeC {\c c}\IeC {\~a}o distribu\IeC {\'\i }da de eventos discretos}{7}
+\contentsline {chapter}{\numberline {2}Simula\IeC {\c c}\IeC {\~a}o Distribu\IeC {\'\i }da de Eventos Discretos}{8}
+\contentsline {section}{\numberline {2.1}Categorias de protocolos de simula\IeC {\c c}\IeC {\~a}o}{8}
+\contentsline {section}{\numberline {2.2}O protocolo \textit {Time Warp}}{8}
+\contentsline {section}{\numberline {2.3}O protocolo \textit {Rollback} Solid\IeC {\'a}rio}{8}
+\contentsline {section}{\numberline {2.4}Balanceamento de cargas}{8}
+\contentsline {chapter}{\numberline {3}Proposta deste projeto}{9}
+\contentsline {section}{\numberline {3.1}Um \textit {framework} para simula\IeC {\c c}\IeC {\~a}o distribu\IeC {\'\i }da}{9}
+\contentsline {subsection}{\numberline {3.1.1}Encapsulamento}{10}
+\contentsline {subsection}{\numberline {3.1.2}Transpar\IeC {\^e}ncia}{11}
+\contentsline {subsection}{\numberline {3.1.3}Reusabilidade}{11}
+\contentsline {section}{\numberline {3.2}Solu\IeC {\c c}\IeC {\~o}es Existentes }{12}
+\contentsline {section}{\numberline {3.3}Arquitetura proposta}{13}
+\contentsline {section}{\numberline {3.4}Organiza\IeC {\c c}\IeC {\~a}o deste documento}{15}
+\contentsline {chapter}{\numberline {4}Arquitetura do \textit {middleware} de comunica\IeC {\c c}\IeC {\~a}o }{16}
+\contentsline {section}{\numberline {4.1}Componentes do \textit {middleware}}{16}
+\contentsline {section}{\numberline {4.2}O componente \textit {environment}}{18}
+\contentsline {subsection}{\numberline {4.2.1}Estrutura interna}{18}
+\contentsline {subsection}{\numberline {4.2.2}\textit {Proxy}}{20}
+\contentsline {subsection}{\numberline {4.2.3}Tabela de endere\IeC {\c c}os de processos}{20}
+\contentsline {section}{\numberline {4.3}O componente \textit {process} }{22}
+\contentsline {subsection}{\numberline {4.3.1}Ciclo de vida de um processo}{24}
+\contentsline {subsection}{\numberline {4.3.2}Serializa\IeC {\c c}\IeC {\~a}o de um processo}{26}
+\contentsline {section}{\numberline {4.4}Migra\IeC {\c c}\IeC {\~a}o de processos }{27}
+\contentsline {subsection}{\numberline {4.4.1}Atualiza\IeC {\c c}\IeC {\~a}o da tabela de endere\IeC {\c c}os dos processos }{28}
+\contentsline {section}{\numberline {4.5}Troca de mensagens }{29}
+\contentsline {subsection}{\numberline {4.5.1}Comunica\IeC {\c c}\IeC {\~a}o direta e indireta}{30}
+\contentsline {subsection}{\numberline {4.5.2}Comunica\IeC {\c c}\IeC {\~a}o local direta}{31}
+\contentsline {section}{\numberline {4.6}Comunica\IeC {\c c}\IeC {\~a}o grupal}{32}
+\contentsline {chapter}{\numberline {5}Arquitetura do \textit {framework} de simula\IeC {\c c}\IeC {\~a}o}{34}
+\contentsline {section}{\numberline {5.1}O m\IeC {\'o}dulo Componente}{34}
+\contentsline {section}{\numberline {5.2}Componentes b\IeC {\'a}sicos}{36}
+\contentsline {subsection}{\numberline {5.2.1}O componente Fila}{36}
+\contentsline {subsection}{\numberline {5.2.2}O componente Gerador}{39}
+\contentsline {subsection}{\numberline {5.2.3}O componente Consumidor}{40}
+\contentsline {subsection}{\numberline {5.2.4}O componente Divisor }{42}
+\contentsline {section}{\numberline {5.3}O \textit {kernel} do \textit {framework}}{42}
+\contentsline {section}{\numberline {5.4}Protocolos de sincroniza\IeC {\c c}\IeC {\~a}o}{43}
+\contentsline {section}{\numberline {5.5}Algoritmos de balanceamento de carga}{44}
+\contentsline {chapter}{\numberline {6}Implementa\IeC {\c c}\IeC {\~a}o}{45}
+\contentsline {section}{\numberline {6.1}A linguagem \emph {Python}}{45}
+\contentsline {section}{\numberline {6.2}As camadas externas}{46}
+\contentsline {subsection}{\numberline {6.2.1}M\IeC {\'o}dulos internos do \emph {framework}}{48}
+\contentsline {section}{\numberline {6.3}Implementando a comunica\IeC {\c c}\IeC {\~a}o}{49}
+\contentsline {section}{\numberline {6.4}O objeto \emph {Message}}{49}
+\contentsline {subsection}{\numberline {6.4.1}O m\IeC {\'e}todo \emph {send}}{50}
+\contentsline {section}{\numberline {6.5}Implementando os Componentes }{50}
+\contentsline {section}{\numberline {6.6}Implementando o \emph {Environment}}{50}
+\contentsline {section}{\numberline {6.7}Exemplos de aplica\IeC {\c c}\IeC {\~a}o}{50}
+\contentsline {chapter}{\numberline {7}Discuss\IeC {\~o}es finais e Conclus\IeC {\~o}es}{52}
+\contentsline {chapter}{Ap\^endice{} A{} -$\mskip -\thinmuskip $-{} A linguagem \textit {Python} }{53}
+\contentsline {chapter}{Ap\^endice{} B{} -$\mskip -\thinmuskip $-{} Diagrama de classes }{54}
+\contentsline {chapter}{Ap\^endice{} C{} -$\mskip -\thinmuskip $-{} Distribui\IeC {\c c}ao}{55}
+\contentsline {section}{\numberline {C.1}Licensa}{55}
+\contentsline {subsection}{\numberline {C.1.1}\emph {License}}{55}
+\contentsline {subsection}{\numberline {C.1.2}Informa\IeC {\c c}\IeC {\~o}es sobre a licensa}{56}
+\contentsline {section}{\numberline {C.2}Disponibilidade}{56}
+\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{57}

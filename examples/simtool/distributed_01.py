@@ -24,6 +24,5 @@ if  __name__=='__main__':
     cfg = open('distributed_01.json').read()
     env = Environment(ip, port, cfg, verbose=True)
     env.populate([source,process])
-    import pdb; pdb.set_trace()
-    time.sleep(29999)
-    #env.start_simulation(untill=1000)
+    time.sleep(2)
+    env.start_simulation(untill=1000)

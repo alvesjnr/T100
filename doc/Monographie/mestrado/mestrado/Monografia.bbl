@@ -1,0 +1,43 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{1.53 }
+
+\bibitem[Alves, Walbon e Takahashi 2009]{RIBEIROALVES}
+\abntrefinfo{Alves, Walbon e Takahashi}{ALVES; WALBON; TAKAHASHI}{2009}
+{ALVES, A.~R.; WALBON, G.; TAKAHASHI, W. \emph{Agentes móveis e Simulação
+  Distribuída}. 2009.}
+
+\bibitem[Cruz 2009]{LIVERSON}
+\abntrefinfo{Cruz}{CRUZ}{2009}
+{CRUZ, L.~B. da. \emph{Projeto de Um Framework para o Desenvolvimento de
+  Aplicações de Simulação Distribuída}. 2009.}
+
+\bibitem[McQuillan e Walden 1975]{MCQUILLAN75}
+\abntrefinfo{McQuillan e Walden}{MCQUILLAN; WALDEN}{1975}
+{MCQUILLAN, J.~M.; WALDEN, D.~C. Some considerations for a high performance
+  message-based interprocess communication system. In:  . [S.l.]: Proceedings
+  of the 1975 ACM SIGCOMM/SIGOPS workshop on Interprocess communications, 1975.
+  v.~9.}
+
+\bibitem[Perrone et al. 2006]{SASSY}
+\abntrefinfo{Perrone et al.}{PERRONE et al.}{2006}
+{PERRONE, L.~F. et al. Sassy: A design for a scalable agent-based simulation
+  system using a distributed discrete event infrastructure. In:
+  \emph{Proceedings of the 2006 Winter Simulation Conference}. [S.l.: s.n.],
+  2006.}
+
+\bibitem[Riehle 2000]{DIRK00}
+\abntrefinfo{Riehle}{RIEHLE}{2000}
+{RIEHLE, D.
+\emph{Framework Design: A Role Modeling Approach}.
+Tese (Doutorado) --- ETH Zürich, 2000.}
+
+\bibitem[Zhang, Tan e Marchesi 2009]{HONGYU09}
+\abntrefinfo{Zhang, Tan e Marchesi}{ZHANG; TAN; MARCHESI}{2009}
+{ZHANG, H.; TAN, H. B.~K.; MARCHESI, M. The distribution of program sizes and
+  its implications: An eclipse case study. In:  . [S.l.: s.n.], 2009.}
+
+\end{thebibliography}

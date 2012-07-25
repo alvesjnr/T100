@@ -180,6 +180,7 @@ class Process(__Component__):
         self.inputs = inputs
         self.inputs_id = [input.id for input in inputs]
         self.timestamp = timestamp
+        self.last_processed_event_timestamp = 0
         self.source = source
         self.output_ratio_expression = output_ratio_expression if output_ratio_expression else output_ratio_dummy
     
@@ -187,7 +188,13 @@ class Process(__Component__):
         for i in self.inputs:
             if i.youngest_event() <= self.timestamp:
                 event = i.remove()
-                if event:           
+                if event:
+                    
+                    # if event.timestamp < self.last_processed_event_timestamp:
+                    #     raise Struggler() # raise exception when try to process, not when schedule it!
+                    # else:
+                    #     self.last_processed_event_timestamp = event.timestamp
+
                     if self.verbose:
                         self.__log__('C %s %s %s %s' % (self.timestamp, event, i, self))
                         self.execute_event(event)

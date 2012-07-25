@@ -1,17 +1,2 @@
 \select@language {brazil}
-\contentsline {figure}{\numberline {1}{\ignorespaces Simula\IeC {\c c}\IeC {\~a}o Sequencial.}}{6}
-\contentsline {figure}{\numberline {2}{\ignorespaces Mensagem strangler.}}{12}
-\contentsline {figure}{\numberline {3}{\ignorespaces Linhas de recupera\IeC {\c c}\IeC {\~a}o.}}{16}
-\contentsline {figure}{\numberline {4}{\ignorespaces Agentes em um determinado contexto.}}{19}
-\contentsline {figure}{\numberline {5}{\ignorespaces Agente migrando para um contexto diferente do original.}}{20}
-\contentsline {figure}{\numberline {6}{\ignorespaces Servidor de \textit {Aglets Tahiti}.}}{22}
-\contentsline {figure}{\numberline {7}{\ignorespaces Servidor \textit {Tahiti} por linha de comandos.}}{23}
-\contentsline {figure}{\numberline {8}{\ignorespaces Ciclo de vida de um \textit {aglet}.}}{25}
-\contentsline {figure}{\numberline {9}{\ignorespaces Classe Message.}}{26}
-\contentsline {figure}{\numberline {10}{\ignorespaces Diagrama de Classes.}}{29}
-\contentsline {figure}{\numberline {11}{\ignorespaces Diagrama de atividades da classe Servidor.}}{30}
-\contentsline {figure}{\numberline {12}{\ignorespaces Diagrama da classe Servidor.}}{31}
-\contentsline {figure}{\numberline {13}{\ignorespaces Diagrama da classe Processo.}}{32}
-\contentsline {figure}{\numberline {14}{\ignorespaces Tratamendo de eventos na classe Processo.}}{33}
-\contentsline {figure}{\numberline {15}{\ignorespaces Diagrama da classe Observador.}}{35}
-\contentsline {figure}{\numberline {16}{\ignorespaces Ciclo de tratamento de eventos.}}{37}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Simula\IeC {\c c}\IeC {\~a}o Sequencial.}}{5}

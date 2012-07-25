@@ -1,5 +1,5 @@
 from t100.core.simulator import Simulator
-from t100.core.components import *
+from t100.core.base_components import *
 
 """
 Example basic_04
@@ -26,17 +26,28 @@ source 2        queue        process
     
 """
 
+def creation_tax_expression_1(timestamp):
+    # 1 events each five minuts
+    return 1.0/(60*5)
+
+def creation_tax_expression_2(timestamp):
+    # 5 events each five minuts
+    return 5.0/(60*5)
+
+def execution_time_expression(timestamp):
+    # execution takes 60 seconds +- 30
+    return 60+random.randint(-30,+30)
+
 if __name__=='__main__':
 
     steps_number = 60*60
-    execution_time_expression = lambda : 60+random.randint(-30,+30)
 
     acc1 = acc2 = 0
     for i in range(100):
         q1 = Queue()
         q2 = Queue()
-        s1 = Source(output=q1, creation_tax=1.0/(60*5), execution_time_expression=execution_time_expression)
-        s2 = Source(output=q2, creation_tax=5.0/(60*5), execution_time_expression=execution_time_expression)
+        s1 = Source(output=q1, creation_tax_expression=creation_tax_expression_1, execution_time_expression=execution_time_expression)
+        s2 = Source(output=q2, creation_tax_expression=creation_tax_expression_2, execution_time_expression=execution_time_expression)
         p = Process(inputs=[q1,q2])
 
         simul = Simulator(components=[q1,q2,s1,s2,p])

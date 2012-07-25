@@ -49,6 +49,7 @@ def distributed(simulator):
         source.timestamp = timestamp
 
     for qprocess in simulator.components['queuedprocess']:
+        import pdb; pdb.set_trace()
         if qprocess.timestamp <= timestamp:
             qprocess.timestamp = timestamp
             qprocess.processer.next()

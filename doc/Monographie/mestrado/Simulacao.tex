@@ -1,23 +1,60 @@
 \chapter{Simulação Distribuída de Eventos Discretos}
 
-Parágrafo 1: Revisar a déia inicial sobre o que é simulação, e dizer que a simulação é baseada em um modelo do problema
+% Parágrafo 1: Revisar a déia inicial sobre o que é simulação, e dizer que a simulação é baseada em um modelo do problema
 
-Parágrafo 2: Dizer que a simulação é um processo caro, e que é conveniente dividir entre vários computadores (distribuir a simulação)
+A simulação é uma técnica que permite prever e visualizar o comportamento de sistemas reais a partir de modelos matemáticos. As aplicações da simulação abrangem diversos benefícios, tais como: a possibilidade de antever possíveis problemas ou comportamentos indesejáveis de um sistema, auxílio na tomada de decisão sem a necessidade de intervir no sistema real, facilidade na manipulação e alteração dos modelos, economia de recursos (físicos e financeiros) durante a tomada de decisões, dentre outros.
 
-Parágrafo 3: Apresentar problemas como sincronização, comunicação, balanceamento de cargas, etc. devido à distribuição.
+% Parágrafo 2: Dizer que a simulação é um processo caro, e que é conveniente dividir entre vários computadores (distribuir a simulação)
 
-Parágrafo 4: Dividir o sistema em Processo lógicos e eventos discretos. Rever o conceito de timestamp de cada evento.
+Por demandar um intenso processamento computacional, a simulação por vezes pode se tornar uma opção demasiadamente custosa. Melhores algorítmos e métodos de simulação mais modernos são maneiras de tornar a simulação mais eficiente. Em paralelo à isto existe a possibilidade de se distribuir a simulação entre vários nós de um sistema, ou entre vários núcleos de uma máquina paralela. O uso desta técnica permite que certos processos sejam executados simultaneamente, acelerando assim a simulação.
 
-Parágrafo 5: Dizer que cada processo lógico possui um relógio interno
+% Parágrafo 3: Apresentar problemas como sincronização, comunicação, balanceamento de cargas, etc. devido à distribuição.
 
-Parágrafo 6: Definir comunicação através de troca de mensagens
+Em contrapartida, ao se dividir uma simulação entre vários nós em um sistema distribuído são criadas diversos novos requisitos ao sistema. Ítens como sincronização dos processos, comunicação entre os processos, balanceamento de cargas no sistema, entre outros devem ser gerenciados pela aplicação de simulação a fim de se garantir um resultado coerente do processo de simulação.
 
-Parágrafo 7: Definir o conceito de sincronização (timestamp das mensagens e LVT)
 
+\section{Princípios da Simulação Baseada em Eventos Discretos}
+% Parágrafo 4: Dividir o sistema em Processo lógicos e eventos discretos. Rever o conceito de timestamp de cada evento.
+
+No paradigma da simulação discreta, três variáveis representam a simulação orientada a eventos:
+
+\begin{itemize}
+\item As variáveis internas do sistema;
+\item Uma lista de eventos, denominada lista de eventos futuros. Esta lista abriga os eventos a serem executados;
+\item Um relógio lógico global, que controla o processo de execução da simulação
+\end{itemize}
+
+Cada evento a ser executado possui uma marca  de tempo (\textit{timestamp}) que determina quando, no tempo lógico do sistema, este evento deve ser executado. O programa de simulação repetidamente retira o evento com o menor \textit{timestamp} da fila de eventos futuros para processa-lo.
+
+Para a implementação da simulação distribuída, a estrutura da simulação tradicional, inerentemente sequencial, teve que sofrer adaptações para incorporar os conceitos de computação distribuída \cite{REED-MALONY}. Para isto, o sistema passou a ser dividido em processos lógicos que representam um processo de sistema real. Uma simulação é um conjunto com $n$ processos lógicos $p_{1}, p_{2}, p_{3}, ..., p_{n}$.
+
+% Parágrafo 5: Dizer que cada processo lógico possui um relógio interno
+
+Assim como o sistema de simulação possui um relógio lógico que representa o tempo lógico da simulação, ao se dividir a simulação em um sistema distribuído cada processo lógico possui um relógio lógico interno que representa o avanço do tempo de simulação para aquele processo lógico. Isso garante que os eventos a serem executados por um determinado processo lógico sejam executados no tempo lógico determinado pelo seu \textit{timestamp}. Portanto um processo lógico, se olhado isoladamente, possui as mesmas variáveis que um sistema de simulação sequencial: uma fila de eventos a serem executados, um relógio lógico interno e as suas variáveis internas.
+
+% Parágrafo 6: Definir comunicação através de troca de mensagens
+
+Porém em certos momentos um processo pode necessitar comunicar-se com outro processo lógico. Por exemplo, um processo pode enviar um evento para ser executado por outro processo lógico diferente. Esta comunicação é feita através de troca de mensagens. Um processo lógico deve ser capaz de enviar mensagens à outros processos lógicos que, por sua vez, devem ser capaz de receber estas mensagens. 
+
+% Parágrafo 7: Definir o conceito de sincronização (timestamp das mensagens e LVT)
+
+Assim como todo evento discreto, um evento enviado de um processo lógico à outro possui um \textit{timestamp} que indica quando este deve ser executado pelo processo lógico em questão. Porém, como os processos lógicos em um sistema distribuído não compartilham um mesmo relógio lógico (cada processo lógico possui seu próprio relógio interno), o sistema de simulação distribuída deve estar preparado para tratar situação de inconsistência da simulação.
+
+Como cada processo lógico possui um relógio lógico interno independente, pode acontecer de um processo estar em um tempo lógico mais atrasado que os demais e enviar um evento para ser processado em um tempo que já foi superado pelo relógio lógico do processo que recebeu a mensagem. Assim como ilustrado na figura~\ref{fig:strag}, o processo em questão possui seu relógio lógico no tempo $t=24$ e recebe uma mensagem para ser processada no tempo $t=11$. Como o evento a ser processado possui um \textit{timestamp} menor que o relógio interno do processo lógico, o sistema encontra-se em um momento de inconsistência. Um sistema de simulação distribuída deve ser capaz de contornar tal situação.
+
+\begin{figure}
+  \centerline{\includegraphics[scale=0.4]{straggler.png}}
+  \caption{Mensagem \textit{straggler}.}
+\label{fig:strag}
+\end{figure}
 
 \section{Categorias de protocolos de simulação}
 
-Parágrafo 1: breve discussão sobre as categorias de protocolos, explicando as principais diferenças
+% Parágrafo 1: breve discussão sobre as categorias de protocolos, explicando as principais diferenças
+
+Para se garantir a sincronização dos processos lógicos na simulação distribuída são usados protocolos de sincronização, que garantem a consistência do sistema ao final da simulação. Os protocolos podem ser divididos em duas categorias quanto ao seu comportamento perante um inconsistência de causa e efeito no sistema: protocolos conservadores e protocolos otimistas. 
+
+Um protocolo conservador evita que um erro de causa e efeito aconteça, garantindo que toda mensagem recebida por um processo lógico esteja dentro do tempo de execução daquele processo. Já um protocolo do tipo otimista não previne a ocorrência de inconsistências no sistema, mas provê mecanismos capazes de recuperar o sistema quando elas acontecem.
 
 \subsection{Protocolos conservaticos}
 
