@@ -5,10 +5,23 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{1.53 }
 
+\bibitem[A Discrete-Event Simulation Course Based on the SimPy Language
+  2011]{SERVICES}
+\abntrefinfo{A\ldots}{A\ldots}{2011}
+{A Discrete-Event Simulation Course Based on the SimPy Language. 2011.
+Dispon{\'\i}vel em:
+  $<$http://heather.cs.ucdavis.edu/~matloff/simcourse.html$>$.}
+
 \bibitem[Alves, Walbon e Takahashi 2009]{RIBEIROALVES}
 \abntrefinfo{Alves, Walbon e Takahashi}{ALVES; WALBON; TAKAHASHI}{2009}
 {ALVES, A.~R.; WALBON, G.; TAKAHASHI, W. \emph{Agentes móveis e Simulação
   Distribuída}. 2009.}
+
+\bibitem[BAEZNER, LOMOW e UNGER 1994]{BAEZNER1}
+\abntrefinfo{BAEZNER, LOMOW e UNGER}{BAEZNER; LOMOW; UNGER}{1994}
+{BAEZNER, D.; LOMOW, G.; UNGER, B.~W. \emph{A parallel simulation environment
+  based on time warp}. [S.l.]: International Journal in Computer Simulation,
+  1994. 183–207~p.}
 
 \bibitem[Banks et al. 2010]{DESS-PH-2010}
 \abntrefinfo{Banks et al.}{BANKS et al.}{2010}
@@ -30,6 +43,18 @@ Dispon{\'\i}vel em:
 {CRUZ, L.~B. da. \emph{Projeto de Um Framework para o Desenvolvimento de
   Aplicações de Simulação Distribuída}. 2009.}
 
+\bibitem[Das 1994]{DAS94}
+\abntrefinfo{Das}{DAS}{1994}
+{DAS, S. Gtw: A time warp system for shared memory multiprocessors. In:
+  \emph{Proceedings of the 26th Conference on Winter Simulation}. [S.l.: s.n.],
+  1994. p. p. 1332–1339.}
+
+\bibitem[Fujimoto 1999]{FUJIMOTO}
+\abntrefinfo{Fujimoto}{FUJIMOTO}{1999}
+{FUJIMOTO, R.~M. \emph{Parallel and Distribution Simulation Systems}. New York,
+  NY, USA: John Wiley \& Sons, Inc., 1999.
+ISBN 0471183830.}
+
 \bibitem[Higham 1971]{NUMERICAL}
 \abntrefinfo{Higham}{HIGHAM}{1971}
 {HIGHAM, D.~J. An algorithmic introduction to numerical simulation of
@@ -37,10 +62,25 @@ Dispon{\'\i}vel em:
 \emph{Society for Industrial and Applied Mathematics}, v.~43, n.~3, p.
   525--546, aug. 1971.}
 
+\bibitem[Jefferson 1985]{JEFFERSON}
+\abntrefinfo{Jefferson}{JEFFERSON}{1985}
+{JEFFERSON, D.~R. Virtual time.
+\emph{ACM Trans. Program. Lang. Syst.}, ACM, New York, NY, USA, v.~7, n.~3, p.
+  404--425, jul. 1985.
+ISSN 0164-0925.
+Dispon{\'\i}vel em: $<$http://doi.acm.org/10.1145/3916.3988$>$.}
+
 \bibitem[Lynch 2007]{WEATHER}
 \abntrefinfo{Lynch}{LYNCH}{2007}
 {LYNCH, P. The origins of computer weather prediction and climate modeling.
 \emph{Journal of Computational Physics}, v.~2, p. 3431--3444, 2007.}
+
+\bibitem[MARTIN, MCBRAYER e WILSEY 1996]{WARPED}
+\abntrefinfo{MARTIN, MCBRAYER e WILSEY}{MARTIN; MCBRAYER; WILSEY}{1996}
+{MARTIN, D.~E.; MCBRAYER, T.~J.; WILSEY, P.~A. Warped: A time warp simulation
+  kernel for analysis and application development. In:  . [S.l.]: Proceedings
+  of the 29th Hawaii International Conference on System Sciences, 1996. v.~1,
+  p. 383–386.}
 
 \bibitem[McQuillan e Walden 1975]{MCQUILLAN75}
 \abntrefinfo{McQuillan e Walden}{MCQUILLAN; WALDEN}{1975}
@@ -48,6 +88,20 @@ Dispon{\'\i}vel em:
   message-based interprocess communication system. In:  . [S.l.]: Proceedings
   of the 1975 ACM SIGCOMM/SIGOPS workshop on Interprocess communications, 1975.
   v.~9.}
+
+\bibitem[Misra e Chandy 1979]{CMB1}
+\abntrefinfo{Misra e Chandy}{MISRA; CHANDY}{1979}
+{MISRA, J.; CHANDY, K.~M. Distributed simulation: A case study in design and
+  verification of distributed programs.
+In:  \underline{\ \ \ \ \ \ \ \ }. [S.l.]: IEEE Transactions on Software
+  Engineering, 1979. p. 440–452.}
+
+\bibitem[Moreira 2003]{EDMARMO}
+\abntrefinfo{Moreira}{MOREIRA}{2003}
+{MOREIRA, E.~M.
+\emph{Rollback Solidário: Um novo Protoloco Otimista para Simulação
+  Distribuída}.
+Tese (Doutorado) --- USP - São Carlos, SP, 2003.}
 
 \bibitem[Nagel e Rohrer 1971]{SPICE}
 \abntrefinfo{Nagel e Rohrer}{NAGEL; ROHRER}{1971}
@@ -80,6 +134,21 @@ Tese (Doutorado) --- ETH Zürich, 2000.}
 \abntrefinfo{Sokolowski e Banks}{SOKOLOWSKI; BANKS}{2008}
 {SOKOLOWSKI, J.~A.; BANKS, C.~M. Modeling and simulation: Real-world examples.
 In:  \underline{\ \ \ \ \ \ \ \ }. [S.l.]: Wiley, 2008. p.~6.}
+
+\bibitem[Srinivasan e Reynolds Jr. 1995]{SRINIVASAN-REYNOLDS-1999}
+\abntrefinfo{Srinivasan e Reynolds Jr.}{SRINIVASAN; REYNOLDS JR.}{1995}
+{SRINIVASAN, S.; REYNOLDS JR., P.~F. Npsi adaptive synchronization algorithms
+  for pdes. In:  \emph{Proceedings of the 27th conference on Winter
+  simulation}. Washington, DC, USA: IEEE Computer Society, 1995.  (WSC '95), p.
+  658--665.
+ISBN 0-7803-3018-8. Dispon{\'\i}vel em:
+  $<$http://dx.doi.org/10.1145/224401.224705$>$.}
+
+\bibitem[STEINMAN 1992]{STEINMAN92}
+\abntrefinfo{STEINMAN}{STEINMAN}{1992}
+{STEINMAN, J.~S. Speedes: A multiple synchronization environment for parallel
+  discrete event simulation.
+\emph{International Journal in Computer Simulation}, v.~2, p. 251–286, 1992.}
 
 \bibitem[Zhang, Tan e Marchesi 2009]{HONGYU09}
 \abntrefinfo{Zhang, Tan e Marchesi}{ZHANG; TAN; MARCHESI}{2009}

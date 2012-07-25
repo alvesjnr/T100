@@ -16,6 +16,13 @@ Database file #1: abnt-options.bib
 Database file #2: biblio.bib
 Warning--entry type for "LIVERSON" isn't style-file defined
 --line 164 of file biblio.bib
+Warning--entry type for "SERVICES" isn't style-file defined
+--line 217 of file biblio.bib
+Warning--string name "october" is undefined
+--line 219 of file biblio.bib
+Warning--I didn't find a database entry for "REED-MALONY"
+Warning--I didn't find a database entry for "MOBILE-AGENTS-WIKIPEDIA"
+Warning--I didn't find a database entry for "AGLETS"
 Warning--I didn't find a database entry for "PYTHONSITE"
 Reallocated wiz_functions (elt_size=4) to 9000 items from 472446408560.
 +---------------------------------------------------------+
@@ -24,45 +31,45 @@ Reallocated wiz_functions (elt_size=4) to 9000 items from 472446408560.
 | Em caso de duvidas ou problemas com este estilo procure |
 | http://abntex.codigolivre.org.br                        |
 +---------------------------------------------------------+
-You've used 14 entries,
+You've used 24 entries,
             6522 wiz_defined-function locations,
-            1264 strings with 11765 characters,
-and the built_in function-call counts, 11604 in all, are:
-= -- 954
-> -- 419
-< -- 22
-+ -- 201
-- -- 126
-* -- 826
-:= -- 1584
-add.period$ -- 50
-call.type$ -- 15
-change.case$ -- 144
-chr.to.int$ -- 32
-cite$ -- 13
-duplicate$ -- 506
-empty$ -- 875
-format.name$ -- 603
-if$ -- 2785
+            1347 strings with 13564 characters,
+and the built_in function-call counts, 19994 in all, are:
+= -- 1663
+> -- 663
+< -- 35
++ -- 294
+- -- 201
+* -- 1362
+:= -- 2623
+add.period$ -- 94
+call.type$ -- 25
+change.case$ -- 233
+chr.to.int$ -- 51
+cite$ -- 23
+duplicate$ -- 967
+empty$ -- 1559
+format.name$ -- 952
+if$ -- 4889
 int.to.chr$ -- 0
 int.to.str$ -- 0
-missing$ -- 238
-newline$ -- 72
-num.names$ -- 65
-pop$ -- 321
+missing$ -- 417
+newline$ -- 122
+num.names$ -- 110
+pop$ -- 543
 preamble$ -- 1
-purify$ -- 56
+purify$ -- 92
 quote$ -- 0
-skip$ -- 681
+skip$ -- 1219
 stack$ -- 1
-substring$ -- 434
-swap$ -- 251
-text.length$ -- 16
+substring$ -- 763
+swap$ -- 515
+text.length$ -- 26
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 7
+type$ -- 15
 warning$ -- 0
-while$ -- 93
+while$ -- 160
 width$ -- 0
-write$ -- 213
-(There were 2 warnings)
+write$ -- 376
+(There were 7 warnings)

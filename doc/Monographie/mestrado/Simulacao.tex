@@ -6,12 +6,11 @@ A simulação é uma técnica que permite prever e visualizar o comportamento de
 
 % Parágrafo 2: Dizer que a simulação é um processo caro, e que é conveniente dividir entre vários computadores (distribuir a simulação)
 
-Por demandar um intenso processamento computacional, a simulação por vezes pode se tornar uma opção demasiadamente custosa. Melhores algorítmos e métodos de simulação mais modernos são maneiras de tornar a simulação mais eficiente. Em paralelo à isto existe a possibilidade de se distribuir a simulação entre vários nós de um sistema, ou entre vários núcleos de uma máquina paralela. O uso desta técnica permite que certos processos sejam executados simultaneamente, acelerando assim a simulação.
+Por demandar um intenso processamento computacional, a simulação por vezes pode se tornar uma opção demasiadamente custosa. Melhores algorítmos e computadores mais modernos são maneiras de tornar a simulação mais eficiente. Em paralelo à isto existe a possibilidade de se distribuir a simulação entre vários nós de um sistema, ou entre vários núcleos de uma máquina paralela. O uso desta técnica permite que certos processos sejam executados simultaneamente, acelerando assim a simulação.
 
 % Parágrafo 3: Apresentar problemas como sincronização, comunicação, balanceamento de cargas, etc. devido à distribuição.
 
-Em contrapartida, ao se dividir uma simulação entre vários nós em um sistema distribuído são criadas diversos novos requisitos ao sistema. Ítens como sincronização dos processos, comunicação entre os processos, balanceamento de cargas no sistema, entre outros devem ser gerenciados pela aplicação de simulação a fim de se garantir um resultado coerente do processo de simulação.
-
+Em contrapartida, ao se dividir uma simulação entre vários nós em um sistema distribuído são criadas diversos novos requisitos ao sistema. Ítens como sincronização dos processos, comunicação entre os processos, balanceamento de cargas no sistema, entre outros, devem ser gerenciados pela aplicação de simulação a fim de se garantir um resultado coerente do processo de simulação.
 
 \section{Princípios da Simulação Baseada em Eventos Discretos}
 % Parágrafo 4: Dividir o sistema em Processo lógicos e eventos discretos. Rever o conceito de timestamp de cada evento.
@@ -24,13 +23,17 @@ No paradigma da simulação discreta, três variáveis representam a simulação
 \item Um relógio lógico global, que controla o processo de execução da simulação
 \end{itemize}
 
-Cada evento a ser executado possui uma marca  de tempo (\textit{timestamp}) que determina quando, no tempo lógico do sistema, este evento deve ser executado. O programa de simulação repetidamente retira o evento com o menor \textit{timestamp} da fila de eventos futuros para processa-lo.
+O relógio lógico global armazena o chamado Tempo Virtual Global (\textit{Global Virtual Time} - GVT). O GVT representa o atual momento da simulação. O seu valor sofre incrementos discretos, e cada unidade do GVT representa uma fração real de tempo, discretizada para o modelo a ser simulado.
+
+Cada evento a ser executado possui uma marca  de tempo (\textit{timestamp}) que determina quando, no tempo virtual do sistema, este evento deve ser executado. O programa de simulação repetidamente retira o evento com o menor \textit{timestamp} da fila de eventos futuros para processa-lo.
 
 Para a implementação da simulação distribuída, a estrutura da simulação tradicional, inerentemente sequencial, teve que sofrer adaptações para incorporar os conceitos de computação distribuída \cite{REED-MALONY}. Para isto, o sistema passou a ser dividido em processos lógicos que representam um processo de sistema real. Uma simulação é um conjunto com $n$ processos lógicos $p_{1}, p_{2}, p_{3}, ..., p_{n}$.
 
 % Parágrafo 5: Dizer que cada processo lógico possui um relógio interno
 
-Assim como o sistema de simulação possui um relógio lógico que representa o tempo lógico da simulação, ao se dividir a simulação em um sistema distribuído cada processo lógico possui um relógio lógico interno que representa o avanço do tempo de simulação para aquele processo lógico. Isso garante que os eventos a serem executados por um determinado processo lógico sejam executados no tempo lógico determinado pelo seu \textit{timestamp}. Portanto um processo lógico, se olhado isoladamente, possui as mesmas variáveis que um sistema de simulação sequencial: uma fila de eventos a serem executados, um relógio lógico interno e as suas variáveis internas.
+Assim como o sistema de simulação centralizado possui um relógio que representa o tempo global da simulação, ao se dividir a simulação em um sistema distribuído cada processo lógico possui um relógio lógico interno que representa o avanço do tempo de simulação para aquele processo. O relógio de cada processo lógico armazena o que é chamado de Tempo Virtual Local (\textit{Local Virtual Time} - LVT), e é este LVT que indica qual o tempo virtual de cada processo lógico.
+
+Isso garante que os eventos a serem executados por um determinado processo lógico sejam executados no tempo determinado pelo seu \textit{timestamp}. Portanto um processo lógico, se olhado isoladamente, possui as mesmas variáveis que um sistema de simulação sequencial: uma fila de eventos a serem executados, um relógio lógico interno e as suas variáveis internas.
 
 % Parágrafo 6: Definir comunicação através de troca de mensagens
 
@@ -40,13 +43,15 @@ Porém em certos momentos um processo pode necessitar comunicar-se com outro pro
 
 Assim como todo evento discreto, um evento enviado de um processo lógico à outro possui um \textit{timestamp} que indica quando este deve ser executado pelo processo lógico em questão. Porém, como os processos lógicos em um sistema distribuído não compartilham um mesmo relógio lógico (cada processo lógico possui seu próprio relógio interno), o sistema de simulação distribuída deve estar preparado para tratar situação de inconsistência da simulação.
 
-Como cada processo lógico possui um relógio lógico interno independente, pode acontecer de um processo estar em um tempo lógico mais atrasado que os demais e enviar um evento para ser processado em um tempo que já foi superado pelo relógio lógico do processo que recebeu a mensagem. Assim como ilustrado na figura~\ref{fig:strag}, o processo em questão possui seu relógio lógico no tempo $t=24$ e recebe uma mensagem para ser processada no tempo $t=11$. Como o evento a ser processado possui um \textit{timestamp} menor que o relógio interno do processo lógico, o sistema encontra-se em um momento de inconsistência. Um sistema de simulação distribuída deve ser capaz de contornar tal situação.
+Como cada processo lógico possui um relógio lógico interno independente, pode acontecer de um processo estar em um tempo virtual mais atrasado que os demais e enviar um evento para ser processado em um tempo que já foi superado pelo relógio lógico do processo que recebeu a mensagem. Assim como ilustrado na figura~\ref{fig:strag}, o processo em questão possui seu relógio lógico no tempo $t=24$ e recebe uma mensagem para ser processada no tempo $t=11$. Como o evento a ser processado possui um \textit{timestamp} menor que o relógio interno do processo lógico, o sistema encontra-se em um momento de inconsistência. Um sistema de simulação distribuída deve ser capaz de contornar tal situação.
 
 \begin{figure}
   \centerline{\includegraphics[scale=0.4]{straggler.png}}
   \caption{Mensagem \textit{straggler}.}
 \label{fig:strag}
 \end{figure}
+
+Uma mensagem que contém um evento para ser processado em um tempo pertencente ao passado lógico do processo que a recebeu é denominada Mensagem \textit{Straggler}.
 
 \section{Categorias de protocolos de simulação}
 
@@ -58,25 +63,38 @@ Um protocolo conservador evita que um erro de causa e efeito aconteça, garantin
 
 \subsection{Protocolos conservaticos}
 
-Parágrafo 1: citar Srinivasan and Reynolds, explicando o conceito básico de um protocolo conservativo
+% Parágrafo 1: citar Srinivasan and Reynolds, explicando o conceito básico de um protocolo conservativo
 
-Parágrafo 2: citar as implementacoes de [chandy e misra] e bryant, citando a necesidade de canais estaticos
+Os protocolos conservativos evitam a possibilidade da ocorrência de erros de causa e efeito, ou seja, sua preocupação está em determinar quando é seguro processar um evento. Nas simulações distribuídas sincronizadas com protocolos conservativos, um processo lógico só tratará um evento se puder garantir que não chegará um outro com evento com um \textit{timestamp} inferior ao do evento a ser tratado \cite{SRINIVASAN-REYNOLDS-1999}.
 
-Parágrafo 3: citar problema de bloqueio por esperar mensagem que contém um lvt inferior, citar também como contornar esse deadlock
+% Parágrafo 2: citar as implementacoes de [chandy e misra] e bryant, citando a necesidade de canais estaticos
 
-Parágrafo 4: explicar porque é difícil resolver o problema de deadlock
+Os primeiro protocolos de simulação distribuídas foram baseados em abordagens conservativas. Esses protocolos, desenvolvidos independentemente pro Chandy e Misra (1979) e Bryant(1977) (também tratados neste texto por CMB), exigiam que a especificação dos canais de comunicação entre os processos fosse feita estaticamente e também que as mensagens chegassem em cada canal obedecendo uma ordem crescente dos seus \textit{timestamps}.
 
-Parágrafo 5: citar a desvantagem do conservativo por não aproveitar todo o paralelismo
+Como os canais de comunicação são previamente conhecidos, uma vez que foram previamente especificados antes do início da simulação, é possíıvel, para cada processo, determinar o tempo virtual dos seus processos vizinhos, já que cada mensagem recebida está rotulada com o relógio local do processo emissor. Com essa informação, os processos podem tratar os eventos que possuam tempo de ocorrência menor que o tempo virtual dos canais de comunicação que chegam ao processo.
 
-Parágrafo 6: conclusão pessoal de porque não utilizar o protocolos conservativos
+% Parágrafo 3: citar problema de bloqueio por esperar mensagem que contém um lvt inferior, citar também como contornar esse deadlock
+
+% Parágrafo 4: explicar porque é difícil resolver o problema de deadlock
+
+Um problema pode surgir quando não há mensagem trafegando através de um determinado canal de comunicação. Quando isto ocorre, não há como um processo obtero o \textit{LVT} daquele canal, o que pode levar à um \textit{deadlock}. Para contornar tal efeito é necessário lançar mão de mecanismos, como as mensagens nulas proposta por \cite{CMB1}, que força a atualização do LVT dos canais que estão vazios.
+
+% Parágrafo 5: citar a desvantagem do conservativo por não aproveitar todo o paralelismo
+
+Segundo Fujimoto~\cite{FUJIMOTO} a maior desvantagem dos mecanismos conservativos consiste no fato de que estes não podem explorar totalmente o paralelismo disponível na aplicação, uma vez que frequentemente os processos lógicos precisam interromper sua execução a fim de aguardar a chegada de um novo evento, ou mesmo uma mensagem nula.
 
 \subsection{Protocolos Otimistas}
 
-Parágrafo 1: explicação inicial do conceito de protocolo otimista e citar o conceito de rollback
+% Parágrafo 1: explicação inicial do conceito de protocolo otimista e citar o conceito de rollback
 
-Parágrafo 2: Citar o time warp, contextualizando como foi desenvolvido, em qual época e por quem
+Diferentemente dos protocolos conservativos, os protocolos otimistas não possuem nenhum mecanismo que evite a ocorrência de uma inconsistência de causa e efeito. O que acontece em um protocolo otimista é, uma vez detectado o recebimento de uma mensagem \textit{straggler}, o protocolo deve ser capaz de desfazer a simulação até um tempo virtual onde a mensagem recebida não representa uma inconsistência no sistema, e continuar a simulação a partir deste ponto.
 
-Parágrafo 4: Citar o Rollback Solidário como alternativa ao Time Warp
+% Parágrafo 2: Citar o time warp, contextualizando como foi desenvolvido, em qual época e por quem
+
+Um dos mais conhecidos protocolos otimistas é o Time Warp, que possui algumas implementações, tais como \textit{Jade Time Warp} \cite{BAEZNER1}, o sistema \textit{SPEE-DES} (\textit{Synchronous Parallel Environment for Emulation and Discrete Event Simulation})\cite{STEINMAN92}, o \textit{WARPED} \cite{WARPED} e o \textit{Georgia Tech Time Warp (GTW)} \cite{DAS94}. O \textit{Time Warp} foi originalmente proposto por Jefferson~\cite{JEFFERSON}.
+
+% Parágrafo 4: Citar o Rollback Solidário como alternativa ao Time Warp
+Desenvolvido por~\cite{EDMARMO}, o protocolo \textit{Rollback} Solidário também utiliza a abordagem otimista para sincronizar os processos lógicos em uma simulação distribuída.
 
 \section{O protocolo \textit{Time Warp}}
 
@@ -183,18 +201,30 @@ Parágrafo: por fim mostrar que para prover o balanceamento de cargas temos que 
 
 \subsection{O Uso de Agentes Móveis Para Prover Mobilidade}
 
-Parágrafo: O que é um agente móvel
+% Parágrafo: O que é um agente móvel
 
-Parágrafo: Falar sobre a implementação feita por Antonio, Walbon e Takahashi - 2010
+Agentes Móveis são entidades computacionais com características como autonomia, habilidades sociais, capacidade de aprendizado e, mais importante, mobilidade \cite{MOBILE-AGENTS-WIKIPEDIA}. Um agente móvel é um processo que possui a capacidade de transportar seu atual estado de um ambiente para outro, incluindo o estado de suas variáveis internas. Esta característica de mobilidade provida pelos agente móveis, de certa forma, supre uma necessidade no desenvolvimento de aplicações de simulação distribuída que pretendem prover, de alguma forma, balanceamento de cargas entre os nós do sistema.
 
-Parágrafo: Outras implementações feitas usando agentes móveis
+% Parágrafo: Falar sobre a implementação feita por Antonio, Walbon e Takahashi - 2010
+
+Aproveitando a mobilidade provida por um agente móvel, ~\cite{RIBEIROALVES} desenvolveram uma implementação do protocolo \textit{Rollback} Solidário utilizando a biblioteca \textit{Aglets}~\cite{AGLETS} de agentes móveis.
+
+% Parágrafo: Outras implementações feitas usando agentes móveis
+
+Outras soluções como \cite{SASSY} e \cite{}, baseiam-se nos agentes móveis para se desenvolver a aplicação de simulação distribuída, porém não necessariamente aproveitando da mobilidade proporcionada por eles para prover balanceamento de carga.
 
 \subsection{Requisitos Para Mobilidade de um Processo Lógico}
 
-Parágrafo: explicar quais as funcionalidades de agentes móveis que precisamos (migração)
+% Parágrafo: Abstrair o conceito de ambiente e processo lógico: um ambiente abriga diversos processos lógicos
+A mobilidade é a principal característica provida por um agente móvel que justifique o seu uso no desenvolvimento de uma simulação distribuída. Porém os agentes móveis possuem determinadas características que não se adequam diretamente ao sistema (conforme descrito na seção~\ref{solucoes_existentes}). Uma alternativa ao uso de agentes móveis é a criação de entidades que encapsulem os processos lógicos e supram suas necessidades básicas para o desenvolvimento da aplicação de simulação distribuída: autonomia, migração e comunicação entre os processos.
 
-Parágrafo: Abstrair o conceito de ambiente e processo lógico: um ambiente abriga diversos processos lógicos
+Para isto é criada uma abstração na qual os processos lógicos habitam. Essa abstração é denominada ambiente (\textit{environment}). Todo processo lógico habita um \textit{environment}, e todo todo processo lógico que habita um determinado ambiente possui a capacidade de migrar do ambiente que se encontra atualmente para um novo ambiente, e lá continuar seu processamento.
 
-Parágrafo: Mostrar a idéia de migrar um processo de um ambiente para outro, a fim de prover o balanceamento
+% Parágrafo: Mostrar a idéia de migrar um processo de um ambiente para outro, a fim de prover o balanceamento
+Sendo assim, existe a capacidade de manipular a localização dos processos lógicos ao longo da simulação. Isso possibilita que a localização dos processos lógicos seja rearranjada conforme a necessidade da simulação ao longo do tempo, a fim de prover um melhor aproveitamento dos recursos existentes, provendo o balancemento das cargas no sistema.
+
+O \textit{middleware} de comunicação proposto por este trabalho contempla a criação desta abstração de ambiente onde os processos lógicos residem, assim como provê uma pase para a criação destes processos lógicos.
 
 \subsection{Considerações Finais}
+
+O capítulo seguinte trata com detalhes o porque de se utilizar uma nova abstração para o desenvolvimento dos processos lógicos, e por que esta proposta foi preferida à utilização dos agentes móveis. O capítulo traz também a arquitetura básica de um \textit{framework} de simulação, e como o proposto \textit{middleware} de comunicação substitui o uso de agentes móveis na construção de um \textit{framework} para simulação distribuída.
