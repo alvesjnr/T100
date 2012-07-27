@@ -10,12 +10,12 @@ Por demandar um intenso processamento computacional, a simulação por vezes pod
 
 % Parágrafo 3: Apresentar problemas como sincronização, comunicação, balanceamento de cargas, etc. devido à distribuição.
 
-Em contrapartida, ao se dividir uma simulação entre vários nós em um sistema distribuído são criadas diversos novos requisitos ao sistema. Ítens como sincronização dos processos, comunicação entre os processos, balanceamento de cargas no sistema, entre outros, devem ser gerenciados pela aplicação de simulação a fim de se garantir um resultado coerente do processo de simulação.
+Em contrapartida, ao se dividir uma simulação entre vários nós em um sistema distribuído são criadas diversos novos requisitos ao sistema. Ítens como sincronização dos processos, comunicação entre os processos, balanceamento de cargas no sistema, dentre outros, devem ser gerenciados pela aplicação de simulação a fim de se garantir um resultado consistente do processo de simulação.
 
 \section{Princípios da Simulação Baseada em Eventos Discretos}
 % Parágrafo 4: Dividir o sistema em Processo lógicos e eventos discretos. Rever o conceito de timestamp de cada evento.
 
-No paradigma da simulação discreta, três variáveis representam a simulação orientada a eventos:
+No paradigma da simulação discreta, três estruturas representam a simulação orientada a eventos:
 
 \begin{itemize}
 \item As variáveis internas do sistema;
@@ -27,23 +27,23 @@ O relógio lógico global armazena o chamado Tempo Virtual Global (\textit{Globa
 
 Cada evento a ser executado possui uma marca  de tempo (\textit{timestamp}) que determina quando, no tempo virtual do sistema, este evento deve ser executado. O programa de simulação repetidamente retira o evento com o menor \textit{timestamp} da fila de eventos futuros para processa-lo.
 
-Para a implementação da simulação distribuída, a estrutura da simulação tradicional, inerentemente sequencial, teve que sofrer adaptações para incorporar os conceitos de computação distribuída \cite{REED-MALONY}. Para isto, o sistema passou a ser dividido em processos lógicos que representam um processo de sistema real. Uma simulação é um conjunto com $n$ processos lógicos $p_{1}, p_{2}, p_{3}, ..., p_{n}$.
+Para a implementação da simulação distribuída, a estrutura da simulação tradicional, inerentemente sequencial, teve que sofrer adaptações para incorporar os conceitos de computação distribuída \cite{REED-MALONY}. Para isto, o sistema passou a ser dividido em processos lógicos que representam um processo do sistema real. Uma simulação é um conjunto com $n$ processos lógicos $p_{1}, p_{2}, p_{3}, ..., p_{n}$.
 
 % Parágrafo 5: Dizer que cada processo lógico possui um relógio interno
 
-Assim como o sistema de simulação centralizado possui um relógio que representa o tempo global da simulação, ao se dividir a simulação em um sistema distribuído cada processo lógico possui um relógio lógico interno que representa o avanço do tempo de simulação para aquele processo. O relógio de cada processo lógico armazena o que é chamado de Tempo Virtual Local (\textit{Local Virtual Time} - LVT), e é este LVT que indica qual o tempo virtual de cada processo lógico.
+Assim como o sistema de simulação centralizado possui um relógio que representa o tempo global da simulação, ao se dividir a simulação em um sistema distribuído cada processo lógico possui um relógio lógico interno que representa o avanço do tempo da simulação para aquele processo. O relógio de cada processo lógico armazena o que é chamado de Tempo Virtual Local (\textit{Local Virtual Time} - LVT), e é este LVT que indica o tempo virtual de cada processo lógico.
 
 Isso garante que os eventos a serem executados por um determinado processo lógico sejam executados no tempo determinado pelo seu \textit{timestamp}. Portanto um processo lógico, se olhado isoladamente, possui as mesmas variáveis que um sistema de simulação sequencial: uma fila de eventos a serem executados, um relógio lógico interno e as suas variáveis internas.
 
 % Parágrafo 6: Definir comunicação através de troca de mensagens
 
-Porém em certos momentos um processo pode necessitar comunicar-se com outro processo lógico. Por exemplo, um processo pode enviar um evento para ser executado por outro processo lógico diferente. Esta comunicação é feita através de troca de mensagens. Um processo lógico deve ser capaz de enviar mensagens à outros processos lógicos que, por sua vez, devem ser capaz de receber estas mensagens. 
+Porém em certos momentos um processo pode necessitar comunicar-se com outro processo lógico. Por exemplo, um processo pode enviar um evento para ser executado por outro processo lógico. Esta comunicação é feita através de troca de mensagens. Um processo lógico deve ser capaz de enviar mensagens à outros processos lógicos que, por sua vez, devem ser capaz de receber estas mensagens. 
 
 % Parágrafo 7: Definir o conceito de sincronização (timestamp das mensagens e LVT)
 
 Assim como todo evento discreto, um evento enviado de um processo lógico à outro possui um \textit{timestamp} que indica quando este deve ser executado pelo processo lógico em questão. Porém, como os processos lógicos em um sistema distribuído não compartilham um mesmo relógio lógico (cada processo lógico possui seu próprio relógio interno), o sistema de simulação distribuída deve estar preparado para tratar situação de inconsistência da simulação.
 
-Como cada processo lógico possui um relógio lógico interno independente, pode acontecer de um processo estar em um tempo virtual mais atrasado que os demais e enviar um evento para ser processado em um tempo que já foi superado pelo relógio lógico do processo que recebeu a mensagem. Assim como ilustrado na figura~\ref{fig:strag}, o processo em questão possui seu relógio lógico no tempo $t=24$ e recebe uma mensagem para ser processada no tempo $t=11$. Como o evento a ser processado possui um \textit{timestamp} menor que o relógio interno do processo lógico, o sistema encontra-se em um momento de inconsistência. Um sistema de simulação distribuída deve ser capaz de contornar tal situação.
+Como cada processo lógico possui um relógio lógico interno independente, pode acontecer de um processo estar em um tempo virtual mais atrasado que os demais e enviar um evento para ser processado em um tempo que já foi superado pelo relógio lógico do processo que recebe a mensagem. Assim como ilustrado na figura~\ref{fig:strag}, o processo em questão possui seu relógio lógico no tempo $t=24$ e recebe uma mensagem para ser processada no tempo $t=11$. Como o evento a ser processado possui um \textit{timestamp} inferior ao valor do relógio interno do processo lógico, o sistema encontra-se em um momento de inconsistência. Um sistema de simulação distribuída deve ser capaz de contornar (ou evitar) tal situação.
 
 \begin{figure}
   \centerline{\includegraphics[scale=0.4]{straggler.png}}
@@ -53,15 +53,15 @@ Como cada processo lógico possui um relógio lógico interno independente, pode
 
 Uma mensagem que contém um evento para ser processado em um tempo pertencente ao passado lógico do processo que a recebeu é denominada Mensagem \textit{Straggler}.
 
-\section{Categorias de protocolos de simulação}
+\section{Categorias de Protocolos de Simulação}
 
 % Parágrafo 1: breve discussão sobre as categorias de protocolos, explicando as principais diferenças
 
 Para se garantir a sincronização dos processos lógicos na simulação distribuída são usados protocolos de sincronização, que garantem a consistência do sistema ao final da simulação. Os protocolos podem ser divididos em duas categorias quanto ao seu comportamento perante um inconsistência de causa e efeito no sistema: protocolos conservadores e protocolos otimistas. 
 
-Um protocolo conservador evita que um erro de causa e efeito aconteça, garantindo que toda mensagem recebida por um processo lógico esteja dentro do tempo de execução daquele processo. Já um protocolo do tipo otimista não previne a ocorrência de inconsistências no sistema, mas provê mecanismos capazes de recuperar o sistema quando elas acontecem.
+Um protocolo conservador evita que um erro de causa e efeito aconteça, garantindo que toda mensagem recebida por um processo lógico esteja dentro do tempo de execução daquele processo. Já um protocolo do tipo otimista não previne a ocorrência de inconsistências no sistema, mas provê mecanismos capazes de recuperar o sistema quando elas ocorrem.
 
-\subsection{Protocolos conservaticos}
+\subsection{Protocolos Conservativos}
 
 % Parágrafo 1: citar Srinivasan and Reynolds, explicando o conceito básico de um protocolo conservativo
 
@@ -87,7 +87,7 @@ Segundo Fujimoto~\cite{FUJIMOTO} a maior desvantagem dos mecanismos conservativo
 
 % Parágrafo 1: explicação inicial do conceito de protocolo otimista e citar o conceito de rollback
 
-Diferentemente dos protocolos conservativos, os protocolos otimistas não possuem nenhum mecanismo que evite a ocorrência de uma inconsistência de causa e efeito. O que acontece em um protocolo otimista é, uma vez detectado o recebimento de uma mensagem \textit{straggler}, o protocolo deve ser capaz de desfazer a simulação até um tempo virtual onde a mensagem recebida não representa uma inconsistência no sistema, e continuar a simulação a partir deste ponto.
+Diferentemente dos protocolos conservativos, os protocolos otimistas não possuem nenhum mecanismo que evite a ocorrência de uma anomalia de causa e efeito. O que acontece em um protocolo otimista é que, uma vez detectado o recebimento de uma mensagem \textit{straggler}, o protocolo deve ser capaz de desfazer a simulação até um tempo virtual onde a mensagem recebida não representa uma inconsistência no sistema, e continuar a simulação a partir deste ponto.
 
 % Parágrafo 2: Citar o time warp, contextualizando como foi desenvolvido, em qual época e por quem
 
@@ -96,34 +96,69 @@ Um dos mais conhecidos protocolos otimistas é o Time Warp, que possui algumas i
 % Parágrafo 4: Citar o Rollback Solidário como alternativa ao Time Warp
 Desenvolvido por~\cite{EDMARMO}, o protocolo \textit{Rollback} Solidário também utiliza a abordagem otimista para sincronizar os processos lógicos em uma simulação distribuída.
 
-\section{O protocolo \textit{Time Warp}}
+\section{O Protocolo \textit{Time Warp}}
 
-Parágrafo 1: Explica por que o Time Warp é otimista, citando o fato de nao impedir a ocorrência de erros de causa e efeito
+% Parágrafo 3: Explicar o comportamento individual de um processo lógico (tirar o eventos com menor timestamp da lista de eventos futuros, etc.)
+Assim como na simulação sequencial, um processo lógico na simulação distribuída efetua repetidamente a ação de retirar um evento da fila de eventos futuros e tratá-lo. 
 
-Parágrafo 2: Citar como um erro de causa e efeito pode acontecer, e o que deve ser feito quando isso acontece: o rollback
+O tratamento de um evento pode ou não (dependendo do modelo simulado) gerar novos eventos para serem colocados na fila de eventos futuros. Uma vez gerado um novo evento, caso  ele seja destinado ao mesmo processo lógico, este é simplesmente inserido na fila de eventos futuros, obedecendo o seu \textit{timestamp}.
 
-Parágrafo 4: Citar implementações do protocolo
+Porém, caso a execução de um evento resulte num novo evento a ser tratado por um processo lógico distinto, o processo cuja execução originou o novo evento deve encaminhar este novo evento para o seu processo correspondente. Para isto os processos lógicos se comunicam através de troca de mensagens. Quando um processo $p_{2}$ necessita encaminhar um evento para ser tratado pelo processo $p_{1}$, isto é feito através do envio de uma mensagem de $p_{2}$ para $p_{1}$ (figura~\ref{fig:envia_mensagem}).
 
-Parágrafo 5: Explicar o comportamento individual de um processo lógico (tirar o eventos com menor timestamp da lista de eventos futuros, etc.)
+\begin{figure}
+  \centerline{\includegraphics[scale=0.4]{envia_mensagem.png}}
+  \caption{Processo $p_{2}$ envia uma mensagem com \textit{timestamp} $t=5$ para o processo $p_{1}$.}
+\label{fig:envia_mensagem}
+\end{figure}
+
+% Parágrafo 1: Explica por que o Time Warp é otimista, citando o fato de nao impedir a ocorrência de erros de causa e efeito
+Como os processos lógicos executam de forma independente entre si, não existe nenhuma garantia que os processos $p_{1}$ e $p_{2}$ possuam o mesmo tempo virtual no momento da troca de mensagem. Caso o LVT do processo $p_{1}$ seja superior ao valor do LVT do processo $p_{2}$, existe uma garantia de que o \textit{timestamp} da mensagem enviada por $p_{1}$ também seja superior ao valor do LVT de $p_{2}$, e isso garante a consistência da simulação neste caso. Mas o mesmo não ocorre quando o LVT de $p_{1}$ é inferior ao LVT de $p_{2}$. Neste caso existe a possibilidade de que o \textit{timestamp} da mensagem enviada seja inferior ao LVT do processo $p_{2}$, resultando em uma anomalia de causa e efeito.
 
 \subsection{Detecção e Tratamento de Inconsistências}
 
-Parágrafo 1: Mostrar que o sistema pode receber mensagens que causam erro de causa e efeito.
+O protocolo \textit{Time Warp} não possui nenhum mecanismo que evite que uma mensagem com um \textit{timestamp} inferior ao LVT do processo receptor seja entregue. Porém, quando isto ocorre, o processo receptor identifica para qual momento no tempo de simulação (qual LVT) ele deve retornar para que haja uma consistência na simulação. Existe então um espaço no tempo de simulação que fica entre o o LVT em que o processo recebeu a mensagem \textit{straggler} e o tempo virtual referente ao \textit{timestamp} da mensagem recebida.
 
-Parágrafo 2: Explicar o comportamento ao receber uma mensagem straggler.
+\emph{Definição: Janela de Retorno} - É o momento compreendido entre o LVT em que um processo lógico detecta uma anomalia e o LVT para o qual este processo realizará o \textit{rollback}.
 
-Parágrafo 3: definir a diferença entre rollback primário e rollback secundário
+Assim que identificado o LVT que garante a consistência da simulação para aquela processo lógico, este restaura a simulação para este este determinado tempo virtual, realizando um retorno (\textit{rollback}) da sua simulação. Para isso, todos os eventos tratados dentro da janela de retorno devem ser descartados, para serem novamente tratados pelo processo lógico que efetuou o \textit{rollback}, porém agora após o tratamento da mensagem recebida.
 
-\subsection{Anti-Mensagens}
+Conforme ilustrado na figura~\ref{fig:strag_2}, o processo $p_{1}$, cujo $LVT=9$, recebe uma mensagem com o \textit{timestamp} $t=5$, ou seja, uma mensagem para ser tratada em um tempo virtual inferior ao seu atual LVT, o que à caracteriza como mensagem \textit{straggler}. Neste caso o processo $p_{1}$ deve restornar para o $LVT=5$ para tratar a mensagem recebida. Para isto, os eventos que foram tratados dentro da janela de retorno, ou seja, os eventos $e_{7}$ e $e_{9}$ devem ser desfeitos, e novamente tratados após o tratamento da mensagem recebida.
 
-Parágrafo 1: Explicar o que é uma antimensagem
+\begin{figure}
+  \centerline{\includegraphics[scale=0.4]{straggler_2.png}}
+  \caption{Mensagem \textit{straggler}.}
+\label{fig:strag_2}
+\end{figure}
 
-Parágrafo 2: mostrar que antimensagens podem se referir a um evento já processado, ou a um evento que ainda esta na fila de eventos futuros
+Um \textit{rollback} causado pelo recebimento de uma mensagem \textit{straggler} é chamado de \textit{rollback} primário.
 
-Parágrafo 3: Tratar o caso da antimensagem chegar antes da mensagem
+Caso o processo lógico tenha enviado alguma mensagem de dentro da janela de retorno, estas mensagens devem ser canceladas pelo processo durante o \textit{rollback}. Isto é necessário porque uma mensagem enviada de dentro da janela de retorno faz parte da anomalia de causa e efeito do sistema.
+
+Uma vez que cada mensagem enviada contém dados não confiáveis (devido à anomalia de causa e efeito), todo processo oriundo destas mensagens também deve ser desfeito. Para que isto seja feito, para cada mensagem enviada pelo processo lógico dentro da janela de retorno, uma mensagem de cancelamento deve ser enviada, indicando a invalidação da mensagem original. Esta mensagem de cancelamento é denominada anti-mensagem.
+
+A figura~\ref{fig:strag_3} ilustra uma situação semelhante ao ilustrado pela figura~\ref{fig:strag_2}. Neste caso, além de desfazer os eventos $e_{7}$ e $e_{9}$, o processo em questão deve cancelar a mensagem enviada no tempo $t=7$ (cujo \textit{timestamp} é $t=12$) para o processo $p_{1}$. Isto é feito enviando uma anti-mensagem ao processo $p_{1}$, indicando que este deve descartar a mensagem recebida (e todo processamento relacionado à ela) por se tratar de uma mensagem que fere a consistência do sistema.
+
+\begin{figure}
+  \centerline{\includegraphics[scale=0.4]{straggler_3.png}}
+  \caption{Envio de anti-mensagem para cancelamento de mensagem.}
+\label{fig:strag_3}
+\end{figure}
+
+Quando um processo lógico recebe uma anti-mensagem ele verifica se o evento relacionado à esta já foi tratado ou está na lista de eventos futuros. Caso o evento esteja na lista de eventos futuros, este simplesmente é descartado (removido da lista).
+
+Caso o evento já tenha sido tratado, existe a necessidade de se desfazer a simulação, e restaurar o processo para um tempo inferior ao \textit{timestamp} deste evento, e então descartar o evento em questão. Neste caso o processo que recebeu a anti-mensagem deverá realizar um \textit{rollback} para um LVT que garanta a consistência da simulação (ou seja, para um momento anterior ao processamento da mensagem recebida), desfazendo o tratamento do evento citado. Este \textit{rollback} realizado devido ao recebimento de uma anti-mensagem é denominado \textit{rollback} secundário.
+
+Novamente existe a possibilidade de ter havido envio de mensagem nesta nova janela de retorno, e o processo de envio de anti-mensagens referente a cada mensagem enviada deve ser feito, a fim de neutralizar todas as mensagens enviadas decorrentes de um processamento não-consistente.
+
+Todo o processo de envio de anti-mensagens ocorre até que o sistema encontre-se em um ponto onde não haja mais inconsistência, e a simulação é retomada.
 
 \subsection{Considerações Finais}
 
+O protocolo \textit{Time Warp} é uma solução que sofreu avanços ao longo do tempo desde que foi proposto em 1985. 
+
+As utilizações de \textit{rollbacks} com intuito de recuperar sistemas inconsistentes permitem aos protocolos otimistas grande liberdade na execução de eventos, proporcionando um alto ganho em velocidade na obtenção de resultados em simulações. 
+
+Uma grande desvantagem de um protocolo como o \textit{Time Warp} é a existência de \textit{rollbacks} secundários, que por sua vez podem disparar mais \textit{rollbacks}, transformando a recuperação do sistema em algo não muito eficiente. Assim, o surgimento de um protocolo que não utiliza anti-mensagens pode ser bastante viável. O surgimento do protocolo Rollback Solidário, proposto por~\cite{EDMARMO}, apresenta uma nova solução utilizando o conceito de checkpoints consistentes para recuperação do sistema, possibilitando que todos os processos lógicos executem um retorno ao mesmo tempo.
 
 \section{O protocolo \textit{Rollback} Solidário}
 
@@ -189,6 +224,8 @@ Parágrafo: Falar sobre a atuação do processo observador (escolher a linha de 
 Parágrafo: Falar sobre o reinício da simulação após o Rollback
 
 \subsection{Considerações Finais}
+
+O protocolo de sincronização \textit{Rollback} Solidário apresenta uma alternativa ao \textit{Time Warp}. Sua abordagem de efetuar a restauração de todos os processos lógicos concomitantemente resulta em um ganho natural de desempenho, uma vez que é eliminada a existência de \textit{rollbacks} secundários.
 
 
 \section{Balanceamento de cargas}
