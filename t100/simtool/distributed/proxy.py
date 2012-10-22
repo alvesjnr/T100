@@ -11,9 +11,9 @@ class Proxy(object):
         self.components = []
         self.ip = ip
         self.port = port
-        thread.start_new_thread(self.__receiver__, (ip,port))
+        thread.start_new_thread(self.__receiver, (ip,port))
 
-    def __receiver__(self, ip, port):
+    def __receiver(self, ip, port):
         HOST = ip                # Symbolic name meaning all available interfaces
         PORT = port              # Arbitrary non-privileged port
 
